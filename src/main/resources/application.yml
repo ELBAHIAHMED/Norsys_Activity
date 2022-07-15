@@ -1,0 +1,53 @@
+server:
+  port: 8090
+  http2:
+    enabled: true
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    password: mysecretpassword
+    url: jdbc:mysql://localhost:3306/norsys_activity
+    username: root
+
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 11MB
+
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    locations: classpath:db/migration
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:3800/auth/realms/norsys
+
+cloud:
+  server:
+    name: http://localhost:3900
+    download-url: http://localhost:3900
+    password: cloudagrisudcrud
+    username: cloudagrisudcrud
+
+keycloak:
+  resource: norsys-activity-api
+  allowed-origin: http://localhost:3000
+
+realm-admin:
+  server-url: http://localhost:3800/auth
+  realm: norsys
+  client-id: admin-cli
+  username: norsys-admin
+  password: mysecretpassword
+
+

@@ -1,0 +1,245 @@
+:root {
+  --textColor: green;
+  --textOffColor: #7c858d;
+  --baseColor: #ffffff;
+  --secondaryColor: #ff5f01
+}
+
+.form-img {
+  position: absolute;
+  margin-left: 29vw;
+  height: 45.4vh;
+  width: 12vw;
+}
+
+.forgot-password-wrapper {
+  margin-left: -5em;
+  ;
+}
+
+body {
+  background-image: url("../img/background.jpg") !important;
+  color: var(--textColor);
+  font-size: 18px;
+}
+
+
+.login-pf-page-header {
+  display: none;
+}
+
+.kc-base-logo-wrapper {
+  text-align: center;
+}
+
+.kc-base-logo {
+  width: 20%;
+}
+
+/* Login Card */
+
+.card-pf {
+  border-color: var(--secondaryColor);
+  margin-left: 39.5vw;
+}
+
+/* Card Title */
+
+.login-pf-page .login-pf-header {
+  margin-bottom: 50px;
+}
+
+#kc-page-title {
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Login Form */
+
+.login-pf-page .form-group {
+  margin-bottom: 30px;
+}
+
+.login-pf-page .form-control {
+  border: none;
+  padding: 22px 30px;
+  font-size: 18px;
+  color: var(--textColor);
+  height: auto;
+
+  border-radius: 32px;
+  background: var(--baseColor);
+}
+
+.login-pf-page .form-control::placeholder {
+  font-style: normal;
+  color: var(--textOffColor);
+}
+
+/* Reset Password Link */
+
+#kc-form-reset-psw a {
+  font-size: 16px;
+  color: var(--textColor);
+  padding-right: 8px;
+}
+
+#kc-form-buttons {
+  margin-top: 50px;
+}
+
+/* Login Button */
+
+#kc-login {
+  background-color: var(--textColor);
+}
+
+#kc-login:hover {
+  background-color: var(--secondaryColor);
+}
+
+.pf-c-form-control:hover {
+  border-bottom-color: var(--secondaryColor);
+}
+
+#kc-form-register a {
+  margin-right: 9vw;
+  font-size: 16px;
+  color: var(--textColor) !important;
+}
+
+.agrisud-navbar {
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 0 2vw;
+}
+
+.agrisud-navbar .agrisud-navbar-items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between !important;
+}
+
+.agrisud-navbar-links {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.agrisud-navbar-links h5,
+.agrisud-navbar-links h6 {
+  margin: 10px 42px;
+}
+
+.agrisud-navbar-links h5 {
+  font-size: 1.15rem;
+}
+
+.agrisud-admin-navbar-links-slugan {
+  margin-left: 1.5vw;
+  padding: unset !important;
+  color: darkgray;
+  margin-right: unset !important;
+}
+
+.agrisud-navbar-slugan {
+  margin: 16px 0;
+}
+
+.agrisud-navbar-slugan h5 {
+  font-size: 1.15rem;
+}
+
+.agrisud-navbar-links-slugan {
+  margin-left: 1.5vw;
+  padding: unset !important;
+  color: darkgray;
+  margin-right: unset !important;
+  border-left: 1px solid lightgray;
+}
+
+.agrisud-navbar-links-items {
+  display: flex;
+  align-items: flex-end;
+  margin-left: 30em;
+}
+
+.agrisud-navbar-links-items h6 {
+  font-size: 0.9rem;
+  margin-bottom: 1.8em;
+}
+
+.agrisud-navbar-links-items a {
+  color: #2b2b2b;
+  font-family: Rubik, sans-serif;
+  font-size: .9rem;
+}
+
+.agrisud-navbar-links-items a:hover {
+  color: var(--theme-deafult);
+}
+
+.agrisud-navbar-links-item {
+  border-right: 1px solid lightgray;
+}
+
+
+.agrisud-navbar-aide {
+  cursor: pointer;
+}
+
+.agrisud-nav-menus {
+  margin-top: 8px;
+}
+
+.agrisud-nav-menus-logo {
+  padding: unset !important;
+  max-width: 20vw;
+}
+
+.agrisud-nav-menus .agrisud-navbar-login {
+  margin-left: 20px;
+}
+
+.agrisud-nav-menus .custom-media {
+  min-width: 152px;
+}
+
+.nav-image {
+  height: 100%;
+  cursor: pointer;
+}
+
+.form-container{
+  margin-top: 6em;
+}
+.password-reveal {
+  color: #5500B3;
+  margin-left: -40px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.eye-open {
+  content: url("../img/eye-open.png");
+  width: 1.2em;
+  top: 0.3em;
+  position: absolute;
+}
+
+.eye-closed {
+  content: url("../img/eye-closed.png");
+  width: 1.2em;
+  top: 0.3em;
+  position: absolute;
+}
+
+.form-group {
+  position: relative;
+}
+
