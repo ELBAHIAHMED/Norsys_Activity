@@ -1,0 +1,6 @@
+{
+  "KEYCLOAK_URL": "http://localhost:8080/",
+  "KEYCLOAK_REALM": "Norsys",
+  "KEYCLOAK_CLIENT_ID": "frontend-norsys-activity",
+  "KEYCLOAK_REDIRECT_URI": "http://localhost:4200/*"
+}
