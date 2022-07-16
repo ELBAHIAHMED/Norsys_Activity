@@ -5,7 +5,7 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeKeycloak } from './init/keycloak-init.factory';
-import { DashboardNorsysActivityComponent } from './dashboard-norsys-activity/dashboard-norsys-activity.component';
+import { DashboardNorsysActivityComponent } from './components/dashboard-norsys-activity/dashboard-norsys-activity.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardNorsysActivityComponent } from './dashboard-norsys-activity/dashboard-norsys-activity.component';
+import { DashboardNorsysActivityComponent } from './components/dashboard-norsys-activity/dashboard-norsys-activity.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
