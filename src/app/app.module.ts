@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { initializeKeycloak } from './init/keycloak-init.factory';
 import { DashboardNorsysActivityComponent } from './components/dashboard-norsys-activity/dashboard-norsys-activity.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavBarComponent } from './components/home/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardNorsysActivityComponent
+    DashboardNorsysActivityComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
