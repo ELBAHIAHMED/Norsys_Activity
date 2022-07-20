@@ -111,7 +111,7 @@ export class CardLineChartComponent implements OnInit {
       },
     };
     let ctx: any = document.getElementById("line-chart") as HTMLCanvasElement;
-    ctx = ctx.getContext("2d"); 
+    ctx = ctx.getContext("2d");
     new Chart(ctx, config as any);
   }
 }

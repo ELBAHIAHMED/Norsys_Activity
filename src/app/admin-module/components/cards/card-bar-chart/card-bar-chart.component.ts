@@ -104,7 +104,6 @@ export class CardBarChartComponent implements OnInit, AfterViewInit {
     };
     let ctx: any = document.getElementById("bar-chart");
     ctx = ctx.getContext("2d");
-    new Chart(ctx, config as any); 
+    new Chart(ctx, config as any);
   }
 }
- 
