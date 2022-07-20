@@ -6,8 +6,10 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { KeycloakAngularModule, KeycloakService } from "keycloak-angular";
 import { initializeKeycloak } from "./init/keycloak-init.factory";
-import { AuthModule } from "./authentication-module/auth.module";
-import { AdminModule } from "./admin-module/admin.module";
+import { AuthModule } from "./auth/auth.module";
+import { AdminModule } from "./admin/admin.module";
+import { CollaboratorModule } from "./collaborator/collaborator.module";
+import { VisitorModule } from "./visitor/visitor.module";
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AdminModule } from "./admin-module/admin.module";
     KeycloakAngularModule,
     HttpClientModule,
     AuthModule,
-    AdminModule
+    AdminModule,
+    CollaboratorModule,
+    VisitorModule
   ],
   providers: [
     {
