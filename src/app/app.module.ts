@@ -19,7 +19,6 @@ import { VisitorModule } from "./visitor/visitor.module";
     BrowserModule,
     AppRoutingModule,
     KeycloakAngularModule,
-    HttpClientModule,
     AuthModule,
     AdminModule,
     CollaboratorModule,

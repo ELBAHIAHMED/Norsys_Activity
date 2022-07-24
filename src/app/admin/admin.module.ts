@@ -23,6 +23,9 @@ import { FooterAdminComponent } from './components/footer/footer-admin/footer-ad
 import { HeaderStatsComponent } from './components/header-stats/header-stats.component';
 import { NotificationDropdownComponent } from './components/dropdown/notification-dropdown/notification-dropdown.component';
 import { UserDropdownComponent } from './components/dropdown/user-dropdown/user-dropdown.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { AdminService } from '../services/admin.service';
 
 
 @NgModule({
@@ -51,7 +54,9 @@ import { UserDropdownComponent } from './components/dropdown/user-dropdown/user-
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
-  ]
+    AdminRoutingModule,
+    HttpClientModule
+  ],
+  providers: [AdminService]
 })
 export class AdminModule { }

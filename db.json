@@ -1,0 +1,41 @@
+{
+  "collaborators": [
+    {
+      "id": 1,
+      "firstName": "collaborator1",
+      "secondName": "col1",
+      "email": "email1@email.com",
+      "address": "Marrakech-norsys-1",
+      "number_of_vote": 10
+    },
+    {
+      "id": 2,
+      "firstName": "collaborator2",
+      "secondName": "col2",
+      "email": "email2@email.com",
+      "address": "Marrakech-norsys-2",
+      "number_of_vote": 5
+    }
+  ],
+  "admin": {
+    "id": 1,
+    "firstName": "admin",
+    "secondName": "admin",
+    "email": "admin@email.com",
+    "address": "Marrakech-norsys-admin",
+    "phone": "0606060606",
+    "number_of_collaborators": 10
+  },
+  "activities": [
+    {
+      "id": 1,
+      "title": "activity1",
+      "description": "description 1"
+    },
+    {
+      "id": 2,
+      "title": "activity2",
+      "description": "description 2"
+    }
+  ]
+}

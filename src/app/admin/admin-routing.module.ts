@@ -9,7 +9,7 @@ import { TablesComponent } from "./view/tables/tables.component";
 
 const routes: Routes = [
   {
-    path: "admin",
+    path: "",
     component: AdminComponent,
     children: [
       { path: "dashboard", component: DashboardComponent },
@@ -24,5 +24,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
+  
 })
 export class AdminRoutingModule { }
