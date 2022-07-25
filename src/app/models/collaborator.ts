@@ -1,7 +1,7 @@
 export interface Collaborator {
   id: number;
-  firstName: string;
-  secondName: string;
+  name: string;
+  type: string;
   email: string;
   address: string;
   number_of_vote: number;

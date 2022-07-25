@@ -9,8 +9,14 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminService {
   private MOCK_URL_COLLABORATORS = environment.MOCK_URL + '/collaborators/';
+
   constructor(private http: HttpClient) {}
-  getAllCollaborators(): Observable<Array<Collaborator>> {
-    return this.http.get<Array<Collaborator>>(`${this.MOCK_URL_COLLABORATORS}`);
+
+  getAllCollaborators(): Observable<Collaborator[]> {
+    return this.http.get<Collaborator[]>(this.MOCK_URL_COLLABORATORS);
+  }
+
+  getOneCollaborator(id: number): Observable<Collaborator> {
+    return this.http.get<Collaborator>(`${this.MOCK_URL_COLLABORATORS}/${id}`);
   }
 }

@@ -11,7 +11,7 @@ import { CardProfileComponent } from './components/cards/card-profile/card-profi
 import { CardSettingsComponent } from './components/cards/card-settings/card-settings.component';
 import { CardSocialTrafficComponent } from './components/cards/card-social-traffic/card-social-traffic.component';
 import { CardStatsComponent } from './components/cards/card-stats/card-stats.component';
-import { CardTableComponent } from './components/cards/card-table/card-table.component';
+import { CardTableCollaboratorComponent } from './components/cards/card-table-collaborator/card-table-collaborator.component';
 import { CardBarChartComponent } from './components/cards/card-bar-chart/card-bar-chart.component';
 import { CardLineChartComponent } from './components/cards/card-line-chart/card-line-chart.component';
 import { CardPageVisitsComponent } from './components/cards/card-page-visits/card-page-visits.component';
@@ -24,8 +24,9 @@ import { HeaderStatsComponent } from './components/header-stats/header-stats.com
 import { NotificationDropdownComponent } from './components/dropdown/notification-dropdown/notification-dropdown.component';
 import { UserDropdownComponent } from './components/dropdown/user-dropdown/user-dropdown.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
 import { AdminService } from '../services/admin.service';
+import { CardTableActivitiesComponent } from './components/cards/card-table-activities/card-table-activities.component';
+import { ActivityService } from '../services/activity.service';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { AdminService } from '../services/admin.service';
     CardSettingsComponent,
     CardSocialTrafficComponent,
     CardStatsComponent,
-    CardTableComponent,
+    CardTableCollaboratorComponent,
     CardBarChartComponent,
     CardLineChartComponent,
     CardPageVisitsComponent,
@@ -50,13 +51,14 @@ import { AdminService } from '../services/admin.service';
     FooterAdminComponent,
     HeaderStatsComponent,
     NotificationDropdownComponent,
-    UserDropdownComponent
+    UserDropdownComponent,
+    CardTableActivitiesComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     HttpClientModule
   ],
-  providers: [AdminService]
+  providers: [AdminService, ActivityService]
 })
 export class AdminModule { }
