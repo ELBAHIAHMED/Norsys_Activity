@@ -19,12 +19,15 @@
   ],
   "admin": {
     "id": 1,
-    "name": "admin",
-    "type": "admin",
+    "username": "admin-norsys",
+    "firstname": "Zakaria",
+    "lastname": "Dani",
+    "date_of_birth": "2022-07-29",
     "email": "admin@email.com",
     "address": "Marrakech-norsys-admin",
     "phone": "0606060606",
-    "number_of_collaborators": 10
+    "country": "Morocco",
+    "position": "full stack developer"
   },
   "activities": [
     {

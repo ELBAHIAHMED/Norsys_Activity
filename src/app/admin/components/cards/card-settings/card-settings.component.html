@@ -7,15 +7,16 @@
       <button
         class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
         type="button"
+        (click)="updateAdmin(updateAdminForm)"
       >
-        Settings
+        Save
       </button>
     </div>
   </div>
   <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-    <form>
+    <form #updateAdminForm="ngForm">
       <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-        User Information
+        My Information
       </h6>
       <div class="flex flex-wrap">
         <div class="w-full lg:w-6/12 px-4">
@@ -28,8 +29,10 @@
             </label>
             <input
               type="text"
+              [(ngModel)]="valueService.admin.username"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="lucky.jesse"
+              value={{valueService.admin.username}}
+              name="username"
             />
           </div>
         </div>
@@ -43,8 +46,10 @@
             </label>
             <input
               type="email"
+              name="email"
+              [(ngModel)]="valueService.admin.email"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="jesse@example.com"
+              value={{valueService.admin.email}}
             />
           </div>
         </div>
@@ -58,8 +63,10 @@
             </label>
             <input
               type="text"
+              name="firstname"
+              [(ngModel)]="valueService.admin.firstname"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="Lucky"
+              value={{valueService.admin.firstname}}
             />
           </div>
         </div>
@@ -73,8 +80,10 @@
             </label>
             <input
               type="text"
+              name="lastname"
+              [(ngModel)]="valueService.admin.lastname"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="Jesse"
+              value={{valueService.admin.lastname}}
             />
           </div>
         </div>
@@ -96,8 +105,10 @@
             </label>
             <input
               type="text"
+              [(ngModel)]="valueService.admin.address"
+              name="address"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+              value={{valueService.admin.address}}
             />
           </div>
         </div>
@@ -107,12 +118,14 @@
               class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
               htmlFor="grid-password"
             >
-              City
+              Date Of Birth
             </label>
             <input
-              type="email"
+              type="date"
+              [(ngModel)]="valueService.admin.date_of_birth"
+              name="date_of_birth"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="New York"
+              value="{{valueService.admin.date_of_birth}}"
             />
           </div>
         </div>
@@ -126,8 +139,10 @@
             </label>
             <input
               type="text"
+              name="country"
+              [(ngModel)]="valueService.admin.country"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="United States"
+              value={{valueService.admin.country}}
             />
           </div>
         </div>
@@ -137,40 +152,15 @@
               class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
               htmlFor="grid-password"
             >
-              Postal Code
+              Phone
             </label>
             <input
-              type="text"
+              type="tel"
+              name="phone"
+              [(ngModel)]="valueService.admin.phone"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              value="Postal Code"
+              value={{valueService.admin.phone}}
             />
-          </div>
-        </div>
-      </div>
-
-      <hr class="mt-6 border-b-1 border-blueGray-300" />
-
-      <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-        About Me
-      </h6>
-      <div class="flex flex-wrap">
-        <div class="w-full lg:w-12/12 px-4">
-          <div class="relative w-full mb-3">
-            <label
-              class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              About me
-            </label>
-            <textarea
-              type="text"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              rows="4"
-            >
-                  A beautiful UI Kit and Admin for Angular & Tailwind CSS. It is Free
-                  and Open Source.
-                </textarea
-            >
           </div>
         </div>
       </div>

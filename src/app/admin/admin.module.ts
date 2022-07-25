@@ -27,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminService } from '../services/admin.service';
 import { CardTableActivitiesComponent } from './components/cards/card-table-activities/card-table-activities.component';
 import { ActivityService } from '../services/activity.service';
+import { CollaboratorService } from '../services/collaborator.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -57,8 +59,9 @@ import { ActivityService } from '../services/activity.service';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [AdminService, ActivityService]
+  providers: [AdminService, ActivityService, CollaboratorService]
 })
 export class AdminModule { }

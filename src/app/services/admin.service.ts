@@ -1,22 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Collaborator } from 'src/app/models/collaborator';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Admin } from '../models/admin';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
-  private MOCK_URL_COLLABORATORS = environment.MOCK_URL + '/collaborators/';
-
+  private MOCK_URL_ADMIN = environment.MOCK_URL + '/admin';
   constructor(private http: HttpClient) {}
 
-  getAllCollaborators(): Observable<Collaborator[]> {
-    return this.http.get<Collaborator[]>(this.MOCK_URL_COLLABORATORS);
+  getAdmin(): Observable<Admin> {
+    return this.http.get<Admin>(this.MOCK_URL_ADMIN);
   }
 
-  getOneCollaborator(id: number): Observable<Collaborator> {
-    return this.http.get<Collaborator>(`${this.MOCK_URL_COLLABORATORS}/${id}`);
+  UpdateAdmin(newAdmin: Admin): Observable<Admin> {
+    return this.http.patch<Admin>(this.MOCK_URL_ADMIN, newAdmin);
   }
 }
