@@ -1,1 +1,1 @@
-# NorsysActivityClientSide
+# Norsys Activité Front
