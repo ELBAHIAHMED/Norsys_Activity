@@ -1,0 +1,48 @@
+{
+  "collaborators": [
+    {
+      "id": 1,
+      "name": "collaborator1",
+      "type": "col1",
+      "email": "email1@email.com",
+      "address": "Marrakech-norsys-1",
+      "number_of_vote": 10
+    },
+    {
+      "id": 2,
+      "name": "collaborator2",
+      "type": "col2",
+      "email": "email2@email.com",
+      "address": "Marrakech-norsys-2",
+      "number_of_vote": 5
+    }
+  ],
+  "admin": {
+    "id": 1,
+    "username": "admin-norsys",
+    "firstname": "Zakaria",
+    "lastname": "Dani",
+    "date_of_birth": "2022-07-29",
+    "email": "admin@email.com",
+    "address": "Marrakech-norsys-admin",
+    "phone": "0606060606",
+    "country": "Morocco",
+    "position": "full stack developer"
+  },
+  "activities": [
+    {
+      "id": 1,
+      "title": "activity1",
+      "description": "description 1",
+      "number_of_votes": 100,
+      "date": "Tue Feb 05 2019 12:05:22 GMT+0530 (IST)"
+    },
+    {
+      "id": 2,
+      "title": "activity2",
+      "description": "description 2",
+      "number_of_votes": 50,
+      "date": "Tue Feb 05 2019 12:05:22 GMT+0530 (IST)"
+    }
+  ]
+}
