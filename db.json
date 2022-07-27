@@ -5,16 +5,24 @@
       "name": "collaborator1",
       "type": "col1",
       "email": "email1@email.com",
-      "address": "Marrakech-norsys-1",
-      "number_of_vote": 10
+      "address": "switzerland-norsys-1",
+      "number_of_vote": 10,
+      "country": "switzerland",
+      "date_of_collaboration": "2022-07-29",
+      "budget": 400000,
+      "phone":"0606060606"
     },
     {
       "id": 2,
       "name": "collaborator2",
       "type": "col2",
       "email": "email2@email.com",
-      "address": "Marrakech-norsys-2",
-      "number_of_vote": 5
+      "address": "USA-norsys-2",
+      "number_of_vote": 5,
+      "country": "USA",
+      "date_of_collaboration": "2002-07-29",
+      "budget": 800000,
+      "phone":"0606060606"
     }
   ],
   "admin": {
@@ -35,14 +43,18 @@
       "title": "activity1",
       "description": "description 1",
       "number_of_votes": 100,
-      "date": "Tue Feb 05 2019 12:05:22 GMT+0530 (IST)"
+      "date": "Tue Feb 05 2019 12:05:22 GMT+0530 (IST)",
+      "number_of_participant": 50,
+      "category": "category1"
     },
     {
       "id": 2,
       "title": "activity2",
       "description": "description 2",
       "number_of_votes": 50,
-      "date": "Tue Feb 05 2019 12:05:22 GMT+0530 (IST)"
+      "date": "Tue Feb 05 2019 12:05:22 GMT+0530 (IST)",
+      "number_of_participant": 50,
+      "category": "category2"
     }
   ]
 }
