@@ -10,7 +10,7 @@ import { ValueService } from 'src/app/services/values.service';
   ]
 })
 export class CollaboratorsComponent implements OnInit {
-
+  addCollaboratorShown = false;
   listView = true;
   cardView = false;
   constructor(private titleService: Title, public valueService: ValueService, private collaboratorsService: CollaboratorService) {
@@ -36,6 +36,10 @@ export class CollaboratorsComponent implements OnInit {
   toggleToCardView() {
     this.listView = false;
     this.cardView = true;
+  }
+
+  showAddCollaborator() {
+    this.addCollaboratorShown = !this.addCollaboratorShown;
   }
 
 }

@@ -10,6 +10,7 @@ import { ValueService } from 'src/app/services/values.service';
 export class ActivitiesComponent implements OnInit {
   listView = true;
   cardView = false;
+  addActivityShown = false;
   constructor(private titleService: Title, public valueService: ValueService, private activityService: ActivityService) {
     this.titleService.setTitle('activities');
   }
@@ -33,5 +34,8 @@ export class ActivitiesComponent implements OnInit {
   toggleToCardView() {
     this.listView = false;
     this.cardView = true;
+  }
+  showAddActivity() {
+    this.addActivityShown = !this.addActivityShown;
   }
 }
