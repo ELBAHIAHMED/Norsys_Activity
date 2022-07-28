@@ -6,7 +6,6 @@ import { AdminComponent } from './layout/admin.component';
 import { SettingsComponent } from './view/settings/settings.component';
 import { MapsComponent } from './view/maps/maps.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
-import { TablesComponent } from './view/tables/tables.component';
 import { CardProfileComponent } from './components/cards/card-profile/card-profile.component';
 import { CardSettingsComponent } from './components/cards/card-settings/card-settings.component';
 import { CardSocialTrafficComponent } from './components/cards/card-social-traffic/card-social-traffic.component';
@@ -29,6 +28,10 @@ import { CardTableActivitiesComponent } from './components/cards/card-table-acti
 import { ActivityService } from '../services/activity.service';
 import { CollaboratorService } from '../services/collaborator.service';
 import { FormsModule } from '@angular/forms';
+import { ActivitiesComponent } from './view/activities/activities.component';
+import { CardActivitiesComponent } from './components/cards/card-activities/card-activities.component';
+import { CardCollaboratorsComponent } from './components/cards/card-collaborators/card-collaborators.component';
+import { CollaboratorsComponent } from './view/collaborators/collaborators.component';
 
 
 @NgModule({
@@ -37,7 +40,6 @@ import { FormsModule } from '@angular/forms';
     SettingsComponent,
     MapsComponent,
     DashboardComponent,
-    TablesComponent,
     CardProfileComponent,
     CardSettingsComponent,
     CardSocialTrafficComponent,
@@ -54,7 +56,11 @@ import { FormsModule } from '@angular/forms';
     HeaderStatsComponent,
     NotificationDropdownComponent,
     UserDropdownComponent,
-    CardTableActivitiesComponent
+    CardTableActivitiesComponent,
+    ActivitiesComponent,
+    CardActivitiesComponent,
+    CardCollaboratorsComponent,
+    CollaboratorsComponent,
   ],
   imports: [
     CommonModule,

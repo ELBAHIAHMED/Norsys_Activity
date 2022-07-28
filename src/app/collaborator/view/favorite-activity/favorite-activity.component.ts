@@ -8,9 +8,20 @@ import { Activity } from 'src/app/models/activity';
 })
 export class FavoriteActivityComponent implements OnInit {
   favorite_activities: Activity[] | undefined;
+  listView = true;
+  cardView = false;
   constructor(private titleService: Title) {
     this.titleService.setTitle('favorite-activity');
   }
 
   ngOnInit(): void {}
+  toggleToListView() {
+    this.listView = true;
+    this.cardView = false;
+  }
+
+  toggleToCardView() {
+    this.listView = false;
+    this.cardView = true;
+  }
 }

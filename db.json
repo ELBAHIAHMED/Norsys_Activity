@@ -41,20 +41,26 @@
     {
       "id": 1,
       "title": "activity1",
-      "description": "description 1",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis expedita beatae numquam ducimus! Dolorum rerum commodi vero laudantium illo qui unde itaque, tempora eius tenetur voluptatem officiis modi quidem assumenda!",
       "number_of_votes": 100,
       "date": "Tue Feb 05 2019 12:05:22 GMT+0530 (IST)",
       "number_of_participant": 50,
-      "category": "category1"
+      "category": "category1",
+      "localization": "Marrakech-Morocco",
+      "number_of_days":4,
+      "number_of_sponsors":7
     },
     {
       "id": 2,
       "title": "activity2",
-      "description": "description 2",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis expedita beatae numquam ducimus! Dolorum rerum commodi vero laudantium illo qui unde itaque, tempora eius tenetur voluptatem officiis modi quidem assumenda!",
       "number_of_votes": 50,
       "date": "Tue Feb 05 2019 12:05:22 GMT+0530 (IST)",
       "number_of_participant": 50,
-      "category": "category2"
+      "category": "category2",
+      "localization": "Paris-France",
+      "number_of_days":7,
+      "number_of_sponsors":17
     }
   ]
 }
