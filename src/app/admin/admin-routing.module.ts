@@ -14,7 +14,7 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: "dashboard", component: DashboardComponent },
-      { path: "settings", component: SettingsComponent },
+      { path: "profile", component: SettingsComponent },
       { path: "activities", component: ActivitiesComponent },
       { path: "maps", component: MapsComponent },
       { path: "collaborators", component: CollaboratorsComponent },

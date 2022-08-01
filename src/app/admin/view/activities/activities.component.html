@@ -1,9 +1,22 @@
 <div class="flex h-full min-h-screen flex-wrap mt-14">
   <div class="flex flex-col space-y-4 w-full mb-12 px-4 mt-14">
     <div class="flex space-x-2">
-      <i class="fas fa-list-ul cursor-pointer" [ngClass]="listView ? '':'text-blueGray-400'" (click)="toggleToListView()"></i>
-      <i class="fas fa-th cursor-pointer" [ngClass]="cardView ? '':'text-blueGray-400'" (click)="toggleToCardView()"></i>
-      <i class="fas fa-plus cursor-pointer text-blueGray-400" (click)="showAddActivity()"></i>
+      <i
+        class="fas fa-list-ul cursor-pointer"
+        [ngClass]="listView ? '' : 'text-blueGray-400'"
+        (click)="toggleToListView()"
+        *ngIf="innerWidth > 768"
+      ></i>
+      <i
+        class="fas fa-th cursor-pointer"
+        [ngClass]="cardView ? '' : 'text-blueGray-400'"
+        (click)="toggleToCardView()"
+        *ngIf="innerWidth > 768"
+      ></i>
+      <i
+        class="fas fa-plus cursor-pointer text-blueGray-400"
+        (click)="showOrHideAddActivity()"
+      ></i>
     </div>
     <div class="">
       <app-card-table-activities
@@ -19,37 +32,228 @@
 </div>
 
 <!--Modal-->
-<div *ngIf="addActivityShown" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+<div
+  *ngIf="addActivityShown"
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center flex mb-5"
+>
   <div class="relative w-auto my-6 mx-auto max-w-6xl">
     <!--content-->
-    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+    <div
+      class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+    >
       <!--header-->
-      <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-        <h3 class="text-3xl font-semibold">
-          Add New Activity
-        </h3>
-        <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="showAddActivity()">
-          <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+      <div
+        class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+      >
+        <h3 class="text-3xl font-semibold">Add New Activity</h3>
+        <button
+          class="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+          (click)="showOrHideAddActivity()"
+        >
+          <span
+            class="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none"
+          >
             ×
           </span>
         </button>
       </div>
       <!--body-->
-      <div class="relative p-6 flex-auto">
-        <p class="my-4 text-slate-500 text-lg leading-relaxed">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus nesciunt sunt cupiditate officiis blanditiis error, consequatur ipsum aperiam, officia quisquam accusantium nisi magnam? Ducimus neque atque odio iste iure.
-        </p>
+      <div class="relative max-h-full p-6 flex-auto">
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+        >
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+            <form #addActivityForm="ngForm" [ngSwitch]="step">
+              <div class="step-1" *ngSwitchCase="0">
+                <h6
+                  class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"
+                >
+                  Information
+                </h6>
+                <div class="flex flex-wrap">
+                  <div class="w-screen h-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        title
+                      </label>
+                      <input
+                        type="text"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        name="title"
+                        ngModel
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        number of participant
+                      </label>
+                      <input
+                        type="number"
+                        name="number_of_participant"
+                        ngModel
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        number of days
+                      </label>
+                      <input
+                        type="number"
+                        name="number_of_days"
+                        ngModel
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        number of sponsors
+                      </label>
+                      <input
+                        type="number"
+                        name="number_of_sponsors"
+                        ngModel
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+                <h6
+                  class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"
+                >
+                  Extra Information
+                </h6>
+                <div class="flex flex-wrap">
+                  <div class="w-full lg:w-12/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        Description
+                      </label>
+                      <input
+                        type="text"
+                        name="description"
+                        ngModel
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full lg:w-4/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        Date
+                      </label>
+                      <input
+                        type="date"
+                        name="date"
+                        ngModel
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full lg:w-4/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        localization
+                      </label>
+                      <input
+                        type="text"
+                        name="localization"
+                        ngModel
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full lg:w-4/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      >
+                        Category
+                      </label>
+                      <input
+                        type="text"
+                        name="category"
+                        ngModel
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="step-2" *ngSwitchCase="1">
+                <h6
+                  class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"
+                >
+                  Upload Files
+                </h6>
+                <div class="flex flex-wrap">
+                  <div class="w-screen h-full lg:w-12/12 px-4">
+                    <div class="relative w-full mb-3">
+                      <app-upload></app-upload>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
       <!--footer-->
-      <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-        <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="showAddActivity()">
-          Close
+      <div
+        class="flex justify-end p-4 border-t border-solid border-slate-200 rounded-b"
+      >
+        <button
+          class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button"
+          (click)="showOrHideAddActivity()"
+        >
+          cancel
         </button>
-        <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="showAddActivity()">
-          Save Changes
+        <button
+          class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button"
+          (click)="next()"
+          *ngIf="step===0; else elseButton"
+        >
+          Next
         </button>
+        <ng-template #elseButton>
+          <button
+          class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button"
+          (click)="addActivity(addActivityForm)"
+        >
+          Add
+        </button>
+        </ng-template>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="addActivityShown" class="opacity-25 fixed inset-0 z-40 bg-black"></div>`
+<div
+  *ngIf="addActivityShown"
+  class="opacity-25 fixed inset-0 z-40 bg-black"
+></div>
