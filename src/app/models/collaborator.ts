@@ -5,4 +5,8 @@ export interface Collaborator {
   email: string;
   address: string;
   number_of_vote: number;
+  country: string;
+  budget: number;
+  date_of_collaboration: Date;
+  phone: string;
 }

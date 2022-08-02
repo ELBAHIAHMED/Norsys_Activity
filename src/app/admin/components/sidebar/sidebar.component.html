@@ -14,19 +14,16 @@
     </button>
     <!-- Brand -->
     <a
-      [routerLink]="['/']"
+      [routerLink]="['/admin/dashboard']"
       class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
     >
-      <span class="block sm:hidden"> Tailwind Angular </span>
-      <span class="hidden sm:block"> Norsys Activity </span>
+      <span class="block sm:hidden"> Admin </span>
+      <span class="hidden sm:block"> Admin </span>
     </a>
     <!-- User -->
     <ul class="md:hidden items-center flex flex-wrap list-none">
       <li class="inline-block relative">
         <app-notification-dropdown class="block"></app-notification-dropdown>
-      </li>
-      <li class="inline-block relative">
-        <app-user-dropdown class="block"></app-user-dropdown>
       </li>
     </ul>
     <!-- Collapse -->
@@ -41,7 +38,7 @@
         <div class="flex flex-wrap">
           <div class="w-6/12">
             <a
-              [routerLink]="['/']"
+              [routerLink]="['/admin/dashboard']"
               class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
             Norsys Activity
@@ -104,7 +101,7 @@
 
         <li class="items-center">
           <a
-            [routerLink]="['/admin/settings']"
+            [routerLink]="['/admin/profile']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
             #adminSettings="routerLinkActive"
@@ -115,23 +112,23 @@
             "
           >
             <i
-              class="fas fa-tools mr-2 text-sm"
+              class="fas fa-user mr-2 text-sm"
               [ngClass]="
                 adminSettings.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Settings
+            Profile
           </a>
         </li>
 
         <li class="items-center">
           <a
-            [routerLink]="['/admin/tables']"
+            [routerLink]="['/admin/activities']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
-            #adminTables="routerLinkActive"
+            #adminActivities="routerLinkActive"
             [ngClass]="
-              adminTables.isActive
+            adminActivities.isActive
                 ? 'text-red-600 hover:text-red-700'
                 : 'text-blueGray-700 hover:text-blueGray-500'
             "
@@ -139,10 +136,31 @@
             <i
               class="fas fa-table mr-2 text-sm"
               [ngClass]="
-                adminTables.isActive ? 'opacity-75' : 'text-blueGray-300'
+              adminActivities.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Tables
+            Activities
+          </a>
+        </li>
+        <li class="items-center">
+          <a
+            [routerLink]="['/admin/collaborators']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #adminCollaborators="routerLinkActive"
+            [ngClass]="
+              adminCollaborators.isActive
+                ? 'text-red-600 hover:text-red-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            "
+          >
+            <i
+              class="fas fa-hands-helping mr-2 text-sm"
+              [ngClass]="
+              adminCollaborators.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "
+            ></i>
+            Collaborators
           </a>
         </li>
 

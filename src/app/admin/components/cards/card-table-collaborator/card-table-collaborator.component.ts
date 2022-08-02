@@ -13,7 +13,7 @@ export class CardTableCollaboratorComponent implements OnInit {
   set color(color: string) {
     this._color = color !== "light" && color !== "dark" ? "light" : color;
   }
-  private _color = "light";
+  private _color = "dark";
   constructor(public valueService: ValueService) {}
 
   ngOnInit(): void {}

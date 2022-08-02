@@ -7,5 +7,5 @@ import { AdminService } from './services/admin.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'norsys-activity-client-side';
+  title = 'norsys-activity';
 }
