@@ -33,6 +33,7 @@ import { UploadComponent } from './components/upload/upload.component';
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { CardPolarChartComponent } from './components/cards/card-polar-chart/card-polar-chart.component';
 import { CardRadarChartComponent } from './components/cards/card-radar-chart/card-radar-chart.component';
+import { FormulaireComponent } from './view/formulaire/formulaire.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { CardRadarChartComponent } from './components/cards/card-radar-chart/car
     UploadComponent,
     FileSizePipe,
     CardPolarChartComponent,
-    CardRadarChartComponent
+    CardRadarChartComponent,
+    FormulaireComponent
   ],
   imports: [
     CommonModule,
