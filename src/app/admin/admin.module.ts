@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './layout/admin.component';
 import { SettingsComponent } from './view/settings/settings.component';
-import { MapsComponent } from './view/maps/maps.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { CardProfileComponent } from './components/cards/card-profile/card-profile.component';
 import { CardSettingsComponent } from './components/cards/card-settings/card-settings.component';
@@ -40,7 +39,6 @@ import { FormulaireComponent } from './view/formulaire/formulaire.component';
   declarations: [
     AdminComponent,
     SettingsComponent,
-    MapsComponent,
     DashboardComponent,
     CardProfileComponent,
     CardSettingsComponent,
