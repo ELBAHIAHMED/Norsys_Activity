@@ -68,12 +68,6 @@
 
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />
-      <!-- Heading -->
-      <h6
-        class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
-      >
-        Admin Pages
-      </h6>
       <!-- Navigation -->
 
       <ul class="md:flex-col md:min-w-full flex flex-col list-none">
@@ -95,7 +89,7 @@
                 adminDashboard.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Dashboard
+            Tableau de bord
           </a>
         </li>
 
@@ -117,7 +111,7 @@
                 adminSettings.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Profile
+            Profil
           </a>
         </li>
 
@@ -126,9 +120,9 @@
             [routerLink]="['/admin/activities']"
             class="text-xs uppercase py-3 font-bold block"
             routerLinkActive
-            #adminActivities="routerLinkActive"
+            #adminEvents="routerLinkActive"
             [ngClass]="
-            adminActivities.isActive
+            adminEvents.isActive
                 ? 'text-blue-600 hover:text-blue-700'
                 : 'text-blueGray-700 hover:text-blueGray-500'
             "
@@ -136,10 +130,10 @@
             <i
               class="fas fa-table mr-2 text-sm"
               [ngClass]="
-              adminActivities.isActive ? 'opacity-75' : 'text-blueGray-300'
+              adminEvents.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Activities
+            Evénements
           </a>
         </li>
         <li class="items-center">
@@ -181,19 +175,13 @@
               adminCollaborators.isActive ? 'opacity-75' : 'text-blueGray-300'
               "
             ></i>
-            Collaborators
+            Collaborateurs
           </a>
         </li>
       </ul>
 
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />
-      <!-- Heading -->
-      <h6
-        class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
-      >
-        Auth Page
-      </h6>
       <!-- Navigation -->
 
       <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
@@ -203,7 +191,7 @@
             class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
           >
             <i class="fas fa-door-open text-blueGray-300 mr-2 text-sm"></i>
-            Logout
+            Déconnexion
           </a>
         </li>
       </ul>
