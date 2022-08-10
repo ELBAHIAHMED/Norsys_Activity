@@ -1,0 +1,20 @@
+<div class="flex flex-wrap text-gray-500">
+  <div
+    class="block p-6 w-full m-8 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+  >
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      Description
+    </h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400">
+      {{survey.Description}}
+    </p>
+  </div>
+  <div
+    class="w-full xl:w-full mb-12 xl:mb-0 px-4"
+    *ngFor="let question of survey.Question"
+  >
+    <app-doughnut-form-chart [question]="question"></app-doughnut-form-chart>
+  </div>
+</div>

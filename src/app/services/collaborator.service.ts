@@ -20,6 +20,6 @@ export class CollaboratorService {
     return this.http.get<Collaborator>(`${this.MOCK_URL_COLLABORATORS}/${id}`);
   }
   UpdateCollaborator(newCollaborator: Collaborator, id:number): Observable<Collaborator> {
-    return this.http.patch<Collaborator>(this.MOCK_URL_COLLABORATORS, newCollaborator);
+    return this.http.patch<Collaborator>(`${this.MOCK_URL_COLLABORATORS}/${id}`, newCollaborator);
   }
 }

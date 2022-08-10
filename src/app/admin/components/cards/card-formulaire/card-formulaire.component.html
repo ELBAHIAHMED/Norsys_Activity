@@ -1,0 +1,28 @@
+<mat-accordion class="example-headers-align" >
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+    *ngFor="let survey of filterdSurveys"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>{{ survey.Title | uppercase }}</b>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ survey.Date | date: "medium" }}
+        <div class="icons">
+          <button id="edit" (click)="editForm()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button id="delete">
+            <mat-icon color="warn" click-stop-propagation (click)="deleteSurvey(survey)"
+              >delete</mat-icon
+            >
+          </button>
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <app-form-statistics [survey]="survey"></app-form-statistics>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -10,7 +10,7 @@
       "country": "switzerland",
       "date_of_collaboration": "2022-07-29",
       "budget": 400000,
-      "phone":"0606060606"
+      "phone": "0606060606"
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "country": "USA",
       "date_of_collaboration": "2002-07-29",
       "budget": 800000,
-      "phone":"0606060606"
+      "phone": "0606060606"
     }
   ],
   "admin": {
@@ -47,8 +47,8 @@
       "number_of_participant": 50,
       "category": "category1",
       "localization": "Marrakech-Morocco",
-      "number_of_days":4,
-      "number_of_sponsors":7
+      "number_of_days": 4,
+      "number_of_sponsors": 7
     },
     {
       "id": 2,
@@ -59,8 +59,101 @@
       "number_of_participant": 50,
       "category": "category2",
       "localization": "Paris-France",
-      "number_of_days":7,
-      "number_of_sponsors":17
+      "number_of_days": 7,
+      "number_of_sponsors": 17
+    }
+  ],
+  "surveys": [
+    {
+      "id": 0,
+      "Description": "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+      "Title": "formulaire 0",
+      "IsDeleted": false,
+      "Question": [
+        {
+          "id": 0,
+          "Type": "Single choice",
+          "Text": "zaza",
+          "options": [
+            {
+              "id": 0,
+              "OptionText": "za",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 1,
+              "OptionText": "za",
+              "OptionColor": "",
+              "hasRemarks": false
+            }
+          ],
+          "Required": false,
+          "Remarks": "",
+          "hasRemarks": false
+        }
+      ],
+      "Date": "Fri Aug 18 2022 00:00:00 GMT+0100 (GMT+01:00)"
+    },
+    {
+      "id": 1,
+      "Description": "description pour formulaire 1",
+      "Title": "formulaire 1",
+      "IsDeleted": false,
+      "Question": [
+        {
+          "id": 0,
+          "Type": "Seul choix",
+          "Text": "question 1",
+          "options": [
+            {
+              "id": 0,
+              "OptionText": "choix 1",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "choix 2",
+              "OptionColor": "",
+              "hasRemarks": false
+            }
+          ],
+          "Required": false,
+          "Remarks": "",
+          "hasRemarks": false
+        },
+        {
+          "id": 0,
+          "Type": "Multi choix",
+          "Text": "question 2",
+          "options": [
+            {
+              "id": 0,
+              "OptionText": "choix 1",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "choix 2",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "choix 3",
+              "OptionColor": "",
+              "hasRemarks": false
+            }
+          ],
+          "Required": false,
+          "Remarks": "",
+          "hasRemarks": false
+        }
+      ],
+      "Date": "Fri Aug 8 2022 00:00:00 GMT+0100 (GMT+01:00)",
+      "FileNames": []
     }
   ]
 }

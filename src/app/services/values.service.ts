@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Activity } from '../models/activity';
 import { Admin } from '../models/admin';
 import { Collaborator } from '../models/collaborator';
+import { Survey } from '../models/survey';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Collaborator } from '../models/collaborator';
 export class ValueService {
   private _collaborators: Collaborator[] = [];
   private _activities: Activity[] = [];
+  private _surveys: Survey[] = [];
   private _admin: Admin | undefined;
   set collaborators(collaborators: Collaborator[]) {
     this._collaborators = collaborators;
@@ -22,6 +24,13 @@ export class ValueService {
   }
   get activities() {
     return this._activities;
+  }
+
+  set surveys(surveys: Survey[]) {
+    this._surveys = surveys;
+  }
+  get surveys() {
+    return this._surveys;
   }
 
   set admin(admin: Admin) {
