@@ -7,9 +7,9 @@
     <!-- scroll area -->
     <section class="h-full overflow-auto p-5 w-full h-full flex flex-col">
       <header
-        class="border-dashed border-2 border-gray-400 py-5 flex flex-col justify-center items-center"
+        class="dropzone border-dashed border-2 border-gray-400 py-5 flex flex-col justify-center items-center"
         fileDragDrop
-        (filesChangeEmiter)="onFileChange($event)"
+        (fileDropped)="onFileDroped($event)"
       >
         <p
           class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center"
@@ -75,7 +75,7 @@
               <section
                 class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3"
               >
-                <h1 class="flex-1">{{ f.name }}</h1>
+                <h1 class="flex-1">{{ f?.name }}</h1>
                 <div class="flex">
                   <span class="p-1">
                     <i>
@@ -96,6 +96,7 @@
                   <p class="p-1 size text-xs">{{ f.size | fileSize }}</p>
                   <button
                     class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md"
+                    click-stop-propagation
                     (click)="openConfirmDialog(ind)"
                   >
                     <svg

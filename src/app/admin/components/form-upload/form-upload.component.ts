@@ -10,13 +10,13 @@ import { DeleteFileComponent } from '../dialogs/delete-file/delete-file.componen
 })
 export class FormUploadComponent implements OnInit {
   @Output() uploadFileEvent = new EventEmitter<any>();
-  surveyFiles: any;
+  surveyFiles: any[] = [];
   noFileUploaded = true;
   constructor(private _snackBar: MatSnackBar, public dialog: MatDialog) {}
   ngOnInit(): void {}
 
   onFileChange(event: any) {
-    let files = event.target.files;
+    let files = event.target!.files;
     if (files !== undefined) {
       this.noFileUploaded = false;
       this.surveyFiles = Object.keys(files).map(
@@ -61,17 +61,13 @@ export class FormUploadComponent implements OnInit {
       this.noFileUploaded = true;
     }
   }
-
-  dropHandler(event: any) {
-    console.log('drop: ' + event);
-  }
-  dragOverHandler(event: any) {
-    console.log('dropover: ' + event);
-  }
-  dragLeaveHandler(event: any) {
-    console.log('dropleave: ' + event);
-  }
-  dragEnterHandler(event: any) {
-    console.log('dropenter: ' + event);
+  onFileDroped($event:any) {
+    this.noFileUploaded = false;
+    for (const item of $event) {
+      console.log(item);
+      this.surveyFiles.push(item);
+    }
+    console.log(this.surveyFiles);
+    this.uploadFileEvent.emit(this.surveyFiles);
   }
 }

@@ -13,7 +13,7 @@ import { File } from '../models/file';
 })
 export class FileDragDropDirective {
   //@Input() private allowed_extensions : Array<string> = ['png', 'jpg', 'bmp'];
-  @Output() private filesChangeEmiter: EventEmitter<File[]> =
+  @Output() private fileDropped: EventEmitter<File[]> =
     new EventEmitter();
   //@Output() private filesInvalidEmiter : EventEmitter<File[]> = new EventEmitter();
   @HostBinding('style.background') private background = '#eee';
@@ -45,11 +45,10 @@ export class FileDragDropDirective {
     this.background = '#eee';
     this.borderColor = '#696D7D';
     this.borderStyle = '2px dashed';
-    //debugger;
-    let files = evt.dataTransfer.files;
-    console.log(files);
-    if (files.length > 0) {
-      this.filesChangeEmiter.emit(files);
+    const files = evt.dataTransfer.files;
+    if(files.length > 0) {
+      this.fileDropped.emit(files);
     }
+    
   }
 }
