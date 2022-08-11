@@ -3,21 +3,18 @@
   <article
     aria-label="File Upload Modal"
     class="relative h-full flex flex-col bg-white shadow-xl rounded-md"
-    (drop)="dropHandler($event)"
-    (dragover)="dragOverHandler($event)"
-    (dragleave)="dragLeaveHandler($event)"
-    (dragenter)="dragEnterHandler($event)"
   >
     <!-- scroll area -->
     <section class="h-full overflow-auto p-5 w-full h-full flex flex-col">
       <header
         class="border-dashed border-2 border-gray-400 py-5 flex flex-col justify-center items-center"
+        fileDragDrop
+        (filesChangeEmiter)="onFileChange($event)"
       >
         <p
           class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center"
         >
           <span>Faites glisser et déposez votre fichiers ou</span>
-          
         </p>
 
         <label
@@ -33,7 +30,9 @@
               d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
             />
           </svg>
-          <span class="mt-2 text-base leading-normal">Sélectionner un fichier</span>
+          <span class="mt-2 text-base leading-normal"
+            >Sélectionner un fichier</span
+          >
           <input
             type="file"
             multiple
@@ -43,9 +42,7 @@
         </label>
       </header>
 
-      <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
-        Fichiers
-      </h1>
+      <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">Fichiers</h1>
 
       <ul id="gallery" class="flex flex-1 flex-wrap -m-1" #gallery>
         <li
@@ -58,7 +55,9 @@
             src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
             alt="no data"
           />
-          <span class="text-small text-gray-500">Aucun fichier sélectionné</span>
+          <span class="text-small text-gray-500"
+            >Aucun fichier sélectionné</span
+          >
         </li>
         <ng-template #elseBlock>
           <li

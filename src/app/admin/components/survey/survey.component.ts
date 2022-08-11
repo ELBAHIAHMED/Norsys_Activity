@@ -268,7 +268,7 @@ export class SurveyComponent implements OnInit {
     );
 
     console.log(survey);
-    if (survey.Title !== '' && survey.Question.length === 0) {
+    //if (survey.Title !== '' && survey.Question.length === 0) {
       this.surveyService.addSurvey(survey).subscribe({
         next: (res) => {
           console.log(res);
@@ -279,7 +279,7 @@ export class SurveyComponent implements OnInit {
         },
       });
       console.log('posting survey');
-    }
+    //}
   }
 
   onSubmit() {

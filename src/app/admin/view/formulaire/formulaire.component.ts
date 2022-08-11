@@ -38,29 +38,19 @@ export class FormulaireComponent implements OnInit {
   }
   showSurvey() {
     this.isAddSurvey = false;
+    this.filterdSurveys = this.valueService.surveys;
   }
   filterSurveysByDate(date: Date) {
     if (date) {
-      console.log(date.getMonth());
       this.valueService.surveys.filter((survey) => survey.Date === date);
-      console.log(
-        (this.filterdSurveys = this.valueService.surveys.filter((survey) => {
-          console.log(date);
-          let survey_date = new Date(survey.Date);
-          console.log(survey_date);
-          console.log(
-            survey_date.getMonth() === date.getMonth() &&
-              survey_date.getFullYear() === date.getFullYear() &&
-              survey_date.getDate() === date.getDate()
-          );
-
-          return (
-            survey_date.getMonth() === date.getMonth() &&
-            survey_date.getFullYear() === date.getFullYear() &&
-            survey_date.getDate() === date.getDate()
-          );
-        }))
-      );
+      this.filterdSurveys = this.valueService.surveys.filter((survey) => {
+        let survey_date = new Date(survey.Date);
+        return (
+          survey_date.getMonth() === date.getMonth() &&
+          survey_date.getFullYear() === date.getFullYear() &&
+          survey_date.getDate() === date.getDate()
+        );
+      });
     }
   }
   clearDate() {

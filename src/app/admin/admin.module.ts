@@ -73,6 +73,7 @@ import { ClickStopPropagationDirective } from '../directives/click-stop-propagat
 import { BarFormChartComponent } from './components/form-chart/bar-form-chart/bar-form-chart.component';
 import { DoughnutFormChartComponent } from './components/form-chart/doughnut-form-chart/doughnut-form-chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { FileDragDropDirective } from '../directives/file-drag-drop.directive';
 
 @NgModule({
   declarations: [
@@ -105,11 +106,12 @@ import { ChartsModule } from 'ng2-charts';
     CardFormulaireComponent,
     ConfirmationDialog,
     FormStatisticsComponent,
-    FormUploadComponent,
+    FormUploadComponent, 
     DeleteFileComponent,
     ClickStopPropagationDirective,
     BarFormChartComponent,
-    DoughnutFormChartComponent
+    DoughnutFormChartComponent,
+    FileDragDropDirective
   ],
   imports: [
     CommonModule,
