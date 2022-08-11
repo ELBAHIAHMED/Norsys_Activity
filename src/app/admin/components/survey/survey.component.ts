@@ -9,6 +9,7 @@ import { SurveyService } from 'src/app/services/survey.service';
 import { ValueService } from 'src/app/services/values.service';
 import { ConfirmationDialog } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { File } from 'src/app/models/file';
+import { Route, Router } from '@angular/router';
 export interface QuestionType {
   value: string;
   viewValue: string;
@@ -38,7 +39,7 @@ export class SurveyComponent implements OnInit {
   constructor(
     private dialog_delete_question: MatDialog,
     private surveyService: SurveyService,
-    private valueService: ValueService
+    private valueService: ValueService,
   ) {}
 
   ngOnInit() {
@@ -284,5 +285,6 @@ export class SurveyComponent implements OnInit {
 
   onSubmit() {
     this.postSurvey();
+    //window.location.reload();
   }
 }

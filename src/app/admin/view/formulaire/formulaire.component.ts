@@ -38,6 +38,7 @@ export class FormulaireComponent implements OnInit {
   }
   showSurvey() {
     this.isAddSurvey = false;
+    this.ngOnInit();
   }
   filterSurveysByDate(date: Date) {
     if (date) {

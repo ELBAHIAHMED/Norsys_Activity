@@ -1,6 +1,14 @@
-import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewChecked,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Option } from 'src/app/models/option';
 import { Question } from 'src/app/models/question';
+import { Survey } from 'src/app/models/survey';
+import { ValueService } from 'src/app/services/values.service';
 
 @Component({
   selector: 'app-pie-form-chart',
@@ -24,6 +32,7 @@ export class PieFormChartComponent implements OnInit {
     },
   };
   constructor() {}
+
 
   ngOnInit() {
     this.question.options.forEach((option: Option) => {
