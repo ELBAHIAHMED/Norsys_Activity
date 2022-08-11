@@ -70,10 +70,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FormUploadComponent } from './components/form-upload/form-upload.component';
 import { DeleteFileComponent } from './components/dialogs/delete-file/delete-file.component';
 import { ClickStopPropagationDirective } from '../directives/click-stop-propagation.directive';
-import { BarFormChartComponent } from './components/form-chart/bar-form-chart/bar-form-chart.component';
-import { DoughnutFormChartComponent } from './components/form-chart/doughnut-form-chart/doughnut-form-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { FileDragDropDirective } from '../directives/file-drag-drop.directive';
+import { PieFormChartComponent } from './components/form-chart/pie-form-chart/pie-form-chart.component';
 
 @NgModule({
   declarations: [
@@ -109,9 +108,8 @@ import { FileDragDropDirective } from '../directives/file-drag-drop.directive';
     FormUploadComponent, 
     DeleteFileComponent,
     ClickStopPropagationDirective,
-    BarFormChartComponent,
-    DoughnutFormChartComponent,
-    FileDragDropDirective
+    FileDragDropDirective,
+    PieFormChartComponent
   ],
   imports: [
     CommonModule,

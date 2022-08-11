@@ -1,14 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Color } from 'ng2-charts';
+import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 import { Option } from 'src/app/models/option';
 import { Question } from 'src/app/models/question';
 
 @Component({
-  selector: 'app-doughnut-form-chart',
-  templateUrl: './doughnut-form-chart.component.html',
-  styleUrls: ['./doughnut-form-chart.component.scss'],
+  selector: 'app-pie-form-chart',
+  templateUrl: './pie-form-chart.component.html',
+  styleUrls: ['./pie-form-chart.component.scss'],
 })
-export class DoughnutFormChartComponent implements OnInit {
+export class PieFormChartComponent implements OnInit {
   @Input()
   question!: Question;
   doughnutChartLabels: string[] = [];

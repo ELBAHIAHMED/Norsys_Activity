@@ -38,7 +38,6 @@ export class FormulaireComponent implements OnInit {
   }
   showSurvey() {
     this.isAddSurvey = false;
-    this.filterdSurveys = this.valueService.surveys;
   }
   filterSurveysByDate(date: Date) {
     if (date) {
