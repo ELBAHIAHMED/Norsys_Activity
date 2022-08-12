@@ -65,7 +65,7 @@ export class SurveyService {
         })
       );
   }
-  UpdateSurvey(newSurvey: Survey, id: number): Observable<Survey> {
+  updateSurvey(newSurvey: Survey, id: number): Observable<Survey> {
     return this.http
       .patch<Survey>(`${this.MOCK_URL_SURVEYS}/${id}`, newSurvey)
       .pipe(

@@ -1,0 +1,262 @@
+<mat-card-content>
+  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <mat-form-field class="full-width">
+      <input
+        formControlName="surveyTitle"
+        matInput
+        placeholder="Titre"
+        maxlength="50"
+        [required]="true"
+        [(ngModel)]="survey.Title"
+      />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        formControlName="surveyUrl"
+        matInput
+        placeholder="Url"
+        [(ngModel)]="survey.Url"
+      />
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        formControlName="surveyDescription"
+        matInput
+        placeholder="écrire..."
+        [(ngModel)]="survey.Description"
+      ></textarea>
+    </mat-form-field>
+    <div>
+      <app-form-upload
+        (uploadFileEvent)="getFiles($event)"
+      ></app-form-upload>
+    </div>
+
+    <div class="survey-options" style="padding: 5px">
+      <div formArrayName="surveyQuestions" class="poll-options">
+        <h3 class="list-title">Ajouter les Questions</h3>
+        <ol class="list-style">
+          <ng-container *ngIf="surveyQuestionsArray">
+            <li
+              *ngFor="let questionCtrl of surveyQuestionsArray; let i = index"
+            >
+              <div [formGroupName]="i">
+                <div>
+                  <mat-form-field class="full-width">
+                    <input
+                      formControlName="questionTitle"
+                      maxlength="200"
+                      matInput
+                      placeholder="Question"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <mat-select
+                      formControlName="questionType"
+                      placeholder="Type de question"
+                      ng-model="myVar"
+                      [(value)]="selectedOption[i]"
+                      (selectionChange)="
+                        onSeletQuestionType(selectedOption[i], i)
+                      "
+                    >
+                      <mat-option
+                        *ngFor="let type of questions"
+                        [value]="type.value"
+                      >
+                        {{ type.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <div
+                    formGroupName="questionGroup"
+                    [ngSwitch]="selectedOption[i]"
+                  >
+                    <div *ngSwitchCase="'Seul choix'">
+                      <div
+                        *ngIf="
+                          questionCtrl.controls.questionGroup.controls.options
+                        "
+                      >
+                        <ul class="question-type" formArrayName="options">
+                          <li
+                            *ngFor="
+                              let optionCtrl of questionCtrl.controls
+                                .questionGroup.controls.options.controls;
+                              let j = index
+                            "
+                          >
+                            <div [formGroupName]="j">
+                              <mat-form-field>
+                                <input
+                                  formControlName="optionText"
+                                  matInput
+                                  placeholder="option text"
+                                  maxlength="100"
+                                  [required]="true"
+                                />
+                              </mat-form-field>
+
+                              <button
+                                mat-raised-button
+                                *ngIf="j >= 2"
+                                (click)="removeOption(i, j)"
+                                color="warn"
+                              >
+                                <i class="fas fa-times text-white"></i>
+                              </button>
+                            </div>
+                          </li>
+                        </ul>
+                        <button
+                          mat-raised-button
+                          type="button"
+                          (click)="addOption(i)"
+                          class="mat-sm-button add-option-btn"
+                          color="accent"
+                        >
+                          Ajouter option
+                        </button>
+                      </div>
+                      <div
+                        *ngIf="
+                          questionCtrl.controls.questionGroup.controls
+                            .showRemarksBox
+                        "
+                      >
+                        <mat-slide-toggle formControlName="showRemarksBox">
+                          Show Remarks Textarea
+                        </mat-slide-toggle>
+                        <mat-form-field class="full-width">
+                          <textarea
+                            style="resize: none"
+                            disabled
+                            matInput
+                            placeholder="Textarea"
+                          ></textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="'Multi choix'">
+                      <div
+                        *ngIf="
+                          questionCtrl.controls.questionGroup.controls.options
+                        "
+                      >
+                        <ul class="question-type" formArrayName="options">
+                          <li
+                            *ngFor="
+                              let optionCtrl of questionCtrl.controls
+                                .questionGroup.controls.options.controls;
+                              let j = index
+                            "
+                          >
+                            <div [formGroupName]="j">
+                              <mat-form-field>
+                                <input
+                                  formControlName="optionText"
+                                  matInput
+                                  placeholder="option text"
+                                  maxlength="100"
+                                  [required]="true"
+                                />
+                              </mat-form-field>
+
+                              <button
+                                mat-raised-button
+                                *ngIf="j >= 2"
+                                color="warn"
+                                (click)="removeOption(i, j)"
+                                class="poll-remove-option-btn"
+                              >
+                                <i class="fas fa-times text-white"></i>
+                              </button>
+                            </div>
+                          </li>
+                        </ul>
+                        <button
+                          mat-raised-button
+                          type="button"
+                          (click)="addOption(i)"
+                          class="mat-sm-button add-option-btn"
+                          color="accent"
+                        >
+                          Ajouter option
+                        </button>
+                      </div>
+                      <div
+                        *ngIf="
+                          questionCtrl.controls.questionGroup.controls
+                            .showRemarksBox
+                        "
+                      >
+                        <mat-slide-toggle formControlName="showRemarksBox">
+                          Show Remarks Textarea
+                        </mat-slide-toggle>
+                        <mat-form-field class="full-width">
+                          <textarea
+                            style="resize: none"
+                            disabled
+                            matInput
+                            placeholder="Textarea"
+                          ></textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div *ngSwitchCase="'Texte'">
+                      <mat-form-field class="full-width">
+                        <textarea
+                          style="resize: none"
+                          disabled
+                          matInput
+                          placeholder="Textarea"
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  *ngIf="i > 0"
+                  mat-mini-fab
+                  color="warn"
+                  type="button"
+                  (click)="openDeleteQuestionDialog(i)"
+                  class="poll-remove-btn"
+                >
+                  <i class="fas fa-times text-white"></i>
+                </button>
+              </div>
+            </li>
+          </ng-container>
+        </ol>
+        <div class="button-row">
+          <button
+            type="button"
+            style="
+              outline: none;
+              background-color: rgb(27, 99, 222);
+              color: white;
+            "
+            mat-raised-button
+            (click)="onAddQuestion()"
+          >
+            Ajouter une Question
+          </button>
+        </div>
+      </div>
+    </div>
+    <div align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!surveyForm.valid"
+        cdkFocusInitial
+      >
+        Sauvgarder
+      </button>
+    </div>
+  </form>
+</mat-card-content>
