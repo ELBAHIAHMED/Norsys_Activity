@@ -1,5 +1,5 @@
 <mat-card-content>
-  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()" autocomplete="off">
+  <form [formGroup]="surveyForm" autocomplete="off">
     <mat-form-field class="full-width">
       <input
         formControlName="surveyTitle"
@@ -246,6 +246,7 @@
         color="primary"
         type="submit"
         [disabled]="!surveyForm.valid"
+        (click)="onSubmit()"
         cdkFocusInitial
       >
         Ajouter

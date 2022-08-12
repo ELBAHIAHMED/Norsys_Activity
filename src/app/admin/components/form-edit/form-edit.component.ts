@@ -267,7 +267,6 @@ export class FormEditComponent implements OnInit {
       this.surveyService.updateSurvey(survey, this.survey.id).subscribe({
         next: (res) => {
           console.log(res);
-          this.valueService.surveys.push(survey);
         },
         error: (err) => {
           console.log(err);

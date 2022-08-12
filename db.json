@@ -68,40 +68,21 @@
       "id": 0,
       "Description": "description pour formulaire 0",
       "Url": "http://localhost:4200/admin/formulaire",
-      "Title": "formulaire 0",
+      "Title": "formulaire 12",
       "IsDeleted": false,
-      "IsAvailable": true,
+      "IsAvailable": false,
       "Question": [
         {
           "id": 0,
-          "Type": "Multi choix",
-          "Text": "question 1",
-          "options": [
-            {
-              "id": 0,
-              "OptionText": "choix 1",
-              "OptionColor": "",
-              "hasRemarks": false
-            },
-            {
-              "id": 0,
-              "OptionText": "choix 2",
-              "OptionColor": "",
-              "hasRemarks": false
-            },
-            {
-              "id": 0,
-              "OptionText": "choix 3",
-              "OptionColor": "",
-              "hasRemarks": false
-            }
-          ],
+          "Type": "",
+          "Text": "",
+          "options": [],
           "Required": false,
           "Remarks": "",
           "hasRemarks": false
         }
       ],
-      "Date": "2022-08-12T15:31:24.361Z",
+      "Date": "2022-08-12T18:01:25.999Z",
       "Files": []
     },
     {
