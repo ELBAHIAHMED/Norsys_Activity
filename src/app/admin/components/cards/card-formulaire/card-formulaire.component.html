@@ -4,17 +4,19 @@
     (closed)="panelOpenState = false"
     *ngFor="let survey of filterdSurveys"
   >
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header (click)="showStatistics()">
       <mat-panel-title>
         <b>{{ survey.Title | uppercase }}</b>
       </mat-panel-title>
       <mat-panel-description>
         {{ survey.Date | date: "medium" }}
         <div class="icons">
-          <button id="edit" (click)="editForm()">
+              <mat-slide-toggle class="available" click-stop-propagation [checked]="survey.IsAvailable" (change)="shareForm(survey)"></mat-slide-toggle>
+
+          <button class="edit" click-stop-propagation (click)="editForm()">
             <mat-icon>edit</mat-icon>
           </button>
-          <button id="delete">
+          <button class="delete">
             <mat-icon color="warn" click-stop-propagation (click)="deleteSurvey(survey)"
               >delete</mat-icon
             >
@@ -22,7 +24,9 @@
         </div>
       </mat-panel-description>
     </mat-expansion-panel-header>
-
-    <app-form-statistics [survey]="survey"></app-form-statistics>
+    <app-form-statistics *ngIf="!isEditForm; else elseBlock" [survey]="survey"></app-form-statistics>
+    <ng-template #elseBlock>
+      <app-form-edit [survey]="survey"></app-form-edit>
+    </ng-template>
   </mat-expansion-panel>
 </mat-accordion>

@@ -12,6 +12,8 @@ import { ConfirmationDialog } from '../../dialogs/confirmation-dialog/confirmati
 })
 export class CardFormulaireComponent implements OnInit {
   panelOpenState = false;
+  IsAvailable = false;
+  isEditForm = false;
   @Input()
   filterdSurveys!: Survey[];
   constructor(
@@ -23,7 +25,10 @@ export class CardFormulaireComponent implements OnInit {
     this.dialog_delete_form
       .open(ConfirmationDialog, {
         width: '450px',
-        data:{title: 'Supprimer le formulaire', body: 'Voulez-vous supprimez ce formulaire ?'},
+        data: {
+          title: 'Supprimer le formulaire',
+          body: 'Voulez-vous supprimez ce formulaire ?',
+        },
         disableClose: true,
       })
       .afterClosed()
@@ -45,6 +50,30 @@ export class CardFormulaireComponent implements OnInit {
         }
       });
   }
-  editForm() {}
+  editForm() {
+    this.isEditForm = true;
+  }
+  showStatistics() {
+    this.isEditForm = false;
+  }
+  shareForm(survey: Survey) {
+    if(survey.IsAvailable){
+      this.IsAvailable = false
+      survey.IsAvailable = false;
+    }
+    else {
+      this.IsAvailable = true;
+      survey.IsAvailable = true;
+    }
+    this.surveyService.shareForm(survey.id, this.IsAvailable).subscribe({
+      next: (res) => {
+        console.log(res);
+        
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
   ngOnInit(): void {}
 }

@@ -10,10 +10,8 @@ import { ValueService } from 'src/app/services/values.service';
 import { ConfirmationDialog } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { File } from 'src/app/models/file';
 import { Route, Router } from '@angular/router';
-export interface QuestionType {
-  value: string;
-  viewValue: string;
-}
+import { QuestionType } from 'src/app/models/question-type';
+
 
 @Component({
   selector: 'app-survey',
@@ -27,8 +25,6 @@ export class SurveyComponent implements OnInit {
   selectedOption: any = [];
 
   surveyQuestionsArray: any;
-
-  editMode = false;
 
   questions: QuestionType[] = [
     { value: 'Seul choix', viewValue: 'Seul choix' },
@@ -193,7 +189,7 @@ export class SurveyComponent implements OnInit {
     let Url = formData.surveyUrl;
     let Title = formData.surveyTitle;
     let IsDeleted = false;
-    let IsAvailable = formData.IsAvailable;
+    let IsAvailable = false;
     let Questions: Question[] = [];
     console.log('heeeeeere-----' + this.surveyFiles);
     let Files: any[] = [];

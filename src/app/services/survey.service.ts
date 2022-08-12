@@ -23,21 +23,61 @@ export class SurveyService {
           });
         }
       })
-    );;
+    );
   }
   deleteOneSurvey(survey_id: number): Observable<Survey> {
     console.log(`${this.MOCK_URL_SURVEYS}/${survey_id}`);
 
-    return this.http.delete<Survey>(`${this.MOCK_URL_SURVEYS}/${survey_id}`).pipe(
-      tap((res) => {
-        console.log(res);
-        
-        if (res) {
-          this.toast.success('Formulaire supprimé...', '', {
-            timeOut: 1000,
-          });
-        }
+    return this.http
+      .delete<Survey>(`${this.MOCK_URL_SURVEYS}/${survey_id}`)
+      .pipe(
+        tap((res) => {
+          console.log(res);
+
+          if (res) {
+            this.toast.success('Formulaire supprimé...', '', {
+              timeOut: 1000,
+            });
+          }
+        })
+      );
+  }
+  shareForm(survey_id: number, IsAvailable: boolean): Observable<Survey> {
+    return this.http
+      .patch<Survey>(`${this.MOCK_URL_SURVEYS}/${survey_id}`, {
+        IsAvailable: IsAvailable,
       })
-    );
+      .pipe(
+        tap((res) => {
+          console.log(IsAvailable);
+
+          if (res) {
+            if (IsAvailable) {
+              this.toast.success('Formulaire partagé...', '', {
+                timeOut: 1000,
+              });
+            } else {
+              this.toast.info('Formulaire non partagé...', '', {
+                timeOut: 1000,
+              });
+            }
+          }
+        })
+      );
+  }
+  UpdateSurvey(newSurvey: Survey, id: number): Observable<Survey> {
+    return this.http
+      .patch<Survey>(`${this.MOCK_URL_SURVEYS}/${id}`, newSurvey)
+      .pipe(
+        tap((res) => {
+          console.log(res);
+
+          if (res) {
+            this.toast.success('Formulaire actualisé...', '', {
+              timeOut: 1000,
+            });
+          }
+        })
+      );
   }
 }

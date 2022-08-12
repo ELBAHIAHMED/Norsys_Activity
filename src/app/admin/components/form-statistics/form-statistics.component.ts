@@ -11,7 +11,7 @@ import { Survey } from 'src/app/models/survey';
 export class FormStatisticsComponent implements OnInit {
   @Input()
   survey!: Survey;
-
+  
       
   constructor() {}
   ngOnInit(): void {

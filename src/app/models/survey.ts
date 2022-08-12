@@ -1,4 +1,5 @@
 import { Question } from "./question";
+import { File } from "./file";
 export class Survey {
     constructor(
       public id: number,

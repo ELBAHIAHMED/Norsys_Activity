@@ -23,6 +23,6 @@
     class="w-full xl:w-full mb-12 xl:mb-0 px-4"
     *ngFor="let question of survey.Question"
   >
-    <app-pie-form-chart [question]="question"></app-pie-form-chart>
+    <app-pie-form-chart *ngIf="question.Type==='Seul choix' || question.Type==='Multi choix'" [question]="question"></app-pie-form-chart>
   </div>
 </div>

@@ -23,7 +23,6 @@
     <div>
       <app-form-upload (uploadFileEvent)="getFiles($event)"></app-form-upload>
     </div>
-    <!-- <mat-slide-toggle formControlName="IsAvailable" class="mb-10">Make survey available </mat-slide-toggle> -->
 
     <div class="survey-options" style="padding: 5px">
       <div formArrayName="surveyQuestions" class="poll-options">
@@ -243,7 +242,6 @@
     </div>
     <div align="end">
       <button
-        *ngIf="!editMode"
         mat-raised-button
         color="primary"
         type="submit"
@@ -251,16 +249,6 @@
         cdkFocusInitial
       >
         Ajouter
-      </button>
-      <button
-        *ngIf="editMode"
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="!surveyForm.valid"
-        cdkFocusInitial
-      >
-        Sauvgarder
       </button>
     </div>
   </form>

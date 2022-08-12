@@ -73,6 +73,7 @@ import { ClickStopPropagationDirective } from '../directives/click-stop-propagat
 import { ChartsModule } from 'ng2-charts';
 import { FileDragDropDirective } from '../directives/file-drag-drop.directive';
 import { PieFormChartComponent } from './components/form-chart/pie-form-chart/pie-form-chart.component';
+import { FormEditComponent } from './components/form-edit/form-edit.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { PieFormChartComponent } from './components/form-chart/pie-form-chart/pi
     DeleteFileComponent,
     ClickStopPropagationDirective,
     FileDragDropDirective,
-    PieFormChartComponent
+    PieFormChartComponent,
+    FormEditComponent
   ],
   imports: [
     CommonModule,
