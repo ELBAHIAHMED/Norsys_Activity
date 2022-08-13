@@ -1,0 +1,28 @@
+<app-index-navbar></app-index-navbar>
+<app-filter-bar></app-filter-bar>
+<img
+  alt="..."
+  class="relative md:absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px "
+  src="assets/img/pattern_react.png"
+/>
+<div class="mt-20 md:mt-36 md:ml-2 relative active:reveal" id="test1">
+  <div class="justify-center text-center flex flex-wrap">
+    <div class="w-full md:w-6/12 px-12 md:px-4">
+      <h2 class="font-semibold text-4xl text-blue-600 font-bold" data-aos="zoom-in" data-aos-duration="2000">
+        ALL OUR EVENTS</h2>
+    </div>
+  </div>
+</div>
+<div class=" relative active:reveal md:ml-64 ml-64 md: mt-10 mt:20 ">
+  <div class="grid grid-cols-4 p-8 gap-8 ">
+    <app-card *ngFor="let event of Events" [card]="event"></app-card>
+  </div>
+
+
+
+
+
+
+
+
+
