@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { Survey } from 'src/app/models/survey';
 import { SurveyService } from 'src/app/services/survey.service';
 import { ValueService } from 'src/app/services/values.service';
@@ -19,7 +20,8 @@ export class CardFormulaireComponent implements OnInit {
   constructor(
     public valueService: ValueService,
     private dialog_delete_form: MatDialog,
-    private surveyService: SurveyService
+    private surveyService: SurveyService,
+    private toast: ToastrService
   ) {}
   deleteSurvey(survey: Survey) {
     this.dialog_delete_form
@@ -57,23 +59,49 @@ export class CardFormulaireComponent implements OnInit {
     this.isEditForm = false;
   }
   shareForm(survey: Survey) {
-    if(survey.IsAvailable){
-      this.IsAvailable = false
+    if (survey.IsAvailable) {
+      this.IsAvailable = false;
       survey.IsAvailable = false;
-    }
-    else {
+    } else {
       this.IsAvailable = true;
       survey.IsAvailable = true;
     }
     this.surveyService.shareForm(survey.id, this.IsAvailable).subscribe({
       next: (res) => {
         console.log(res);
-        
+        if (res) {
+          if (this.IsAvailable) {
+            this.toast.success('Formulaire partagé...', '', {
+              timeOut: 1000,
+            });
+          } else {
+            this.toast.info('Formulaire non partagé...', '', {
+              timeOut: 1000,
+            });
+          }
+        }
       },
       error: (err) => {
         console.log(err);
       },
     });
+    this.removeShareFromOthers(this.valueService.surveys, survey);
   }
+
+  removeShareFromOthers(surveys: Survey[], survey: Survey) {
+    surveys.forEach((_survey: Survey) => {
+      if (_survey.id !== survey.id)
+        this.surveyService.shareForm(_survey.id, false).subscribe({
+          next: (res) => {
+            console.log(res);
+            _survey.IsAvailable=false;
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+    });
+  }
+
   ngOnInit(): void {}
 }

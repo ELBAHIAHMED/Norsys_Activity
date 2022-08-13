@@ -47,23 +47,6 @@ export class SurveyService {
       .patch<Survey>(`${this.MOCK_URL_SURVEYS}/${survey_id}`, {
         IsAvailable: IsAvailable,
       })
-      .pipe(
-        tap((res) => {
-          console.log(IsAvailable);
-
-          if (res) {
-            if (IsAvailable) {
-              this.toast.success('Formulaire partagé...', '', {
-                timeOut: 1000,
-              });
-            } else {
-              this.toast.info('Formulaire non partagé...', '', {
-                timeOut: 1000,
-              });
-            }
-          }
-        })
-      );
   }
   updateSurvey(newSurvey: Survey, id: number): Observable<Survey> {
     return this.http
@@ -80,4 +63,5 @@ export class SurveyService {
         })
       );
   }
+  
 }
