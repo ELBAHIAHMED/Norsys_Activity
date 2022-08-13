@@ -70,7 +70,7 @@
       "Url": "http://localhost:4200/admin/formulaire",
       "Title": "formulaire 12",
       "IsDeleted": false,
-      "IsAvailable": true,
+      "IsAvailable": false,
       "Question": [
         {
           "id": 0,
@@ -91,7 +91,7 @@
       "Url": "http://localhost:4200/admin/formulaire",
       "Title": "formulaire 1",
       "IsDeleted": false,
-      "IsAvailable": false,
+      "IsAvailable": true,
       "Question": [
         {
           "id": 0,

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { forkJoin, Observable, switchMap, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { Survey } from '../models/survey';
@@ -42,11 +42,31 @@ export class SurveyService {
         })
       );
   }
-  shareForm(survey_id: number, IsAvailable: boolean): Observable<Survey> {
-    return this.http
-      .patch<Survey>(`${this.MOCK_URL_SURVEYS}/${survey_id}`, {
-        IsAvailable: IsAvailable,
-      })
+  shareForm(survey: Survey, surveys: Survey[]): any {
+    let shareFormRequest: Observable<any>[] = [];
+    surveys.forEach((_survey) => {
+      let notShareForm = this.http.patch<Survey>(
+        `${this.MOCK_URL_SURVEYS}/${_survey.id}`,
+        {
+          IsAvailable: false,
+        }
+      );
+      let ShareForm = this.http.patch<Survey>(
+        `${this.MOCK_URL_SURVEYS}/${_survey.id}`,
+        {
+          IsAvailable: true,
+        }
+      );
+      if (survey.id !== _survey.id) {
+        _survey.IsAvailable = false;
+        shareFormRequest.push(notShareForm);
+      } else {
+        _survey.IsAvailable = true;
+        shareFormRequest.push(ShareForm);
+      }
+    });
+
+    return forkJoin(shareFormRequest);
   }
   updateSurvey(newSurvey: Survey, id: number): Observable<Survey> {
     return this.http
@@ -63,5 +83,4 @@ export class SurveyService {
         })
       );
   }
-  
 }
