@@ -54,7 +54,7 @@ export class SurveyService {
       let ShareForm = this.http.patch<Survey>(
         `${this.MOCK_URL_SURVEYS}/${_survey.id}`,
         {
-          IsAvailable: true,
+          IsAvailable: !_survey.IsAvailable,
         }
       );
       if (survey.id !== _survey.id) {
