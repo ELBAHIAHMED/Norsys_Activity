@@ -10,7 +10,7 @@
       "country": "switzerland",
       "date_of_collaboration": "2022-07-29",
       "budget": 400000,
-      "phone":"0606060606"
+      "phone": "0606060606"
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "country": "USA",
       "date_of_collaboration": "2002-07-29",
       "budget": 800000,
-      "phone":"0606060606"
+      "phone": "0606060606"
     }
   ],
   "admin": {
@@ -47,8 +47,8 @@
       "number_of_participant": 50,
       "category": "category1",
       "localization": "Marrakech-Morocco",
-      "number_of_days":4,
-      "number_of_sponsors":7
+      "number_of_days": 4,
+      "number_of_sponsors": 7
     },
     {
       "id": 2,
@@ -59,8 +59,189 @@
       "number_of_participant": 50,
       "category": "category2",
       "localization": "Paris-France",
-      "number_of_days":7,
-      "number_of_sponsors":17
+      "number_of_days": 7,
+      "number_of_sponsors": 17
+    }
+  ],
+  "surveys": [
+    {
+      "id": 0,
+      "Description": "description pour formulaire 0",
+      "Url": "http://localhost:4200/admin/formulaire",
+      "Title": "formulaire 01",
+      "IsDeleted": false,
+      "IsAvailable": false,
+      "Question": [
+        {
+          "id": 0,
+          "Type": "Multi choix",
+          "Text": "question 1",
+          "options": [
+            {
+              "id": 0,
+              "OptionText": "c2",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "c4",
+              "OptionColor": "",
+              "hasRemarks": false
+            }
+          ],
+          "Required": false,
+          "Remarks": "",
+          "hasRemarks": false
+        }
+      ],
+      "Date": "2022-08-15T10:25:07.344Z",
+      "Files": []
+    },
+    {
+      "id": 1,
+      "Description": "description pour formulaire 1",
+      "Url": "http://localhost:4200/admin/formulaire",
+      "Title": "formulaire 1",
+      "IsDeleted": false,
+      "IsAvailable": false,
+      "Question": [
+        {
+          "id": 0,
+          "Type": "Seul choix",
+          "Text": "question b",
+          "options": [
+            {
+              "id": 0,
+              "OptionText": "c a",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "c b",
+              "OptionColor": "",
+              "hasRemarks": false
+            }
+          ],
+          "Required": false,
+          "Remarks": "",
+          "hasRemarks": false
+        }
+      ],
+      "Date": "2022-08-12T15:34:03.725Z",
+      "Files": []
+    },
+    {
+      "id": 2,
+      "Description": "description pour formulaire 3",
+      "Url": "http://localhost:4200/admin/formulaire",
+      "Title": "formulaire 3",
+      "IsDeleted": false,
+      "IsAvailable": false,
+      "Question": [
+        {
+          "id": 0,
+          "Type": "Seul choix",
+          "Text": "question 1",
+          "options": [
+            {
+              "id": 0,
+              "OptionText": "c1 ",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "c 2",
+              "OptionColor": "",
+              "hasRemarks": false
+            }
+          ],
+          "Required": false,
+          "Remarks": "",
+          "hasRemarks": false
+        }
+      ],
+      "Date": "2022-08-15T10:32:23.233Z",
+      "Files": [
+        {
+          "lastModified": 1638753666000,
+          "lastModifiedDate": "2021-12-06T01:21:06.000Z",
+          "name": "La persistance des données  ORM et hibernate.pptx",
+          "size": 12848148,
+          "type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "Description": "desc here",
+      "Url": "http://localhost:4200/admin/formulaire",
+      "Title": "formulaire 4",
+      "IsDeleted": false,
+      "IsAvailable": false,
+      "Question": [
+        {
+          "id": 0,
+          "Type": "Seul choix",
+          "Text": "q41",
+          "options": [
+            {
+              "id": 0,
+              "OptionText": "c1",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "c5",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "c8",
+              "OptionColor": "",
+              "hasRemarks": false
+            }
+          ],
+          "Required": false,
+          "Remarks": "",
+          "hasRemarks": false
+        }
+      ],
+      "Date": "2022-08-15T12:08:30.642Z",
+      "Files": [
+        {
+          "lastModified": 1638753732000,
+          "lastModifiedDate": "2021-12-06T01:22:12.000Z",
+          "name": "JDBC Gestion des bases de données en Java.pptx",
+          "size": 4680991,
+          "type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        },
+        {
+          "lastModified": 1638753540000,
+          "lastModifiedDate": "2021-12-06T01:19:00.000Z",
+          "name": "JEE.pptx",
+          "size": 20141902,
+          "type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        },
+        {
+          "lastModified": 1638753666000,
+          "lastModifiedDate": "2021-12-06T01:21:06.000Z",
+          "name": "La persistance des données  ORM et hibernate.pptx",
+          "size": 12848148,
+          "type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        },
+        {
+          "lastModified": 1653064324000,
+          "lastModifiedDate": "2022-05-20T16:32:04.000Z",
+          "name": "maven.pptx",
+          "size": 46125198,
+          "type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        }
+      ]
     }
   ]
 }

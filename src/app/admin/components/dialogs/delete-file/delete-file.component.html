@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Confirmation du suppression</h1>
+<div mat-dialog-content>
+  <p>
+    <strong>{{ fName }}</strong> sera supprimé. Vous confirmez ?
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button style="outline: none" (click)="cancel()">Annuler</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    style="outline: none; background-color: rgb(27, 99, 222); color: white"
+    (click)="confirm()"
+  >
+    Confirmer
+  </button>
+</div>
