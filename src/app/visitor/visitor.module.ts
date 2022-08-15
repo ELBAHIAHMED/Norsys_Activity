@@ -9,15 +9,18 @@ import { IndexDropdownComponent } from './components/dropdown/index-dropdown/ind
 
 
 @NgModule({
-  declarations: [
-    IndexComponent,
-    IndexNavbarComponent,
-    FooterComponent,
-    IndexDropdownComponent
-  ],
-  imports: [
-    CommonModule,
-    VisitorRoutingModule
-  ]
+    declarations: [
+        IndexComponent,
+        IndexNavbarComponent,
+        FooterComponent,
+        IndexDropdownComponent
+    ],
+    exports: [
+        IndexNavbarComponent
+    ],
+    imports: [
+        CommonModule,
+        VisitorRoutingModule
+    ]
 })
 export class VisitorModule { }

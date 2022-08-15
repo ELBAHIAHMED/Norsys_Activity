@@ -1,7 +1,5 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { APP_INITIALIZER, NgModule } from "@angular/core";
-
-
+import {BrowserModule} from "@angular/platform-browser";
+import {APP_INITIALIZER, NgModule} from "@angular/core";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -41,7 +39,8 @@ import { AdminModule } from "./admin/admin.module";
 import { CollaboratorModule } from "./collaborator/collaborator.module";
 import { VisitorModule } from "./visitor/visitor.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {EventModule} from "./event/event.module";
+import {PhotoModule} from "./photo/photo.module";
 
 @NgModule({
   declarations: [
@@ -81,7 +80,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSlideToggleModule,
     MatGridListModule,
     MatBadgeModule,
-    
+    EventModule,
+    PhotoModule
   ],
   providers: [
     {
@@ -93,4 +93,5 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

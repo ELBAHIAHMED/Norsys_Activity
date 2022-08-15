@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,600,700,900&display=swap');
 /* You can add global styles to this file, and also import other style files */
 @import '~ngx-toastr/toastr';
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
 
 /*! tailwindcss v2.0.4 | MIT License | https://tailwindcss.com */
 
@@ -2542,6 +2543,18 @@ select {
   overflow: scroll;
 }
 
+.reveal{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: 1s all ease;
+}
+
+.reveal.active{
+  transform: translateY(0);
+  opacity: 1;
+}
+
 .overflow-x-auto {
   overflow-x: auto;
 }
@@ -4079,7 +4092,7 @@ select {
   .xl\:w-8\/12 {
     width: 66.666667%;
   }
-} 
+}
 
 @media (min-width: 1536px) {
 }

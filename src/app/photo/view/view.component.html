@@ -1,0 +1,5 @@
+<app-sidebar-gallery *ngIf="!showmask_sidebar"></app-sidebar-gallery>
+<app-index-navbar *ngIf="!showmask_sidebar" ></app-index-navbar>
+<div class="mt-16 md:ml-64">
+<app-gallery [galleryData]="data" [showCount]="true" ></app-gallery>
+</div>

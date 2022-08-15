@@ -1,0 +1,24 @@
+
+<div class=" rounded-xl shadow-xl md: border-4 bg-blue-300">
+  <a routerLink="/photo">
+    <img class="w-full rounded-t-xl h-36 object-cover" src="{{card.img}}">
+    <div class="p-6">
+      <div class="flex flex-row">
+        <div class="uppercase text-xs text-blue-600 bg-blue-600 px-2 py-1 rounded-xl" style="background-color: #FDE8D2 ; color: #C98861">
+          {{card.type}}
+        </div>
+      </div>
+      <h2 class="text-2xl mt-2 font-bold text-white">
+        {{card.name}}
+      </h2>
+      <p class="mt-2 text-gray-600 text-black">
+        {{card.description}}
+      </p>
+      <div class="flex flex-row mt-4 items-center">
+        <img class="rounded-full mr-2" src="https://source.unsplash.com/7YVZYZeITc8/30x30">
+        <div class="font-bold mr-2">John Smith</div>
+        <div class="text-white-400 " style="color: #6761C9" >On {{card.date | date}}</div>
+      </div>
+    </div></a>
+  </div>
+

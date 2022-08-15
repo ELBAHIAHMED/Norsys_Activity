@@ -159,6 +159,6 @@ import { FormEditComponent } from './components/form-edit/form-edit.component';
     ActivityService,
     CollaboratorService,
     SurveyService,
-  ],
+  ]
 })
 export class AdminModule {}
