@@ -14,7 +14,9 @@ import { ConfirmationDialog } from '../../dialogs/confirmation-dialog/confirmati
 export class CardFormulaireComponent implements OnInit {
   panelOpenState = false;
   IsAvailable = false;
-  isEditForm = false;
+  //isEditForm: any = {};
+  isEditForm = -1;
+  isStatisticForm = -1;
   @Input()
   filterdSurveys!: Survey[];
   constructor(
@@ -52,11 +54,13 @@ export class CardFormulaireComponent implements OnInit {
         }
       });
   }
-  editForm() {
-    this.isEditForm = true;
+  editForm(i: number) {    
+      this.isEditForm = i;    
+      this.isStatisticForm = -1;
   }
-  showStatistics() {
-    this.isEditForm = false;
+  showStatistics(i: number) {
+    this.isStatisticForm = i;
+    this.isEditForm = -1; 
   }
   shareForm(survey: Survey) {
     console.log(survey);

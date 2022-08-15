@@ -7,7 +7,6 @@
         placeholder="Titre"
         maxlength="50"
         [required]="true"
-        [(ngModel)]="survey.Title"
       />
     </mat-form-field>
     <mat-form-field class="full-width">
@@ -15,7 +14,6 @@
         formControlName="surveyUrl"
         matInput
         placeholder="Url"
-        [(ngModel)]="survey.Url"
       />
     </mat-form-field>
     <mat-form-field class="full-width" appearance="fill">
@@ -24,7 +22,6 @@
         formControlName="surveyDescription"
         matInput
         placeholder="écrire..."
-        [(ngModel)]="survey.Description"
       ></textarea>
     </mat-form-field>
     <div>
@@ -218,7 +215,6 @@
                   </div>
                 </div>
                 <button
-                  *ngIf="i > 0"
                   mat-mini-fab
                   color="warn"
                   type="button"

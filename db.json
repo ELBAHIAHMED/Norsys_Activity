@@ -74,15 +74,28 @@
       "Question": [
         {
           "id": 0,
-          "Type": "",
-          "Text": "",
-          "options": [],
+          "Type": "Seul choix",
+          "Text": "q 1",
+          "options": [
+            {
+              "id": 0,
+              "OptionText": "c1 ",
+              "OptionColor": "",
+              "hasRemarks": false
+            },
+            {
+              "id": 0,
+              "OptionText": "c 2",
+              "OptionColor": "",
+              "hasRemarks": false
+            }
+          ],
           "Required": false,
           "Remarks": "",
           "hasRemarks": false
         }
       ],
-      "Date": "2022-08-12T18:01:25.999Z",
+      "Date": "2022-08-15T08:20:49.630Z",
       "Files": []
     },
     {

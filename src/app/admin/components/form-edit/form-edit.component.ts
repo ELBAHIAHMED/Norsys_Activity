@@ -12,7 +12,7 @@ import { Option } from 'src/app/models/option';
 @Component({
   selector: 'app-form-edit',
   templateUrl: './form-edit.component.html',
-  styleUrls: ['./form-edit.component.scss']
+  styleUrls: ['./form-edit.component.scss'],
 })
 export class FormEditComponent implements OnInit {
   @Input()
@@ -33,7 +33,7 @@ export class FormEditComponent implements OnInit {
   constructor(
     private dialog_delete_question: MatDialog,
     private surveyService: SurveyService,
-    private valueService: ValueService,
+    private valueService: ValueService
   ) {}
 
   ngOnInit() {
@@ -60,7 +60,22 @@ export class FormEditComponent implements OnInit {
       surveyQuestions: this.surveyQuestions,
     });
 
-    this.onAddQuestion();
+    const surveyQuestionItem = new FormGroup({
+      questionTitle: new FormControl(''),
+      questionType: new FormControl(''),
+      questionGroup: new FormGroup({}),
+    });
+    console.log(this.survey.Question);
+    
+    this.survey.Question.forEach((question: Question) => {
+      console.log(question.Text);
+    });
+    (<FormArray>this.surveyForm.get('surveyQuestions')).push(
+      surveyQuestionItem
+    );
+    this.surveyQuestionsArray = (
+      this.surveyForm.get('surveyQuestions') as FormArray
+    ).controls;
   }
 
   onAddQuestion() {
