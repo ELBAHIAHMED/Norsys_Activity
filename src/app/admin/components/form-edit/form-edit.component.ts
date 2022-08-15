@@ -19,7 +19,6 @@ export class FormEditComponent implements OnInit {
   survey!: Survey;
   surveyQuestions!: FormArray;
   surveyForm!: FormGroup;
-  surveyFiles!: any[];
   selectedOption: any = [];
 
   surveyQuestionsArray: any;
@@ -42,15 +41,10 @@ export class FormEditComponent implements OnInit {
       this.surveyForm.get('surveyQuestions') as FormArray
     ).controls;
   }
-  getFiles(surveyFiles: any) {
-    this.surveyFiles = surveyFiles;
-    console.log(this.surveyFiles);
-  }
   private initForm() {
-    let surveyTitle = '';
-    let surveyUrl = '';
-    let surveyDescription = '';
-    this.surveyFiles = [];
+    let surveyTitle = this.survey.Title;
+    let surveyUrl = this.survey.Url;
+    let surveyDescription = this.survey.Description;
     this.surveyQuestions = new FormArray([]);
 
     this.surveyForm = new FormGroup({
@@ -60,19 +54,61 @@ export class FormEditComponent implements OnInit {
       surveyQuestions: this.surveyQuestions,
     });
 
-    const surveyQuestionItem = new FormGroup({
-      questionTitle: new FormControl(''),
-      questionType: new FormControl(''),
-      questionGroup: new FormGroup({}),
-    });
     console.log(this.survey.Question);
-    
+
     this.survey.Question.forEach((question: Question) => {
+      let surveyQuestionItem = new FormGroup({
+        questionTitle: new FormControl(question.Text),
+        questionType: new FormControl(question.Type),
+        questionGroup: new FormGroup({}),
+      });
+      (<FormArray>this.surveyForm.get('surveyQuestions')).push(
+        surveyQuestionItem
+      );
+      //here
+      console.log(question.Type);
+      let index = this.survey.Question.indexOf(question);
+      this.selectedOption.push(question.Type);
+
+      let options = new FormArray([]);
+      let showRemarksBox = new FormControl(false);
+      this.addOptionControls(
+        question.Type,
+        this.survey.Question.indexOf(question)
+      );
+      (
+        (this.surveyForm.get('surveyQuestions') as FormArray)
+          .at(index)
+          .get('questionGroup') as FormGroup
+      ).addControl('options', options);
+      (
+        (this.surveyForm.get('surveyQuestions') as FormArray)
+          .at(index)
+          .get('questionGroup') as FormGroup
+      ).addControl('options', options);
+
+      this.clearFormArray(
+        (this.surveyForm.get('surveyQuestions') as FormArray)
+          .at(index)
+          .get('questionGroup')
+          ?.get('options') as FormArray
+      );
+
+      question.options.forEach((option: Option) => {
+        console.log(option);
+        let arrayForm = this.surveyForm.get('surveyQuestions') as FormArray;
+        let groupForm = arrayForm.at(index).get('questionGroup') as FormGroup;
+        const optionGroup = new FormGroup({
+          optionText: new FormControl(option.OptionText, Validators.required),
+        });
+        (<FormArray>groupForm.get('options')).push(optionGroup);
+      });
+      this.surveyQuestionsArray = (
+        this.surveyForm.get('surveyQuestions') as FormArray
+      ).controls;
       console.log(question.Text);
     });
-    (<FormArray>this.surveyForm.get('surveyQuestions')).push(
-      surveyQuestionItem
-    );
+
     this.surveyQuestionsArray = (
       this.surveyForm.get('surveyQuestions') as FormArray
     ).controls;
@@ -181,6 +217,8 @@ export class FormEditComponent implements OnInit {
   }
 
   removeOption(questionIndex: number, itemIndex: number) {
+    console.log(itemIndex);
+
     (
       (this.surveyForm.get('surveyQuestions') as FormArray)
         .at(questionIndex)
@@ -197,39 +235,14 @@ export class FormEditComponent implements OnInit {
     console.log(formData);
 
     console.log();
-    let ID = this.valueService.surveys.length;
-    let Description = formData.surveyDescription;
-    let Url = formData.surveyUrl;
-    let Title = formData.surveyTitle;
-    let IsDeleted = false;
-    let IsAvailable = false;
+    this.survey.Description = formData.surveyDescription;
+    this.survey.Url = formData.surveyUrl;
+    this.survey.Title = formData.surveyTitle;
     let Questions: Question[] = [];
-    console.log('heeeeeere-----' + this.surveyFiles);
+    console.log('heeeeeere-----' + this.survey.Files);
     let Files: any[] = [];
-    this.surveyFiles.forEach((file) => {
-      console.log(file.name);
-      let _File = new File(
-        file.lastModified,
-        file.lastModifiedDate,
-        file.name,
-        file.size,
-        file.type
-      );
-      Files.push(_File);
-    });
 
     let surveyQuestions = formData.surveyQuestions;
-    let survey = new Survey(
-      ID,
-      Description,
-      Url,
-      Title,
-      IsDeleted,
-      IsAvailable,
-      Questions,
-      new Date(),
-      Files
-    );
 
     surveyQuestions.forEach(
       (
@@ -270,25 +283,23 @@ export class FormEditComponent implements OnInit {
           });
         }
 
-        survey.Question.push(questionItem);
+        Questions.push(questionItem);
         this.surveyQuestionsArray = (
           this.surveyForm.get('surveyQuestions') as FormArray
         ).controls;
       }
     );
-
-    console.log(survey);
-    if (survey.Title !== '' && survey.Question.length > 0) {
-      this.surveyService.updateSurvey(survey, this.survey.id).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-      console.log('posting survey');
-    }
+    this.survey.Question = Questions;
+    console.log(this.survey);
+    this.surveyService.updateSurvey(this.survey, this.survey.id).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    console.log('updating survey');
   }
 
   onSubmit() {

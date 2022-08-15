@@ -6,7 +6,6 @@ import {
   EventEmitter,
   Input,
 } from '@angular/core';
-import { File } from '../models/file';
 
 @Directive({
   selector: '[fileDragDrop]',
