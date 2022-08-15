@@ -12,6 +12,7 @@ import {VisitorModule} from "./visitor/visitor.module";
 import {EventModule} from "./event/event.module";
 import {PhotoModule} from "./photo/photo.module";
 import {NgxGalleryModule} from "@kolkov/ngx-gallery";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import {NgxGalleryModule} from "@kolkov/ngx-gallery";
     VisitorModule,
     EventModule,
     PhotoModule,
+    BrowserAnimationsModule,
+
   ],
   providers: [
     {

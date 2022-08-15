@@ -12,7 +12,7 @@ interface Item{
 })
 export class ViewComponent implements OnInit {
   @Input() showdata:string;
-
+  active_status = 1;
   data:Item[]=[
     {
       imageSrc: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
