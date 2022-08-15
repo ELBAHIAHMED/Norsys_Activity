@@ -36,40 +36,43 @@ import { CardRadarChartComponent } from './components/cards/card-radar-chart/car
 
 
 @NgModule({
-  declarations: [
-    AdminComponent,
-    SettingsComponent,
-    MapsComponent,
-    DashboardComponent,
-    CardProfileComponent,
-    CardSettingsComponent,
-    CardStatsComponent,
-    CardTableCollaboratorComponent,
-    CardBarChartComponent,
-    CardLineChartComponent,
-    MapExampleComponent,
-    TableDropdownComponent,
-    SidebarComponent,
-    AdminNavbarComponent,
-    FooterAdminComponent,
-    HeaderStatsComponent,
-    NotificationDropdownComponent,
-    CardTableActivitiesComponent,
-    ActivitiesComponent,
-    CardActivitiesComponent,
-    CardCollaboratorsComponent,
-    CollaboratorsComponent,
-    UploadComponent,
-    FileSizePipe,
-    CardPolarChartComponent,
-    CardRadarChartComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [AdminService, ActivityService, CollaboratorService]
+    declarations: [
+        AdminComponent,
+        SettingsComponent,
+        MapsComponent,
+        DashboardComponent,
+        CardProfileComponent,
+        CardSettingsComponent,
+        CardStatsComponent,
+        CardTableCollaboratorComponent,
+        CardBarChartComponent,
+        CardLineChartComponent,
+        MapExampleComponent,
+        TableDropdownComponent,
+        SidebarComponent,
+        AdminNavbarComponent,
+        FooterAdminComponent,
+        HeaderStatsComponent,
+        NotificationDropdownComponent,
+        CardTableActivitiesComponent,
+        ActivitiesComponent,
+        CardActivitiesComponent,
+        CardCollaboratorsComponent,
+        CollaboratorsComponent,
+        UploadComponent,
+        FileSizePipe,
+        CardPolarChartComponent,
+        CardRadarChartComponent
+    ],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        HttpClientModule,
+        FormsModule
+    ],
+    exports: [
+        SidebarComponent
+    ],
+    providers: [AdminService, ActivityService, CollaboratorService]
 })
 export class AdminModule { }

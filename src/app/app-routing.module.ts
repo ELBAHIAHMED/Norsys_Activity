@@ -13,6 +13,15 @@ const routes: Routes = [
       import('./auth/auth.module').then((mod) => mod.AuthModule),
   },
   {
+    path: 'event',
+    loadChildren: () =>
+      import('./event/event.module').then((mod) => mod.EventModule),
+  },{
+    path: 'photo',
+    loadChildren: () =>
+      import('./photo/photo.module').then((mod) => mod.PhotoModule),
+  },
+  {
     path: 'collaborator',
     loadChildren: () =>
       import('./collaborator/collaborator.module').then(
