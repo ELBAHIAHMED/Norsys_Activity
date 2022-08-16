@@ -42,6 +42,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {EventModule} from "./event/event.module";
 import {PhotoModule} from "./photo/photo.module";
 
+import {NgxGalleryModule} from "@kolkov/ngx-gallery";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +84,8 @@ import {PhotoModule} from "./photo/photo.module";
     MatGridListModule,
     MatBadgeModule,
     EventModule,
-    PhotoModule
+    PhotoModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {

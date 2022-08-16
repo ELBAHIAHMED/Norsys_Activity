@@ -8,6 +8,8 @@ import {VisitorModule} from "../visitor/visitor.module";
 import {NgxGalleryModule} from "@kolkov/ngx-gallery";
 import {AdminModule} from "../admin/admin.module";
 import { SidebarGalleryComponent } from './components/sidebar-gallery/sidebar-gallery.component';
+import {VideoComponent} from "./components/video/video.component";
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 @NgModule({
@@ -15,6 +17,7 @@ import { SidebarGalleryComponent } from './components/sidebar-gallery/sidebar-ga
     ViewComponent,
     GalleryComponent,
     SidebarGalleryComponent,
+    VideoComponent,
 
   ],
   imports: [
@@ -22,7 +25,8 @@ import { SidebarGalleryComponent } from './components/sidebar-gallery/sidebar-ga
     PhotoRoutingModule,
     VisitorModule,
     NgxGalleryModule,
-    AdminModule
+    AdminModule,
+    MatTabsModule
   ]
 })
 export class PhotoModule { }

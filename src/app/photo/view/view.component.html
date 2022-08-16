@@ -1,5 +1,20 @@
-<app-sidebar-gallery *ngIf="!showmask_sidebar"></app-sidebar-gallery>
 <app-index-navbar *ngIf="!showmask_sidebar" ></app-index-navbar>
-<div class="mt-16 md:ml-64">
-<app-gallery [galleryData]="data" [showCount]="true" ></app-gallery>
-</div>
+
+<mat-tab-group mat-align-tabs="center" class="md:mt-24 text-blue-600">
+  <mat-tab label="Photos" class="bg-blue-300">
+    <div >
+    <app-gallery [galleryData]="data" [showCount]="true"></app-gallery> </div></mat-tab>
+  <mat-tab label="Videos"><div ><app-video [galleryData]="data" [showCount]="true"></app-video> </div>
+  </mat-tab>
+
+</mat-tab-group>
+
+<!--<app-sidebar-gallery *ngIf="!showmask_sidebar"></app-sidebar-gallery>-->
+<!--<app-index-navbar *ngIf="!showmask_sidebar" ></app-index-navbar>-->
+<!--<div class="mt-16 md:ml-64">-->
+<!--<app-gallery [galleryData]="data" [showCount]="true" ></app-gallery>-->
+<!--</div>-->
+<!--<div class="mt-16 md:ml-64">-->
+<!--<app-video [galleryData]="data" [showCount]="true"></app-video>-->
+<!--</div>-->
+
