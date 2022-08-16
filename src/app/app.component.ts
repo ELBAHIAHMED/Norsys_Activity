@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { AdminService } from './services/admin.service';
+
 // @ts-ignore
 import AOS from 'aos';
 @Component({

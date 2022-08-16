@@ -86,6 +86,7 @@ import {NgxGalleryModule} from "@kolkov/ngx-gallery";
     EventModule,
     PhotoModule,
     BrowserAnimationsModule,
+    NgxGalleryModule
   ],
   providers: [
     {
