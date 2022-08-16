@@ -1,0 +1,77 @@
+<div class="flex h-full min-h-screen flex-wrap mt-14">
+  <div class="flex flex-col space-y-4 w-full mb-12 px-4 mt-14">
+    <div class="">
+      <div class="" style="display: flex; justify-content: space-between">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+          <li class="mr-2 cursor-pointer" (click)="showSurvey()">
+            <a
+              class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent"
+              [ngClass]="
+                !isAddSurvey
+                  ? 'text-blue-600 dark:text-blue-500 border-b-2 border-blue-600 active'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-600 hover:border-gray-300'
+              "
+            >
+              <mat-icon
+                class="mr-2"
+                [ngClass]="
+                  !isAddSurvey
+                    ? 'text-blue-600 dark:text-blue-500'
+                    : 'text-gray-500 dark:text-gray-400'
+                "
+                >insert_drive_file</mat-icon
+              >
+              Formulaires
+            </a>
+          </li>
+          <li class="mr-2 cursor-pointer" (click)="showAddSurvey()">
+            <a
+              class="inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-transparent"
+              aria-current="page"
+              [ngClass]="
+                isAddSurvey
+                  ? 'text-blue-600 dark:text-blue-500 border-b-2 border-blue-600 active'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-600 hover:border-gray-300'
+              "
+            >
+              <mat-icon
+                class="mr-2"
+                [ngClass]="
+                  isAddSurvey
+                    ? 'text-blue-600 dark:text-blue-500'
+                    : 'text-gray-500 dark:text-gray-400'
+                "
+                >note_add</mat-icon
+              >
+              Ajouter un formulaire
+            </a>
+          </li>
+        </ul>
+        <div [hidden]="isAddSurvey">
+          <mat-form-field appearance="fill">
+            <mat-label>Choisir une date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="date" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix (click)="clearDate()">
+              <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker
+              #picker
+              (closed)="filterSurveysByDate(date)"
+            ></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="p-5">
+        <app-card-formulaire
+          [filterdSurveys]="filterdSurveys"
+          [hidden]="isAddSurvey"
+        ></app-card-formulaire>
+        <app-survey [hidden]="!isAddSurvey"></app-survey>
+      </div>
+    </div>
+  </div>
+</div>

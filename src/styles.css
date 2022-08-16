@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,600,700,900&display=swap');
 /* You can add global styles to this file, and also import other style files */
-
+@import '~ngx-toastr/toastr';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,6 +32,7 @@ Use a more readable tab size (opinionated).
   -moz-tab-size: 4;
   -o-tab-size: 4;
      tab-size: 4;
+     
 }
 
 /**

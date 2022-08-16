@@ -1,0 +1,30 @@
+<mat-accordion class="example-headers-align" >
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+    *ngFor="let survey of filterdSurveys; let i=index;"
+  >
+    <mat-expansion-panel-header (click)="showStatistics(i)">
+      <mat-panel-title>
+        <b>{{ survey.Title | uppercase }}</b>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ survey.Date | date: "medium" }}
+        <div class="icons">
+              <mat-slide-toggle class="available" click-stop-propagation [checked]="survey.IsAvailable" (change)="shareForm(survey)"></mat-slide-toggle>
+
+          <button class="edit" click-stop-propagation (click)="editForm(i)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="delete">
+            <mat-icon color="warn" click-stop-propagation (click)="deleteSurvey(survey)"
+              >delete</mat-icon
+            >
+          </button>
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-form-statistics *ngIf="isStatisticForm==i" [survey]="survey"></app-form-statistics>
+      <app-form-edit *ngIf="isEditForm==i" [survey]="survey"></app-form-edit>
+  </mat-expansion-panel>
+</mat-accordion>
