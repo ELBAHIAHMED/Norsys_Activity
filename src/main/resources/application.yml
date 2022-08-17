@@ -39,15 +39,17 @@ cloud:
     password: cloudagrisudcrud
     username: cloudagrisudcrud
 
+
+
 keycloak:
   resource: norsys-activity-api
-  allowed-origin: http://localhost:3000
+  allowed-origin: http://localhost:4200
 
 realm-admin:
-  server-url: http://localhost:3800/auth
+
+  server-url: http://localhost:3800/auth/
   realm: norsys
   client-id: admin-cli
   username: norsys-admin
   password: mysecretpassword
-
-
+  group-admins: activity-admins

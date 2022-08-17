@@ -1,5 +1,6 @@
 package com.norsys.activity.controller;
 
+import com.norsys.activity.security.User;
 import lombok.extern.slf4j.Slf4j;
 
 import com.norsys.activity.cloudservice.EventCloudService;
@@ -10,6 +11,7 @@ import com.norsys.activity.model.Course;
 import com.norsys.activity.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/api")
 public class CourseController {
     public static final String PAGE = "0";
     public static final String SIZE = "10";
@@ -33,6 +35,10 @@ public class CourseController {
     @GetMapping("/ByModule/{moduleID}")
     public List<Course> getCoursesByModule(@PathVariable Long moduleID) {
         return this.courseService.getCoursesByModule(moduleID);
+    }
+    @GetMapping
+    public ResponseEntity<User> test() {
+        return ResponseEntity.ok().body(new User("001","zakaria"));
     }
 
     @GetMapping("/{courseID}")
@@ -74,4 +80,5 @@ public class CourseController {
     public void deleteCourseSupport(@RequestParam String filePath) {
         this.fileCloudService.deleteFile(filePath);
     }
+
 }

@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String ROLE_ADMIN = "NORSYS_ACTIVITY_ADMIN";
-    public static final String ROLE_USER = "NORSYS_ACTIVITY_USER";
+    public static final String ROLE_ADMIN = "ADMIN_ACTIVITY";
+    public static final String ROLE_COLLAB = "COLLAB_ACTIVITY";
     public static final String RESOURCE_ACCESS = "resource_access";
     public static final String ROLES = "roles";
     public static final String REALM_ACCESS = "realm_access";
@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${keycloak.allowed-origin}")
     private String allowedOrigin;
+
 
     @Bean
     @Order(0)
@@ -54,26 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/trainingPath/**").permitAll()
-                .antMatchers("/trainingPath/editor/upload").permitAll()
-                .antMatchers(HttpMethod.GET, "/trainingPath/*/template").permitAll()
-                .antMatchers(HttpMethod.GET, "/trainingPathTranslation/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/homeCover").permitAll()
-                .antMatchers(HttpMethod.GET, "/module/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/course/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/signup").permitAll()
-                .antMatchers(HttpMethod.POST, "/trainingPath/addTrainingPathToUser/**").hasRole(ROLE_USER)
-                .antMatchers(HttpMethod.POST, "/trainingPath/startTrainingPath/**").hasRole(ROLE_USER)
-                .antMatchers(HttpMethod.POST, "/trainingPath/finishTrainingPath/**").hasRole(ROLE_USER)
-                .antMatchers(HttpMethod.POST, "/course/AddCourse/**").hasRole(ROLE_USER)
-                .antMatchers("/trainingPath/**").hasRole(ROLE_ADMIN)
-                .antMatchers("/trainingPathTranslation/**").hasRole(ROLE_ADMIN)
-                .antMatchers("/module/**").hasRole(ROLE_ADMIN)
-                .antMatchers("/course/**").hasRole(ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, "/api/**").hasRole(ROLE_ADMIN)
                 .anyRequest().authenticated()
                 .and().csrf().disable();
     }
-
 
     private JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();

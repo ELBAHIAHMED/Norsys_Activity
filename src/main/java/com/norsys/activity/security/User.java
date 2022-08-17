@@ -1,6 +1,8 @@
 package com.norsys.activity.security;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -9,6 +11,8 @@ import org.springframework.security.oauth2.jwt.Jwt;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     private String userId;
     private String username;
