@@ -1,0 +1,86 @@
+version: '2.1'
+
+services:
+
+  mysql:
+    image: mysql:8.0.26
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./docker/dev/init.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./docker/dev/keycloak-schema.sql:/docker-entrypoint-initdb.d/2-data.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=mysecretpassword --execute \"SHOW DATABASES;\""
+      interval: 100s
+      retries: 10
+    networks:
+      - norsys
+
+  mysql-client:
+    image: dbeaver/cloudbeaver:latest
+    container_name: mysql-client
+    volumes:
+      - mysql-client:/opt/cloudbeaver/workspace
+    ports:
+      - 3300:8978
+    restart: unless-stopped
+    networks:
+      - norsys
+
+  keycloak:
+    container_name: keycloak
+    build:
+      context: .
+      dockerfile: ./docker/keycloak/Dockerfile
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_VENDOR: MYSQL
+      DB_USER: root
+      DB_DATABASE: norsys_keycloak
+      DB_PASSWORD: mysecretpassword
+      DB_ADDR: mysql
+    volumes:
+       - ./docker/keycloak/themes/norsys:/opt/jboss/keycloak/themes/norsys
+    ports:
+      - 3800:8080
+    networks:
+      - norsys
+
+  nextcloud:
+    build:
+      context: ./docker/nextCloud
+    image: nextcloud:22.0.0
+    container_name: nextcloud
+    restart: always
+    ports:
+      - 3900:80
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - nextcloud:/var/www/html/data
+    environment:
+      MYSQL_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: norsys_activity_cloud
+      MYSQL_USER: root
+      MYSQL_HOST: mysql
+    networks:
+      - norsys
+
+
+networks:
+  norsys:
+    driver: bridge
+
+volumes:
+  mysql:
+  mysql-client:
+  nextcloud:
