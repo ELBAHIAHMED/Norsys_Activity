@@ -1,7 +1,7 @@
 <div class="block grid-cols-4 gap-4 md:grid">
     <div
       *ngFor="let collaborator of collaborators"
-      class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16"
+      class="relative flex flex-col min-w-0 break-words bg-blue-200 w-full mb-6 shadow-xl rounded-lg mt-16"
     >
       <div class="px-6">
         <div class="flex flex-wrap justify-center">
@@ -22,7 +22,7 @@
             {{collaborator.name}}
           </h3>
           <div
-            class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase"
+            class="text-sm leading-normal mt-0 mb-2 text-white font-bold uppercase"
           >
             <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
             {{collaborator.country}}
@@ -42,7 +42,7 @@
               <p class="mb-4 text-lg leading-relaxed text-blueGray-700 truncate">
                 {{collaborator.address}}
               </p>
-              <a href="javascript:void(0);" class="font-normal text-red-600">
+              <a href="javascript:void(0);" class="font-normal text-blue-600">
                 Show more
               </a>
             </div>
@@ -51,4 +51,3 @@
       </div>
     </div>
   </div>
-  

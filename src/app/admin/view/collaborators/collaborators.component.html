@@ -1,4 +1,4 @@
-<div class="flex h-full min-h-screen flex-wrap mt-14">
+<div class="flex h-full min-h-screen flex-wrap mt-0">
     <div class="flex flex-col space-y-4 w-full mb-12 px-4 mt-14">
       <div class="flex space-x-2">
         <i class="fas fa-list-ul cursor-pointer" [ngClass]="listView ? '':'text-blueGray-400'" (click)="toggleToListView()"></i>
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  
+
 
   <!--Modal-->
 <div *ngIf="addCollaboratorShown" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
@@ -25,7 +25,7 @@
     <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
       <!--header-->
       <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-        <h3 class="text-3xl font-semibold">
+        <h3 class="text-3xl font-semibold text-center text-blue-500">
           Add New Collaborator
         </h3>
         <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="showAddCollaborator()">
@@ -42,10 +42,10 @@
       </div>
       <!--footer-->
       <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-        <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="showAddCollaborator()">
+        <button class="text-blue-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="showAddCollaborator()">
           Close
         </button>
-        <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="showAddCollaborator()">
+        <button class="bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="showAddCollaborator()">
           Add
         </button>
       </div>

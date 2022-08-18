@@ -1,7 +1,7 @@
-<div class="block grid-cols-4 gap-4 md:grid">
+<div class="block grid-cols-4 gap-4 md:grid" >
   <div
     *ngFor="let activitie of activities"
-    class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16"
+    class="relative flex flex-col min-w-0 break-words bg-blue-200 w-full mb-6 shadow-xl rounded-lg mt-16" data-aos="zoom_in" data-aos-duration="3000"
   >
     <div class="px-6">
       <div class="flex flex-wrap justify-center">
@@ -22,7 +22,7 @@
               >
                 {{activitie.number_of_participant}}
               </span>
-              <span class="text-sm text-blueGray-400">Participants</span>
+              <span class="text-sm text-white">Participants</span>
             </div>
             <div class="mr-4 p-3 text-center">
               <span
@@ -30,7 +30,7 @@
               >
                 {{activitie.number_of_days}}
               </span>
-              <span class="text-sm text-blueGray-400">Days</span>
+              <span class="text-sm text-white">Days</span>
             </div>
             <div class="lg:mr-4 p-3 text-center">
               <span
@@ -38,7 +38,7 @@
               >
                 {{activitie.number_of_sponsors}}
               </span>
-              <span class="text-sm text-blueGray-400">Sponsors</span>
+              <span class="text-sm text-white">Sponsors</span>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@
           {{activitie.title}}
         </h3>
         <div
-          class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase"
+          class="text-sm leading-normal mt-0 mb-2 text-white font-bold uppercase"
         >
           <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
           {{activitie.localization}}
@@ -70,7 +70,7 @@
             <p class="mb-4 text-lg leading-relaxed text-blueGray-700 truncate">
               {{activitie.description}}
             </p>
-            <a href="javascript:void(0);" class="font-normal text-red-600">
+            <a href="javascript:void(0);" class="font-normal text-blue-600">
               Show more
             </a>
           </div>

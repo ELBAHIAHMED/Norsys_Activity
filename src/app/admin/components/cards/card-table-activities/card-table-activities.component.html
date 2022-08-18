@@ -1,12 +1,12 @@
 <div
-  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
-  [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'"
+  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded md:pt-0 md:mt-0"
+  [ngClass]="color === 'light' ? 'bg-blue-200' : 'bg-red-900 text-white'" data-aos="fade-left" data-aos-duration="3000"
 >
-  <div class="rounded-t mb-0 px-4 py-3 border-0">
+  <div class="rounded-t mb-0 px-4 pb-3 border-0">
     <div class="flex flex-wrap items-center">
       <div class="relative w-full px-4 max-w-full flex-grow flex-1">
         <h3
-          class="font-semibold text-lg"
+          class="font-semibold text-lg text-center"
           [ngClass]="color === 'light' ? 'text-blueGray-700' : 'text-white'"
         >
           Activities Table
@@ -16,11 +16,11 @@
   </div>
   <div class="block w-full overflow-x-auto">
     <!-- Projects table -->
-    <table class="items-center w-full bg-transparent border-collapse">
+    <table class="items-center w-full bg-transparent border-collapse rounded-2xl">
       <thead>
-        <tr>
+        <tr >
           <th
-            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            class="px-6 bg-blue-200 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
             [ngClass]="
               color === 'light'
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'

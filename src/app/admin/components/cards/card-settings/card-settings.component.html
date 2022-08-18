@@ -1,11 +1,11 @@
 <div
-  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blue-100 " data-aos="fade-left" data-aos-duration="3000"
 >
-  <div class="rounded-t bg-white mb-0 px-6 py-6">
-    <div class="text-center flex justify-between">
-      <h6 class="text-blueGray-700 text-xl font-bold">Mon compte</h6>
+  <div class="rounded-xl shadow bg-white mb-0 px-6 py-6 ">
+    <div class="text-center flex justify-between ">
+      <h6 class="text-blue-700 text-xl font-bold ">Mon compte</h6>
       <button
-        class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+        class="bg-blue-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
         type="button"
         (click)="updateAdmin(updateAdminForm)"
       >
@@ -13,9 +13,9 @@
       </button>
     </div>
   </div>
-  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+  <div class="flex-auto px-4 lg:px-10 md:py-10 md:pt-20">
     <form #updateAdminForm="ngForm">
-      <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+      <h6 class="text-blue-400 text-sm mt-3 mb-6 font-bold uppercase text-center justify-center">
         Mes informations
       </h6>
       <div class="flex flex-wrap">

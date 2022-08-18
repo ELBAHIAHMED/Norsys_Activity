@@ -1,4 +1,4 @@
-<div class="flex h-full min-h-screen flex-wrap mt-14">
+<div class="flex h-full min-h-screen flex-wrap mt-0" data-aos="fade-left" data-aos-duration="3000">
   <div class="flex flex-col space-y-4 w-full mb-12 px-4 mt-14">
     <div class="">
       <div class="" style="display: flex; justify-content: space-between">
@@ -9,7 +9,7 @@
               [ngClass]="
                 !isAddSurvey
                   ? 'text-blue-600 dark:text-blue-500 border-b-2 border-blue-600 active'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-600 hover:border-gray-300'
+                  : 'text-black dark:text-gray-400 hover:text-gray-600 hover:border-gray-300'
               "
             >
               <mat-icon
@@ -17,10 +17,9 @@
                 [ngClass]="
                   !isAddSurvey
                     ? 'text-blue-600 dark:text-blue-500'
-                    : 'text-gray-500 dark:text-gray-400'
+                    : 'text-black dark:text-gray-400'
                 "
-                >insert_drive_file</mat-icon
-              >
+                >insert_drive_file</mat-icon>
               Formulaires
             </a>
           </li>
@@ -31,7 +30,7 @@
               [ngClass]="
                 isAddSurvey
                   ? 'text-blue-600 dark:text-blue-500 border-b-2 border-blue-600 active'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-600 hover:border-gray-300'
+                  : 'text-black dark:text-gray-400 hover:text-gray-600 hover:border-gray-300'
               "
             >
               <mat-icon
@@ -39,7 +38,7 @@
                 [ngClass]="
                   isAddSurvey
                     ? 'text-blue-600 dark:text-blue-500'
-                    : 'text-gray-500 dark:text-gray-400'
+                    : 'text-black dark:text-gray-400'
                 "
                 >note_add</mat-icon
               >
@@ -47,10 +46,10 @@
             </a>
           </li>
         </ul>
-        <div [hidden]="isAddSurvey">
-          <mat-form-field appearance="fill">
-            <mat-label>Choisir une date</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="date" />
+        <div [hidden]="isAddSurvey" >
+          <mat-form-field appearance="fill" class="bg-transparent">
+            <mat-label class="text-blue-600 bg-transparent">Choisir une date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="date"  class="bg-transparent"/>
             <mat-datepicker-toggle
               matSuffix
               [for]="picker"

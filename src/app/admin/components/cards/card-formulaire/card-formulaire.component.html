@@ -1,23 +1,23 @@
 <mat-accordion class="example-headers-align" >
-  <mat-expansion-panel
+  <mat-expansion-panel class="bg-blue-200"
     (opened)="panelOpenState = true"
     (closed)="panelOpenState = false"
     *ngFor="let survey of filterdSurveys; let i=index;"
   >
     <mat-expansion-panel-header (click)="showStatistics(i)">
-      <mat-panel-title>
+      <mat-panel-title style="color: #606E80">
         <b>{{ survey.Title | uppercase }}</b>
       </mat-panel-title>
-      <mat-panel-description>
+      <mat-panel-description style="color: #B39662">
         {{ survey.Date | date: "medium" }}
         <div class="icons">
-              <mat-slide-toggle class="available" click-stop-propagation [checked]="survey.IsAvailable" (change)="shareForm(survey)"></mat-slide-toggle>
+              <mat-slide-toggle class="available "  click-stop-propagation [checked]="survey.IsAvailable" (change)="shareForm(survey)"></mat-slide-toggle>
 
-          <button class="edit" click-stop-propagation (click)="editForm(i)">
+          <button class="edit" style="color: #6D87A8" click-stop-propagation (click)="editForm(i)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button class="delete">
-            <mat-icon color="warn" click-stop-propagation (click)="deleteSurvey(survey)"
+          <button class="delete " style="color:dodgerblue">
+            <mat-icon click-stop-propagation (click)="deleteSurvey(survey)"
               >delete</mat-icon
             >
           </button>
