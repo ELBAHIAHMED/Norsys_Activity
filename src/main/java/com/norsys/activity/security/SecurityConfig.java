@@ -52,12 +52,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter());
         http
-                .cors()
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/**").hasRole(ROLE_ADMIN)
-                .anyRequest().authenticated()
-                .and().csrf().disable();
+                .cors();
+//                .and()
+//                .authorizeRequests()
+//               .antMatchers(HttpMethod.GET, "/api/v1/admin/**").hasRole(ROLE_ADMIN)
+//                .antMatchers(HttpMethod.POST, "/api/v1/admin/**").hasRole(ROLE_ADMIN)
+//                .anyRequest().authenticated()
+//                .and().csrf().disable();
     }
 
     private JwtAuthenticationConverter jwtAuthenticationConverter() {
