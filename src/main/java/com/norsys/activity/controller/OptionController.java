@@ -1,12 +1,16 @@
 package com.norsys.activity.controller;
 
 import com.norsys.activity.dto.OptionDto;
+import com.norsys.activity.model.Option;
+import com.norsys.activity.model.Question;
 import com.norsys.activity.serviceImp.OptionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -16,7 +20,11 @@ public class OptionController {
     private OptionService optionService;
 
     @PostMapping
-    public long createNewOption(OptionDto optionDto) {
+    public long createNewOption(@RequestBody OptionDto optionDto) {
         return this.optionService.createNewOption(optionDto);
+    }
+    @GetMapping("/question/{question_id}")
+    public ResponseEntity<List<OptionDto>> getAllOptionsOfQuestion(@PathVariable  Long question_id) {
+        return new ResponseEntity<>(this.optionService.getAllOptionsOfQuestion(question_id), HttpStatus.OK);
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -24,7 +25,7 @@ public class OptionDao {
     private SqlParameterSource initParams(Option option) {
         return new MapSqlParameterSource()
                 .addValue("option_text", option.getOptionText())
-                .addValue("question_id", option.getQuestion().getId());
+                .addValue("question_id", option.getQuestion_id());
     }
     public long createNewOption(Option option) {
         KeyHolder holder = new GeneratedKeyHolder();
@@ -37,5 +38,11 @@ public class OptionDao {
             log.error("Option not created :/ ");
             return 0;
         }
+    }
+
+    public List<Option> getAllOptionsOfQuestion(Long question_id) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("question_id", question_id);
+        return namedParameterJdbcTemplate.query(sqlProperties.getProperty("option.get.by.question_id"), sqlParameterSource, Option::baseMapper);
     }
 }

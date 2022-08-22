@@ -23,7 +23,8 @@ public class SurveyController {
     }
 
     @GetMapping("/{survey_id}")
-    public ResponseEntity<SurveyDto> getActivityById(@PathVariable("survey_id") Long survey_id){
+    public ResponseEntity<SurveyDto> getActivityById(@PathVariable Long survey_id){
+        System.out.println("getOne");
         Optional<SurveyDto> surveyDto= this.surveyService.getSurveyByID(survey_id);
         if(surveyDto.isPresent()){
             return new ResponseEntity<>(surveyDto.get(), HttpStatus.OK);
@@ -32,4 +33,13 @@ public class SurveyController {
         }
     }
 
+    @DeleteMapping("/{survey_id}")
+    public long deleteSurvey(@PathVariable Long survey_id){
+        return this.surveyService.deleteSurvey(survey_id);
+    }
+
+    @PatchMapping("/update")
+    public long updateSurvey(@RequestBody SurveyDto surveyDto) {
+        return this.surveyService.updateSurvey(surveyDto);
+    }
 }

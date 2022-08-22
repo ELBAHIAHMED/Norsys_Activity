@@ -17,7 +17,7 @@ public class QuestionDto {
     private Long id;
     private String type;
     private String text;
-    private SurveyDto surveyDto;
+    private Long survey_id;
     private List<OptionDto> options;
 
     private static final ModelMapper modelMapper = new ModelMapper();

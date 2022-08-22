@@ -14,7 +14,7 @@ import org.modelmapper.ModelMapper;
 public class OptionDto {
     private Long id;
     private String optionText;
-    private QuestionDto questionDto;
+    private Long question_id;
 
     private final static ModelMapper modelMapper = new ModelMapper();
 

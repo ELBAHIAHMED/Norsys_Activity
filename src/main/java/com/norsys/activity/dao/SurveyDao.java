@@ -3,7 +3,6 @@ package com.norsys.activity.dao;
 import com.norsys.activity.model.Survey;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -35,8 +34,6 @@ public class SurveyDao {
     public long createNewSurvey(Survey survey) {
         KeyHolder holder = new GeneratedKeyHolder();
         SqlParameterSource sqlParameterSource = this.initParams(survey);
-        System.out.println(sqlParameterSource);
-        System.out.println(sqlProperties.getProperty("survey.create"));
         int insert = namedParameterJdbcTemplate.update(sqlProperties.getProperty("survey.create"), sqlParameterSource, holder);
         if (insert == 1) {
             log.info("New Survey Created :) " + survey.getTitle());
@@ -54,9 +51,37 @@ public class SurveyDao {
             survey = namedParameterJdbcTemplate.queryForObject(sqlProperties.getProperty("survey.get.by.id"), namedParameters, Survey::baseMapper);
             survey.getTitle();
         } catch (DataAccessException dataAccessException) {
-            log.info("Training Path does not exist" + surveyID);
+            log.info("Path does not exist" + surveyID);
         }
         return Optional.ofNullable(survey);
     }
 
+    public long updateSurvey(Survey survey) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("survey_id", survey.getId())
+                .addValue("survey_title", survey.getTitle())
+                .addValue("survey_url", survey.getUrl())
+                .addValue("survey_description", survey.getDescription())
+                .addValue("survey_is_available", survey.isAvailable())
+                .addValue("survey_date", survey.getDate());
+
+        long update = namedParameterJdbcTemplate.update(sqlProperties.getProperty("survey.update"), sqlParameterSource);
+        if (update == 1) {
+            log.info("Survey updated :) " + survey.getTitle());
+        } else {
+            log.error("Survey not updated :/ " + update);
+        }
+        return update;
+    }
+
+    public long deleteSurvey(long id) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("survey_id", id);
+        long delete = namedParameterJdbcTemplate.update(sqlProperties.getProperty("survey.delete"), sqlParameterSource);
+        if (delete == 1) {
+            log.info("Survey deleted:) ");
+        } else {
+            log.error("Survey not deleted :/ ");
+        }
+        return delete;
+    }
 }
