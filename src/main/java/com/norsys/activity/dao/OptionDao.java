@@ -70,4 +70,15 @@ public class OptionDao {
         }
         return update;
     }
+
+    public long deleteOptionById(Long option_id) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource().addValue("option_id", option_id);
+        long delete = namedParameterJdbcTemplate.update(sqlProperties.getProperty("option.delete.by.id"), sqlParameterSource);
+        if (delete == 1) {
+            log.info("Option deleted:) ");
+        } else {
+            log.error("Option not deleted :/ ");
+        }
+        return delete;
+    }
 }

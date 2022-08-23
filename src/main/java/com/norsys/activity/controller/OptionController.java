@@ -25,4 +25,8 @@ public class OptionController {
     public ResponseEntity<List<OptionDto>> getAllOptionsOfQuestion(@PathVariable  Long question_id) {
         return new ResponseEntity<>(this.optionService.getAllOptionsOfQuestion(question_id), HttpStatus.OK);
     }
+    @DeleteMapping("/{option_id}")
+    public long deleteOptionById(@PathVariable Long option_id) {
+        return this.optionService.deleteQuestionById(option_id);
+    }
 }

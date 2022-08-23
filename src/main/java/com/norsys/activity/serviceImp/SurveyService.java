@@ -53,11 +53,16 @@ public class SurveyService {
     }
 
     public long updateSurvey(SurveyDto surveyDto) {
+        for (QuestionDto questionDto:surveyDto.getQuestion()) {
+            this.questionService.updateQuestion(questionDto);
+        }
         return this.surveyDao.updateSurvey(this.getSurvey(surveyDto));
     }
     public long deleteSurvey(Long id) {
         Optional<SurveyDto> surveyDto = this.getSurveyByID(id);
+        System.out.println(surveyDto.get().getQuestion());
         for (QuestionDto questionDto: surveyDto.get().getQuestion()) {
+            System.out.println(questionDto.toString());
             this.questionService.deleteQuestion(questionDto);
         }
         return this.surveyDao.deleteSurvey(id);

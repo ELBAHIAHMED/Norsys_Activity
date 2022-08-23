@@ -55,6 +55,9 @@ public class QuestionService {
         return questionDtoList;
     }
     public long updateQuestion(QuestionDto questionDto) {
+        for (OptionDto optionDto: questionDto.getOptions()) {
+            this.optionService.updateOption(optionDto);
+        }
         return this.questionDao.updateQuestion(this.getQuestion(questionDto));
     }
     public long deleteQuestion(QuestionDto questionDto) {
@@ -62,5 +65,10 @@ public class QuestionService {
             this.optionService.deleteOption(optionDto.getQuestion_id());
         }
         return this.questionDao.deleteQuestion(this.getQuestion(questionDto));
+    }
+    public long deleteQuestionById(long question_id) {
+        System.out.println(question_id);
+        this.optionService.deleteOption(question_id);
+        return this.questionDao.deleteQuestionById(question_id);
     }
 }

@@ -2,9 +2,7 @@ package com.norsys.activity.serviceImp;
 
 import com.norsys.activity.dao.OptionDao;
 import com.norsys.activity.dto.OptionDto;
-import com.norsys.activity.dto.QuestionDto;
 import com.norsys.activity.model.Option;
-import com.norsys.activity.model.Question;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +39,9 @@ public class OptionService {
 
     public long deleteOption(long question_id) {
         return this.optionDao.deleteOption(question_id);
+    }
+
+    public long deleteQuestionById(Long option_id) {
+        return this.optionDao.deleteOptionById(option_id);
     }
 }
