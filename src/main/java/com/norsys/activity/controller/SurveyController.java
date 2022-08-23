@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -23,16 +24,19 @@ public class SurveyController {
     }
 
     @GetMapping("/{survey_id}")
-    public ResponseEntity<SurveyDto> getActivityById(@PathVariable Long survey_id){
-        System.out.println("getOne");
+    public ResponseEntity<?> getActivityById(@PathVariable Long survey_id){
         Optional<SurveyDto> surveyDto= this.surveyService.getSurveyByID(survey_id);
-        if(surveyDto.isPresent()){
-            return new ResponseEntity<>(surveyDto.get(), HttpStatus.OK);
+        if(surveyDto != null){
+
+            return ResponseEntity.status(HttpStatus.OK).body(surveyDto.get());
         }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.badRequest().body("There is no survey with that specific id");
         }
     }
-
+    @GetMapping ResponseEntity<?> getAllSurveys() {
+        Optional<List<SurveyDto>> surveyDtos = this.surveyService.getAllSurveys();
+        return ResponseEntity.status(HttpStatus.OK).body(surveyDtos.get());
+    }
     @DeleteMapping("/{survey_id}")
     public long deleteSurvey(@PathVariable Long survey_id){
         return this.surveyService.deleteSurvey(survey_id);
@@ -42,4 +46,5 @@ public class SurveyController {
     public long updateSurvey(@RequestBody SurveyDto surveyDto) {
         return this.surveyService.updateSurvey(surveyDto);
     }
+
 }

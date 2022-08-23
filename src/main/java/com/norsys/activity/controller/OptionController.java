@@ -1,8 +1,6 @@
 package com.norsys.activity.controller;
 
 import com.norsys.activity.dto.OptionDto;
-import com.norsys.activity.model.Option;
-import com.norsys.activity.model.Question;
 import com.norsys.activity.serviceImp.OptionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

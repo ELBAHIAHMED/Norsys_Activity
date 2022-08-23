@@ -2,6 +2,7 @@ package com.norsys.activity.serviceImp;
 
 import com.norsys.activity.dao.OptionDao;
 import com.norsys.activity.dto.OptionDto;
+import com.norsys.activity.dto.QuestionDto;
 import com.norsys.activity.model.Option;
 import com.norsys.activity.model.Question;
 import org.modelmapper.ModelMapper;
@@ -31,8 +32,14 @@ public class OptionService {
         }
         return optionDtoList;
     }
-
+    public long updateOption(OptionDto optionDto) {
+        return this.optionDao.updateOption(this.getOption(optionDto));
+    }
     private Option getOption(OptionDto optionDto) {
         return modelMapper.map(optionDto, Option.class);
+    }
+
+    public long deleteOption(long question_id) {
+        return this.optionDao.deleteOption(question_id);
     }
 }

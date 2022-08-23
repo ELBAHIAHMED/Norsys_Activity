@@ -45,4 +45,29 @@ public class OptionDao {
                 .addValue("question_id", question_id);
         return namedParameterJdbcTemplate.query(sqlProperties.getProperty("option.get.by.question_id"), sqlParameterSource, Option::baseMapper);
     }
+
+    public long deleteOption(long question_id) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource().addValue("question_id", question_id);
+        long delete = namedParameterJdbcTemplate.update(sqlProperties.getProperty("option.delete"), sqlParameterSource);
+        if (delete == 1) {
+            log.info("Option deleted:) ");
+        } else {
+            log.error("Option not deleted :/ ");
+        }
+        return delete;
+    }
+    public long updateOption(Option option) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("question_id", option.getQuestion_id())
+                .addValue("option_text", option.getOptionText())
+                .addValue("option_id", option.getId());
+
+        long update = namedParameterJdbcTemplate.update(sqlProperties.getProperty("option.update"), sqlParameterSource);
+        if (update == 1) {
+            log.info("Option updated :) " + option.getOptionText());
+        } else {
+            log.error("Option not updated :/ " + update);
+        }
+        return update;
+    }
 }

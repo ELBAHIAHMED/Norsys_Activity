@@ -3,12 +3,9 @@ package com.norsys.activity.serviceImp;
 import com.norsys.activity.dao.QuestionDao;
 import com.norsys.activity.dto.OptionDto;
 import com.norsys.activity.dto.QuestionDto;
-import com.norsys.activity.dto.SurveyDto;
-import com.norsys.activity.model.Option;
 import com.norsys.activity.model.Question;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,7 +23,12 @@ public class QuestionService {
 
 
     public long createNewQuestion(QuestionDto questionDto) {
-        return this.questionDao.createNewQuestion(this.getQuestion(questionDto));
+        long question_id = this.questionDao.createNewQuestion(this.getQuestion(questionDto));
+        for (OptionDto optionDto: questionDto.getOptions()) {
+            optionDto.setQuestion_id(question_id);
+            this.optionService.createNewOption(optionDto);
+        }
+        return question_id;
     }
 
     private Question getQuestion(QuestionDto questionDto) {
@@ -35,10 +37,10 @@ public class QuestionService {
 
     public List<QuestionDto> getAllQuestionsOfSurvey(Long survey_id) {
         Optional<List<Question>> questionOptional = Optional.ofNullable(this.questionDao.getAllQuestionsOfSurvey(survey_id));
-        List<OptionDto> optionDtoList = this.optionService.getAllOptionsOfQuestion(1L);
         List<QuestionDto> questionDtoList = new ArrayList<>();
         if(questionOptional.isPresent()) {
             for (Question question: questionOptional.get()) {
+                List<OptionDto> optionDtoList = this.optionService.getAllOptionsOfQuestion(question.getId());
                 QuestionDto questionDto = QuestionDto.builder()
                                         .id(question.getId())
                                         .text(question.getText())
@@ -52,5 +54,13 @@ public class QuestionService {
 
         return questionDtoList;
     }
-
+    public long updateQuestion(QuestionDto questionDto) {
+        return this.questionDao.updateQuestion(this.getQuestion(questionDto));
+    }
+    public long deleteQuestion(QuestionDto questionDto) {
+        for (OptionDto optionDto: questionDto.getOptions()) {
+            this.optionService.deleteOption(optionDto.getQuestion_id());
+        }
+        return this.questionDao.deleteQuestion(this.getQuestion(questionDto));
+    }
 }

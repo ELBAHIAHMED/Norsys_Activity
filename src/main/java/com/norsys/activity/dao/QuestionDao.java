@@ -1,6 +1,7 @@
 package com.norsys.activity.dao;
 
 import com.norsys.activity.model.Question;
+import com.norsys.activity.model.Survey;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,5 +48,31 @@ public class QuestionDao {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("survey_id", survey_id);
         return namedParameterJdbcTemplate.query(sqlProperties.getProperty("question.get.by.survey_id"), sqlParameterSource, Question::baseMapper);
+    }
+    public long deleteQuestion(Question question) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource().addValue("survey_id", question.getSurvey_id());
+        long delete = namedParameterJdbcTemplate.update(sqlProperties.getProperty("question.delete"), sqlParameterSource);
+        if (delete == 1) {
+            log.info("Question deleted:) ");
+        } else {
+            log.error("Question not deleted :/ ");
+        }
+        return delete;
+    }
+
+    public long updateQuestion(Question question) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("question_id", question.getId())
+                .addValue("question_type", question.getType())
+                .addValue("question_text", question.getText())
+                .addValue("survey_id", question.getSurvey_id());
+
+        long update = namedParameterJdbcTemplate.update(sqlProperties.getProperty("question.update"), sqlParameterSource);
+        if (update == 1) {
+            log.info("Question updated :) " + question.getText());
+        } else {
+            log.error("Question not updated :/ " + update);
+        }
+        return update;
     }
 }

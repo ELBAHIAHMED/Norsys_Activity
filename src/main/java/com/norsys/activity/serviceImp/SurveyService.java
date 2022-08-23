@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,12 @@ public class SurveyService {
     private QuestionService questionService;
     private final ModelMapper modelMapper = new ModelMapper();
     public long createNewSurvey(SurveyDto surveyDto) {
-        return this.surveyDao.createNewSurvey(this.getSurvey(surveyDto));
+        long survey_id = this.surveyDao.createNewSurvey(this.getSurvey(surveyDto));
+        for (QuestionDto questionDto: surveyDto.getQuestion()) {
+            questionDto.setSurvey_id(survey_id);
+            this.questionService.createNewQuestion(questionDto);
+        }
+        return survey_id;
     }
 
     private Survey getSurvey(SurveyDto surveyDto) {
@@ -29,22 +35,49 @@ public class SurveyService {
 
     public Optional<SurveyDto> getSurveyByID(long surveyID) {
         Optional<Survey> surveyOptional = this.surveyDao.getSurveyByID(surveyID);
-        List<QuestionDto> questionDtoList = this.questionService.getAllQuestionsOfSurvey(surveyID);
-        SurveyDto surveyDto = SurveyDto.builder()
-                .id(surveyOptional.get().getId())
-                .title(surveyOptional.get().getTitle())
-                .description(surveyOptional.get().getDescription())
-                .url(surveyOptional.get().getUrl())
-                .IsAvailable(surveyOptional.get().isAvailable())
-                .date(surveyOptional.get().getDate())
-                .question(questionDtoList).build();
-        return Optional.ofNullable(surveyDto);
+        if (surveyOptional.isPresent()) {
+            List<QuestionDto> questionDtoList = this.questionService.getAllQuestionsOfSurvey(surveyID);
+            SurveyDto surveyDto = SurveyDto.builder()
+                    .id(surveyOptional.get().getId())
+                    .title(surveyOptional.get().getTitle())
+                    .description(surveyOptional.get().getDescription())
+                    .url(surveyOptional.get().getUrl())
+                    .IsAvailable(surveyOptional.get().isAvailable())
+                    .date(surveyOptional.get().getDate())
+                    .question(questionDtoList).build();
+            return Optional.ofNullable(surveyDto);
+        }
+        else {
+            return null;
+        }
     }
 
     public long updateSurvey(SurveyDto surveyDto) {
         return this.surveyDao.updateSurvey(this.getSurvey(surveyDto));
     }
     public long deleteSurvey(Long id) {
+        Optional<SurveyDto> surveyDto = this.getSurveyByID(id);
+        for (QuestionDto questionDto: surveyDto.get().getQuestion()) {
+            this.questionService.deleteQuestion(questionDto);
+        }
         return this.surveyDao.deleteSurvey(id);
+    }
+
+    public Optional<List<SurveyDto>> getAllSurveys() {
+        Optional<List<Survey>> surveys = Optional.ofNullable(this.surveyDao.getAllSurveys());
+        List<SurveyDto> surveyDtos = new ArrayList<>();
+        for (Survey survey: surveys.get()) {
+            List<QuestionDto> questionDtoList = this.questionService.getAllQuestionsOfSurvey(survey.getId());
+            SurveyDto surveyDto = SurveyDto.builder()
+                    .id(survey.getId())
+                    .title(survey.getTitle())
+                    .description(survey.getDescription())
+                    .url(survey.getUrl())
+                    .IsAvailable(survey.isAvailable())
+                    .date(survey.getDate())
+                    .question(questionDtoList).build();
+            surveyDtos.add(surveyDto);
+        }
+        return Optional.of(surveyDtos);
     }
 }

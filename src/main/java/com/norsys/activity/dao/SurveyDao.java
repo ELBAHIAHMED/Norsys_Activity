@@ -12,6 +12,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
@@ -83,5 +84,9 @@ public class SurveyDao {
             log.error("Survey not deleted :/ ");
         }
         return delete;
+    }
+
+    public List<Survey> getAllSurveys() {
+        return jdbcTemplate.query(sqlProperties.getProperty("survey.get.all"), Survey::baseMapper);
     }
 }
