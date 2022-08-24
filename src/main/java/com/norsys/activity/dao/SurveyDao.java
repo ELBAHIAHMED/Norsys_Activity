@@ -57,9 +57,9 @@ public class SurveyDao {
         return Optional.ofNullable(survey);
     }
 
-    public long updateSurvey(Survey survey) {
+    public long updateSurvey(Survey survey, long survey_id) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue("survey_id", survey.getId())
+                .addValue("survey_id", survey_id)
                 .addValue("survey_title", survey.getTitle())
                 .addValue("survey_url", survey.getUrl())
                 .addValue("survey_description", survey.getDescription())

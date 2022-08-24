@@ -42,9 +42,9 @@ public class SurveyController {
         return this.surveyService.deleteSurvey(survey_id);
     }
 
-    @PatchMapping("/update")
-    public long updateSurvey(@RequestBody SurveyDto surveyDto) {
-        return this.surveyService.updateSurvey(surveyDto);
+    @PatchMapping("/update/{survey_id}")
+    public long updateSurvey(@RequestBody SurveyDto surveyDto, @PathVariable Long survey_id) {
+        return this.surveyService.updateSurvey(surveyDto, survey_id);
     }
 
 }

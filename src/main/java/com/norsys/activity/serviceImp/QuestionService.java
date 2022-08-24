@@ -56,7 +56,12 @@ public class QuestionService {
     }
     public long updateQuestion(QuestionDto questionDto) {
         for (OptionDto optionDto: questionDto.getOptions()) {
-            this.optionService.updateOption(optionDto);
+            if(optionDto.getId() != null) {
+                this.optionService.updateOption(optionDto);
+            }
+            else {
+                this.optionService.createNewOption(optionDto);
+            }
         }
         return this.questionDao.updateQuestion(this.getQuestion(questionDto));
     }

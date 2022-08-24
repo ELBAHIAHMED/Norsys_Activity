@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class SurveyDto {
     private String title;
     private boolean IsAvailable;
     private Date date;
+    private List<File> files;
     private List<QuestionDto> question;
     private final static ModelMapper modelMapper = new ModelMapper();
 

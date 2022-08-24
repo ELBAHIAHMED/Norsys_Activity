@@ -52,11 +52,16 @@ public class SurveyService {
         }
     }
 
-    public long updateSurvey(SurveyDto surveyDto) {
-        for (QuestionDto questionDto:surveyDto.getQuestion()) {
-            this.questionService.updateQuestion(questionDto);
+    public long updateSurvey(SurveyDto surveyDto, long survey_id) {
+        for (QuestionDto questionDto: surveyDto.getQuestion()) {
+            if(questionDto.getId()!=null) {
+                this.questionService.updateQuestion(questionDto);
+            }
+            else {
+                this.questionService.createNewQuestion(questionDto);
+            }
         }
-        return this.surveyDao.updateSurvey(this.getSurvey(surveyDto));
+        return this.surveyDao.updateSurvey(this.getSurvey(surveyDto), survey_id);
     }
     public long deleteSurvey(Long id) {
         Optional<SurveyDto> surveyDto = this.getSurveyByID(id);
