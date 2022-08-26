@@ -42,7 +42,7 @@ public class SurveyService {
                     .title(surveyOptional.get().getTitle())
                     .description(surveyOptional.get().getDescription())
                     .url(surveyOptional.get().getUrl())
-                    .IsAvailable(surveyOptional.get().isAvailable())
+                    .available(surveyOptional.get().isAvailable())
                     .date(surveyOptional.get().getDate())
                     .question(questionDtoList).build();
             return Optional.ofNullable(surveyDto);
@@ -83,11 +83,15 @@ public class SurveyService {
                     .title(survey.getTitle())
                     .description(survey.getDescription())
                     .url(survey.getUrl())
-                    .IsAvailable(survey.isAvailable())
+                    .available(survey.isAvailable())
                     .date(survey.getDate())
                     .question(questionDtoList).build();
             surveyDtos.add(surveyDto);
         }
         return Optional.of(surveyDtos);
+    }
+
+    public long updateSurveyStatus(long survey_id, Boolean isAvailable) {
+        return this.surveyDao.updateSurveyStatus(survey_id, isAvailable);
     }
 }

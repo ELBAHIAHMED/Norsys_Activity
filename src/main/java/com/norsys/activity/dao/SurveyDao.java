@@ -89,4 +89,20 @@ public class SurveyDao {
     public List<Survey> getAllSurveys() {
         return jdbcTemplate.query(sqlProperties.getProperty("survey.get.all"), Survey::baseMapper);
     }
+
+
+    public long updateSurveyStatus(long survey_id, Boolean isAvailable) {
+        System.out.println(survey_id + " "+ isAvailable);
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("survey_id", survey_id)
+                .addValue("survey_is_available", isAvailable);
+
+        long update = namedParameterJdbcTemplate.update(sqlProperties.getProperty("survey.available"), sqlParameterSource);
+        if (update == 1) {
+            log.info("Survey available :) ");
+        } else {
+            log.error("Survey not available :/ " + update);
+        }
+        return update;
+    }
 }

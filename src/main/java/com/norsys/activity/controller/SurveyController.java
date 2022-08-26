@@ -46,5 +46,9 @@ public class SurveyController {
     public long updateSurvey(@RequestBody SurveyDto surveyDto, @PathVariable Long survey_id) {
         return this.surveyService.updateSurvey(surveyDto, survey_id);
     }
+    @PatchMapping("/available/{survey_id}")
+    public long updateSurveyStatus(@PathVariable long survey_id, @RequestBody SurveyDto surveyDto) {
+        return this.surveyService.updateSurveyStatus(survey_id, Boolean.valueOf(surveyDto.isAvailable()));
+    }
 
 }

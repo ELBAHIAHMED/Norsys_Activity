@@ -6,8 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class SurveyDto {
     private String description;
     private String url;
     private String title;
-    private boolean IsAvailable;
+    private boolean available;
     private Date date;
-    private List<File> files;
+    private List<MultipartFile> files;
     private List<QuestionDto> question;
     private final static ModelMapper modelMapper = new ModelMapper();
 
