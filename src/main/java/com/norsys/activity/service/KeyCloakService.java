@@ -56,6 +56,12 @@ public class KeyCloakService {
 
     }
 
+    public void deleteUser(String userId){
+        UsersResource usersResource = getInstance();
+        usersResource.get(userId)
+                .remove();
+    }
+
     public UsersResource getInstance(){
         return KeycloakConfig.getInstance().realm("norsys").users();
 

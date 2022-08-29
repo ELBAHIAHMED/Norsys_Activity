@@ -36,11 +36,11 @@ public class KeyCloakController {
 //        return "User Details Updated Successfully.";
 //    }
 //
-//    @DeleteMapping(path = "/{userId}")
-//    public String deleteUser(@PathVariable("userId") String userId){
-//        service.deleteUser(userId);
-//        return "User Deleted Successfully.";
-//    }
+    @DeleteMapping(path = "/delete/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") String userId){
+        service.deleteUser(userId);
+        return ResponseEntity.ok().body("the user is deleted");
+    }
 //
 //    @GetMapping(path = "/verification-link/{userId}")
 //    public String sendVerificationLink(@PathVariable("userId") String userId){
