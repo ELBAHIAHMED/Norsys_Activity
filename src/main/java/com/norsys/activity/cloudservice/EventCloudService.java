@@ -62,7 +62,7 @@ public class EventCloudService {
 
 	public String updateFiles(MultipartFile multipartFile, String path,String generatedKey) {
 		String[] name = multipartFile.getOriginalFilename().split("\\.");
-		String fullFilePath = "/Mediatheque/image/".concat(name[0] + "_" + generatedKey + "." + name[1]);
+		String fullFilePath = "/norsys_activity/image/".concat(name[0] + "_" + generatedKey + "." + name[1]);
 		Optional<File> fileOptional = Optional.ofNullable(CloudFileHelper.getTempFileFromMultiPartFile(multipartFile));
 		eventCloudDao.deleteFile(path);
 		fileOptional.ifPresent(file -> {

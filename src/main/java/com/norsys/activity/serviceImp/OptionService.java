@@ -16,7 +16,7 @@ public class OptionService {
     @Autowired
     private OptionDao optionDao;
 
-    private final ModelMapper modelMapper = new ModelMapper();
+    private static final ModelMapper modelMapper = new ModelMapper();
 
     public Long createNewOption(OptionDto optionDto) {
         return this.optionDao.createNewOption(this.getOption(optionDto));
@@ -33,7 +33,7 @@ public class OptionService {
     public long updateOption(OptionDto optionDto) {
         return this.optionDao.updateOption(this.getOption(optionDto));
     }
-    private Option getOption(OptionDto optionDto) {
+    public static Option getOption(OptionDto optionDto) {
         return modelMapper.map(optionDto, Option.class);
     }
 
