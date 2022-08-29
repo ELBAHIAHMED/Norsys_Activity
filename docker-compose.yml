@@ -48,7 +48,7 @@ services:
       DB_PASSWORD: mysecretpassword
       DB_ADDR: mysql
     volumes:
-       - ./docker/keycloak/themes/norsys:/opt/jboss/keycloak/themes/norsys
+       - ./docker/keycloak/themes/activity_theme:/opt/jboss/keycloak/themes/activity_theme
     ports:
       - 3800:8080
     networks:
