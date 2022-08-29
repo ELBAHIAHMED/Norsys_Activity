@@ -1,12 +1,15 @@
 package com.norsys.activity.controller;
 
+import com.norsys.activity.cloudservice.EventCloudService;
 import com.norsys.activity.dto.SurveyDto;
 import com.norsys.activity.serviceImp.SurveyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +20,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SurveyController {
     private SurveyService surveyService;
+    private EventCloudService fileCloudService;
 
     @PostMapping
     public long createNewSurvey(@RequestBody SurveyDto surveyDto) {
@@ -50,5 +54,12 @@ public class SurveyController {
     public long updateSurveyStatus(@PathVariable long survey_id, @RequestBody SurveyDto surveyDto) {
         return this.surveyService.updateSurveyStatus(survey_id, Boolean.valueOf(surveyDto.isAvailable()));
     }
+
+    @PostMapping(value = "/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String uploadCourseSupport(@RequestParam MultipartFile file) {
+        log.info("Starting .....");
+        return this.fileCloudService.uploadFile(file,"/norsys_activity", "11111");
+    }
+
 
 }
