@@ -8,6 +8,17 @@ CREATE TABLE survey
     survey_date Date DEFAULT (CURRENT_DATE),
     PRIMARY KEY (survey_id)
 );
+CREATE TABLE event
+(
+    id bigint NOT NULL AUTO_INCREMENT,
+    event_id varchar(100) NOT NULL,
+    event_name varchar(100)  ,
+    event_description varchar(100) ,
+    event_date DATE DEFAULT (CURRENT_DATE),
+    event_responsable varchar(100),
+    PRIMARY KEY (id),
+    FOREIGN KEY (event_id) REFERENCE sur
+);
 
 CREATE TABLE question
 (
