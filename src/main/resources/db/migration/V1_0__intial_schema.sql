@@ -14,10 +14,9 @@ CREATE TABLE event
     event_id varchar(100) NOT NULL,
     event_name varchar(100)  ,
     event_description varchar(100) ,
-    event_date DATE DEFAULT (CURRENT_DATE),
+    event_date VARCHAR(100) ,
     event_responsable varchar(100),
-    PRIMARY KEY (id),
-    FOREIGN KEY (event_id) REFERENCE sur
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE question
