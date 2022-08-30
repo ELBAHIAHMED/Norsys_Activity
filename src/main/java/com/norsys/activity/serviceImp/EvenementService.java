@@ -2,7 +2,13 @@ package com.norsys.activity.serviceImp;
 
 import com.norsys.activity.dao.EventDao;
 import com.norsys.activity.dto.EventDto;
+import com.norsys.activity.dto.OptionDto;
+import com.norsys.activity.dto.QuestionDto;
+import com.norsys.activity.dto.SurveyDto;
 import com.norsys.activity.model.Evenement;
+import com.norsys.activity.model.Survey;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +17,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EvenementService {
 
     private EventDao eventDao;
+    private final ModelMapper modelMapper = new ModelMapper();
+
 
     public Optional <List<EventDto> >getAllEvents(){
 
@@ -30,6 +39,18 @@ public class EvenementService {
        }
        return Optional.of(eventDtos);
 
+    }
+
+    public long createNewEvent(EventDto eventDto) {
+        long event_id = this.eventDao.createNewEvent(this.getEvent(eventDto));
+
+
+        return event_id;
+    }
+
+    private Evenement getEvent(EventDto eventDto) {
+
+        return modelMapper.map(eventDto, Evenement.class);
     }
 
 }
