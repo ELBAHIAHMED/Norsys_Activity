@@ -23,7 +23,7 @@ public class SurveyDto {
     private String title;
     private boolean available;
     private Date date;
-    private List<MultipartFile> files;
+    private List<FileDto> files;
     private List<QuestionDto> question;
     private final static ModelMapper modelMapper = new ModelMapper();
 
