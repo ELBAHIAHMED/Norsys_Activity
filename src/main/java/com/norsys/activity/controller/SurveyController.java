@@ -55,10 +55,10 @@ public class SurveyController {
         return this.surveyService.updateSurveyStatus(survey_id, Boolean.valueOf(surveyDto.isAvailable()));
     }
 
-    @PostMapping(value = "/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String uploadCourseSupport(@RequestParam MultipartFile file) {
+    @PostMapping(value = "/{survey_id}/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String uploadCourseSupport(@RequestParam MultipartFile file, @PathVariable Long survey_id) {
         log.info("Starting .....");
-        return this.fileCloudService.uploadFile(file,"/norsys_activity", "11111");
+        return this.fileCloudService.uploadFile(file,"/norsys_activity/file", String.valueOf(survey_id));
     }
 
 
