@@ -116,7 +116,9 @@ public class SurveyService {
         Optional<SurveyDto> surveyDto = this.getSurveyByID(id);
         System.out.println(surveyDto.get().getQuestion());
         for (FileS fileDto: this.fileDao.getAllFilesOfSurvey(id)) {
-            this.eventCloudDao.deleteFile(fileDto.getPath());
+            if(this.eventCloudDao.isFolderExist(fileDto.getPath())) {
+                this.eventCloudDao.deleteFile(fileDto.getPath());
+            }
         }
         this.fileDao.deleteFiles(id);
         for (QuestionDto questionDto: surveyDto.get().getQuestion()) {

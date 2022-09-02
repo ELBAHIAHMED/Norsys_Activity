@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.norsys.activity.clouddao.EventCloudDao;
-import com.norsys.activity.model.FileS;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +47,21 @@ public class EventCloudService {
 				.path(fullFilePath)
 				.sharedPath(this.doShared(fullFilePath))
 				.build();
-		this.fileDao.createNewFile(fileS);
+		if(!this.fileDao.getAllFilesOfSurvey(Long.valueOf(generatedKey)).isEmpty()) {
+			System.out.println(this.fileDao.getAllFilesOfSurvey(Long.valueOf(generatedKey)));
+			for (FileS fileS1 : this.fileDao.getAllFilesOfSurvey(Long.valueOf(generatedKey))) {
+				if (fileS1.getPath() == fileS.getPath()) {
+					System.out.println("equals");
+					continue;
+				} else {
+					this.fileDao.createNewFile(fileS);
+				}
+			}
+		}
+		else {
+			this.fileDao.createNewFile(fileS);
+		}
+
 		return fullFilePath;
 	}
 
