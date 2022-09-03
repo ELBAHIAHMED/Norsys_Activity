@@ -4,6 +4,7 @@ import com.norsys.activity.model.Evenement;
 import com.norsys.activity.model.Survey;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Properties;
 
 @Repository
@@ -49,6 +51,29 @@ public class EventDao {
         System.out.println(jdbcTemplate.query(sqlProperties.getProperty("event.getAll"), Evenement::baseMapper)
 );
         return namedParameterJdbcTemplate.query(sqlProperties.getProperty("event.getAll"), Evenement::baseMapper);
+    }
+
+    public Optional<Evenement> getEvenementByID(String EventId) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource("event_id", EventId);
+        Evenement evenement = null;
+        try {
+            evenement = namedParameterJdbcTemplate.queryForObject(sqlProperties.getProperty("event.get.by.id"), namedParameters, Evenement::baseMapper);
+            evenement.getName();
+        } catch (DataAccessException dataAccessException) {
+            log.info("Path does not exist" + EventId);
+        }
+        return Optional.ofNullable(evenement);
+    }
+
+    public long deleteEvent(String event_id) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("event_id", event_id);
+        long delete = namedParameterJdbcTemplate.update(sqlProperties.getProperty("event.delete"), sqlParameterSource);
+        if (delete == 1) {
+            log.info("event deleted:) ");
+        } else {
+            log.error("event not deleted :/ ");
+        }
+        return delete;
     }
 
 }

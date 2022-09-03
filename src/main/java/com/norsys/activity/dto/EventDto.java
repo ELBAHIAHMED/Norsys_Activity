@@ -1,5 +1,6 @@
 package com.norsys.activity.dto;
 
+import com.norsys.activity.model.FileGallery;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,8 +21,8 @@ public class EventDto {
     private String description;
     private String Date;
     private String Responsable;
-    private List<MultipartFile> images;
-    private String path;
+    private List<FileGallery> file;
+//    private String path;
 
 
 }

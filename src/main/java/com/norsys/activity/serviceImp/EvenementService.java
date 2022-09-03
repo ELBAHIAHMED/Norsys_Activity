@@ -47,7 +47,7 @@ public class EvenementService {
 
     public long createNewEvent(EventDto eventDto) {
         long event_id = this.eventDao.createNewEvent(this.getEvent(eventDto));
-        eventCloudService.uploadFile(eventDto.getImages().get(1),eventDto.getPath(),"11111" );
+        eventCloudService.uploadFile(eventDto.getFile(),eventDto.getPath(),"11111" );
         return event_id;
     }
 

@@ -48,3 +48,13 @@ CREATE TABLE fileS
     PRIMARY KEY (file_id),
     FOREIGN KEY (survey_id) REFERENCES survey(survey_id)
 );
+
+CREATE TABLE files_gallery
+(
+    file_id bigint NOT NULL AUTO_INCREMENT,
+    file_path varchar(255) NOT NULL,
+    file_shared_path varchar(255) NOT NULL,
+    event_id VARCHAR(255) NOT NULL,
+    PRIMARY KEY (file_id),
+    FOREIGN KEY (event_id) REFERENCES event(event_id)
+);
