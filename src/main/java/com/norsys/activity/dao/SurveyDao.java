@@ -105,4 +105,7 @@ public class SurveyDao {
         }
         return update;
     }
+    public List<Survey> getAllSurveysByJoin() {
+        return jdbcTemplate.query(sqlProperties.getProperty("survey.get.question.option"), Survey::baseMapper);
+    }
 }

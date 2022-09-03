@@ -1,19 +1,21 @@
 package com.norsys.activity.serviceImp;
 
-import com.norsys.activity.cloudservice.EventCloudService;
+import com.norsys.activity.clouddao.EventCloudDao;
+import com.norsys.activity.dao.FileDao;
 import com.norsys.activity.dao.OptionDao;
 import com.norsys.activity.dao.QuestionDao;
 import com.norsys.activity.dao.SurveyDao;
+import com.norsys.activity.dto.FileDto;
 import com.norsys.activity.dto.OptionDto;
 import com.norsys.activity.dto.QuestionDto;
 import com.norsys.activity.dto.SurveyDto;
+import com.norsys.activity.model.FileS;
 import com.norsys.activity.model.Option;
 import com.norsys.activity.model.Question;
 import com.norsys.activity.model.Survey;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,8 @@ public class SurveyService {
     private QuestionDao questionDao;
 
     private OptionDao optionDao;
-    private EventCloudService fileCloudService;
+    private FileDao fileDao;
+    private EventCloudDao eventCloudDao;
     private final ModelMapper modelMapper = new ModelMapper();
     public long createNewSurvey(SurveyDto surveyDto) {
         long survey_id = this.surveyDao.createNewSurvey(this.getSurvey(surveyDto));
@@ -53,10 +56,14 @@ public class SurveyService {
         Optional<Survey> surveyOptional = this.surveyDao.getSurveyByID(surveyID);
         List<Question> questionList = this.questionDao.getAllQuestionsOfSurvey(surveyID);
         List<QuestionDto> questionDtoList = new ArrayList<>();
+        List<FileDto> fileDtoList = new ArrayList<>();
         if (surveyOptional.isPresent()) {
             for (Question question:questionList) {
                 questionDtoList.add(QuestionDto.getQuestionDto(question));
 
+            }
+            for (FileS fileS:this.fileDao.getAllFilesOfSurvey(surveyID)) {
+                fileDtoList.add(FileDto.getFileDto(fileS));
             }
             for (QuestionDto questionDto: questionDtoList) {
                 List<Option> optionList = this.optionDao.getAllOptionsOfQuestion(questionDto.getId());
@@ -74,6 +81,7 @@ public class SurveyService {
                     .url(surveyOptional.get().getUrl())
                     .available(surveyOptional.get().isAvailable())
                     .date(surveyOptional.get().getDate())
+                    .files(fileDtoList)
                     .question(questionDtoList).build();
             return Optional.ofNullable(surveyDto);
         }
@@ -83,9 +91,6 @@ public class SurveyService {
     }
 
     public long updateSurvey(SurveyDto surveyDto, long survey_id) {
-        for (MultipartFile file:surveyDto.getFiles()) {
-            this.fileCloudService.uploadFile(file,"/norsys_activity", "11111");
-        }
         for (QuestionDto questionDto: surveyDto.getQuestion()) {
             if(questionDto.getId()!=null) {
                 this.questionDao.updateQuestion(QuestionService.getQuestion(questionDto));
@@ -110,6 +115,10 @@ public class SurveyService {
     public long deleteSurvey(Long id) {
         Optional<SurveyDto> surveyDto = this.getSurveyByID(id);
         System.out.println(surveyDto.get().getQuestion());
+        for (FileS fileDto: this.fileDao.getAllFilesOfSurvey(id)) {
+            this.eventCloudDao.deleteFile(fileDto.getPath());
+        }
+        this.fileDao.deleteFiles(id);
         for (QuestionDto questionDto: surveyDto.get().getQuestion()) {
             System.out.println(questionDto.toString());
             this.optionDao.deleteOption(questionDto.getId());
@@ -132,8 +141,11 @@ public class SurveyService {
                         optionDtoList.add(OptionDto.getOptionDto(option));
                     }
                     questionDto.setOptions(optionDtoList);
-                    System.out.println(questionDto);
                 }
+            }
+            List<FileDto> fileDtoList = new ArrayList<>();
+            for (FileS fileS:this.fileDao.getAllFilesOfSurvey(survey.getId())) {
+                fileDtoList.add(FileDto.getFileDto(fileS));
             }
             SurveyDto surveyDto = SurveyDto.builder()
                     .id(survey.getId())
@@ -142,6 +154,7 @@ public class SurveyService {
                     .url(survey.getUrl())
                     .available(survey.isAvailable())
                     .date(survey.getDate())
+                    .files(fileDtoList)
                     .question(questionDtoList).build();
             surveyDtos.add(surveyDto);
         }
@@ -150,5 +163,12 @@ public class SurveyService {
 
     public long updateSurveyStatus(long survey_id, Boolean isAvailable) {
         return this.surveyDao.updateSurveyStatus(survey_id, isAvailable);
+    }
+    public Optional<List<SurveyDto>> getAllSurveysByJoin() {
+        List<SurveyDto> surveyDtoList = new ArrayList<>();
+        for (Survey survey: this.surveyDao.getAllSurveysByJoin()) {
+            surveyDtoList.add(SurveyDto.getSurveyDto(survey));
+        }
+        return Optional.of(surveyDtoList);
     }
 }

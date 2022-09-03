@@ -1,13 +1,15 @@
 package com.norsys.activity.cloudservice;
 
+import com.norsys.activity.dao.FileDao;
+import com.norsys.activity.model.FileS;
 import com.norsys.activity.util.CloudFileHelper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.norsys.activity.clouddao.EventCloudDao;
-
+import com.norsys.activity.model.FileS;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,10 +17,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EventCloudService {
 
-	@Autowired
 	EventCloudDao eventCloudDao;
+
+	FileDao fileDao;
 	
 	public List<String> getFolders() {
 		return eventCloudDao.getEventFolders();
@@ -30,6 +34,7 @@ public class EventCloudService {
 	}
 
 	public String uploadFile(MultipartFile multipartFile, String path, String generatedKey) {
+
 		String[] name = multipartFile.getOriginalFilename().split("\\.");
 		String fullFilePath = path.concat(name[0] + "_" + generatedKey + "." + name[1]);
 		Optional<File> fileOptional = Optional.ofNullable(CloudFileHelper.getTempFileFromMultiPartFile(multipartFile));
@@ -37,6 +42,13 @@ public class EventCloudService {
 			eventCloudDao.upLoadFile(file, fullFilePath);
 			file.delete();
 		});
+
+		FileS fileS = FileS.builder()
+				.survey_id(Long.valueOf(generatedKey))
+				.path(fullFilePath)
+				.sharedPath(this.doShared(fullFilePath))
+				.build();
+		this.fileDao.createNewFile(fileS);
 		return fullFilePath;
 	}
 
