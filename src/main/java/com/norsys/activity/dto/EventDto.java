@@ -21,6 +21,7 @@ public class EventDto {
     private String Date;
     private String Responsable;
     private List<MultipartFile> images;
+    private String path;
 
 
 }

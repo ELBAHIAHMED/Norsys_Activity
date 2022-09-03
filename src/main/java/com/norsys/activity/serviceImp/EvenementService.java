@@ -1,5 +1,6 @@
 package com.norsys.activity.serviceImp;
 
+import com.norsys.activity.cloudservice.EventCloudService;
 import com.norsys.activity.dao.EventDao;
 import com.norsys.activity.dto.EventDto;
 import com.norsys.activity.dto.OptionDto;
@@ -7,6 +8,7 @@ import com.norsys.activity.dto.QuestionDto;
 import com.norsys.activity.dto.SurveyDto;
 import com.norsys.activity.model.Evenement;
 import com.norsys.activity.model.Survey;
+import com.norsys.activity.util.CloudFileHelper;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,9 @@ import java.util.Optional;
 public class EvenementService {
 
     private EventDao eventDao;
+    private EventCloudService eventCloudService;
     private final ModelMapper modelMapper = new ModelMapper();
+
 
 
     public Optional <List<EventDto> >getAllEvents(){
@@ -43,8 +47,7 @@ public class EvenementService {
 
     public long createNewEvent(EventDto eventDto) {
         long event_id = this.eventDao.createNewEvent(this.getEvent(eventDto));
-
-
+        eventCloudService.uploadFile(eventDto.getImages().get(1),eventDto.getPath(),"11111" );
         return event_id;
     }
 

@@ -16,6 +16,7 @@ CREATE TABLE event
     event_description varchar(100) ,
     event_date VARCHAR(100) ,
     event_responsable varchar(100),
+    event_path varchar(100),
     PRIMARY KEY (id)
 );
 
