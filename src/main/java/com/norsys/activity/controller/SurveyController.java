@@ -1,6 +1,7 @@
 package com.norsys.activity.controller;
 
 import com.norsys.activity.cloudservice.EventCloudService;
+import com.norsys.activity.dto.FileDto;
 import com.norsys.activity.dto.SurveyDto;
 import com.norsys.activity.serviceImp.SurveyService;
 import lombok.AllArgsConstructor;
@@ -56,9 +57,9 @@ public class SurveyController {
     }
 
     @PostMapping(value = "/{survey_id}/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String uploadCourseSupport(@RequestParam MultipartFile file, @PathVariable Long survey_id) {
+    public FileDto uploadCourseSupport(@RequestParam MultipartFile file, @PathVariable Long survey_id) {
         log.info("Starting .....");
-        return this.fileCloudService.uploadFile(file,"/norsys_activity/file", String.valueOf(survey_id));
+        return this.fileCloudService.uploadFile(file,"/norsys_activity/", String.valueOf(survey_id));
     }
 
 

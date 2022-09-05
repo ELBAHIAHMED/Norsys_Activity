@@ -1,9 +1,11 @@
 package com.norsys.activity.cloudservice;
 
 import com.norsys.activity.dao.FileDao;
+import com.norsys.activity.dto.FileDto;
 import com.norsys.activity.model.FileS;
 import com.norsys.activity.util.CloudFileHelper;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class EventCloudService {
 
 	EventCloudDao eventCloudDao;
@@ -32,8 +35,7 @@ public class EventCloudService {
 		eventCloudDao.createFolder(path);
 	}
 
-	public String uploadFile(MultipartFile multipartFile, String path, String generatedKey) {
-
+	public FileDto uploadFile(MultipartFile multipartFile, String path, String generatedKey) {
 		String[] name = multipartFile.getOriginalFilename().split("\\.");
 		String fullFilePath = path.concat(name[0] + "_" + generatedKey + "." + name[1]);
 		Optional<File> fileOptional = Optional.ofNullable(CloudFileHelper.getTempFileFromMultiPartFile(multipartFile));
@@ -47,22 +49,30 @@ public class EventCloudService {
 				.path(fullFilePath)
 				.sharedPath(this.doShared(fullFilePath))
 				.build();
+		boolean isEquals = false;
+		System.out.println(this.fileDao.getAllFilesOfSurvey(Long.valueOf(generatedKey)).isEmpty());
 		if(!this.fileDao.getAllFilesOfSurvey(Long.valueOf(generatedKey)).isEmpty()) {
 			System.out.println(this.fileDao.getAllFilesOfSurvey(Long.valueOf(generatedKey)));
 			for (FileS fileS1 : this.fileDao.getAllFilesOfSurvey(Long.valueOf(generatedKey))) {
-				if (fileS1.getPath() == fileS.getPath()) {
-					System.out.println("equals");
-					continue;
-				} else {
-					this.fileDao.createNewFile(fileS);
+				if (fileS1.getPath().equals(fileS.getPath())) {
+					isEquals = true;
 				}
+			}
+			if(!isEquals) {
+				fileS.setId(this.fileDao.createNewFile(fileS));
+			}
+			else {
+				log.error("file existed");
 			}
 		}
 		else {
-			this.fileDao.createNewFile(fileS);
+			fileS.setId(this.fileDao.createNewFile(fileS));
 		}
-
-		return fullFilePath;
+		if (fileS.getId() != null) {
+			return FileDto.getFileDto(fileS);
+		}
+		else
+			return null;
 	}
 
 	public InputStream getFile(String fileName) throws IOException {
