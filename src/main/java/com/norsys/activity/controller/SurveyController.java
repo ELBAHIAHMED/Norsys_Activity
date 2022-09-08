@@ -24,7 +24,7 @@ public class SurveyController {
     private EventCloudService fileCloudService;
 
     @PostMapping
-    public long createNewSurvey(@RequestBody SurveyDto surveyDto) {
+    public Optional<SurveyDto> createNewSurvey(@RequestBody SurveyDto surveyDto) {
         return this.surveyService.createNewSurvey(surveyDto);
     }
 

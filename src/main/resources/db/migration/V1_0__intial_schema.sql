@@ -37,3 +37,13 @@ CREATE TABLE fileS
     PRIMARY KEY (file_id),
     FOREIGN KEY (survey_id) REFERENCES survey(survey_id)
 );
+
+CREATE TABLE user
+(
+    user_id varchar(300) NOT NULL,
+    user_username varchar(100) NOT NULL UNIQUE,
+    user_nom varchar(100) NOT NULL,
+    user_prenom varchar(100) NOT NULL,
+    user_email varchar(100) NOT NULL,
+    PRIMARY KEY (user_id)
+);

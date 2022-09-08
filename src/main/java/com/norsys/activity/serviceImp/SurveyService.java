@@ -32,7 +32,7 @@ public class SurveyService {
     private FileDao fileDao;
     private EventCloudDao eventCloudDao;
     private final ModelMapper modelMapper = new ModelMapper();
-    public long createNewSurvey(SurveyDto surveyDto) {
+    public Optional<SurveyDto> createNewSurvey(SurveyDto surveyDto) {
         long survey_id = this.surveyDao.createNewSurvey(this.getSurvey(surveyDto));
         for (QuestionDto questionDto: surveyDto.getQuestion()) {
             questionDto.setSurvey_id(survey_id);
@@ -40,11 +40,10 @@ public class SurveyService {
 
             for (OptionDto optionDto: questionDto.getOptions()) {
                 optionDto.setQuestion_id(question_id);
-                System.out.println("heeeeeeeeeere"+optionDto);
                 this.optionDao.createNewOption(OptionService.getOption(optionDto));
             }
         }
-        return survey_id;
+        return this.getSurveyByID(survey_id);
     }
 
     private Survey getSurvey(SurveyDto surveyDto) {
