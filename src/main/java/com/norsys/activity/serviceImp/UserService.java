@@ -82,8 +82,12 @@ public class UserService {
         //get groupe users for given id
         return groupsResource.group(groupeId).members();
     }
-    public List<UserRepresentation> getAllCollabs() {
-        return getUsersByGroupe(groupCollabs);
+    public List<UserDto> getAllCollabs() {
+        List<UserDto> userDtoList = new ArrayList<>();
+        for (UserRepresentation userRepresentation: getUsersByGroupe(groupCollabs)) {
+            userDtoList.add(UserDto.getUserDto(this.userDao.getUserById(userRepresentation.getId()).get()));
+        }
+        return userDtoList;
     }
     public List<UserRepresentation> getAllAdmins() {
         return getUsersByGroupe(groupAdmins);
@@ -106,7 +110,7 @@ public class UserService {
         UsersResource instance = getInstance();
         Response response = instance.create(user);
         if(response.getStatus() == 201) {
-            for (UserRepresentation userRepresentation: this.getAllCollabs()) {
+            for (UserRepresentation userRepresentation: this.getUsersByGroupe(groupCollabs)) {
                 System.out.println(user.getUsername().toLowerCase() + userRepresentation.getUsername());
                 if(userRepresentation.getUsername().equals(user.getUsername().toLowerCase())) {
                     userDto.setId(userRepresentation.getId());
@@ -133,6 +137,7 @@ public class UserService {
         UsersResource usersResource = getInstance();
         usersResource.get(userId)
                 .remove();
+        this.userDao.deleteUser(userId);
     }
 
 

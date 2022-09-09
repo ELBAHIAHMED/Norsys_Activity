@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @GetMapping("allCollabs")
-    public List<UserRepresentation> getAllCollabs() {
+    public List<UserDto> getAllCollabs() {
         return userService.getAllCollabs();
     }
 

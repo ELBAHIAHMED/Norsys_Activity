@@ -27,8 +27,7 @@ public class UserDao {
         SqlParameterSource namedParameters = new MapSqlParameterSource("user_id", userId);
         User user = null;
         try {
-            user = jdbcTemplate.queryForObject(sqlProperties.getProperty("user.get.select")+
-                    sqlProperties.getProperty("user.get.one"), namedParameters, User::baseMapper);
+            user = jdbcTemplate.queryForObject(sqlProperties.getProperty("user.get.by.id"), namedParameters, User::baseMapper);
         } catch (DataAccessException dataAccessException) {
             log.info("User does not exist");
         }
@@ -78,5 +77,16 @@ public class UserDao {
             log.error("user not updated :/ ");
         }
         return update;
+    }
+
+    public long deleteUser(String user_id) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource().addValue("user_id", user_id);
+        long delete = jdbcTemplate.update(sqlProperties.getProperty("user.delete"), sqlParameterSource);
+        if (delete == 1) {
+            log.info("User deleted:) ");
+        } else {
+            log.error("User not deleted :/ ");
+        }
+        return delete;
     }
 }

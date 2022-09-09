@@ -19,7 +19,6 @@ public class User {
     private String username;
     private String nom;
     private String prenom;
-    private String password;
     private String email;
     private static final ModelMapper modelMapper = new ModelMapper();
 
@@ -29,7 +28,6 @@ public class User {
         user.setUsername(resultSet.getString("user_username"));
         user.setNom(resultSet.getString("user_nom"));
         user.setPrenom(resultSet.getString("user_prenom"));
-        user.setPassword(resultSet.getString("user_password"));
         user.setEmail(resultSet.getString("user_email"));
         return user;
     }
