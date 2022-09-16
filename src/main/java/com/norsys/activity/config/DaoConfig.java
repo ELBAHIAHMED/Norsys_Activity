@@ -16,6 +16,7 @@ public class DaoConfig {
         ClassPathResource[] resources = new ClassPathResource[]{
                 new ClassPathResource("sql/survey.properties"),
                 new ClassPathResource("sql/user.properties"),
+                new ClassPathResource("sql/reponse.properties"),
         };
         prop.setLocations(resources);
         prop.setIgnoreResourceNotFound(true);

@@ -38,6 +38,19 @@ public class SurveyController {
             return ResponseEntity.badRequest().body("There is no survey with that specific id");
         }
     }
+
+
+    @GetMapping("/available")
+    public ResponseEntity<?> getAvailableSurvey(){
+        Optional<SurveyDto> surveyDto= this.surveyService.getAvailableSurvey();
+        if(surveyDto != null){
+            return ResponseEntity.status(HttpStatus.OK).body(surveyDto.get());
+        }else{
+            return ResponseEntity.badRequest().body("There is no survey available");
+        }
+    }
+
+
     @GetMapping ResponseEntity<?> getAllSurveys() {
         Optional<List<SurveyDto>> surveyDtos = this.surveyService.getAllSurveys();
         return ResponseEntity.status(HttpStatus.OK).body(surveyDtos.get());
