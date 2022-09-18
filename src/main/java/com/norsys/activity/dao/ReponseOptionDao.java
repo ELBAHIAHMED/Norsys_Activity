@@ -1,6 +1,6 @@
 package com.norsys.activity.dao;
 
-import com.norsys.activity.model.Reponse;
+import com.norsys.activity.model.ReponseOption;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -19,22 +19,22 @@ import java.util.Properties;
 @Slf4j
 @Repository
 @AllArgsConstructor
-public class ReponseDao {
+public class ReponseOptionDao {
 
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     JdbcTemplate jdbcTemplate;
     Properties sqlProperties;
 
-    private SqlParameterSource initParams(Reponse reponse) {
+    private SqlParameterSource initParams(ReponseOption reponseOption) {
         return new MapSqlParameterSource()
-                .addValue("option_id", reponse.getOption_id());
+                .addValue("option_id", reponseOption.getOption_id());
     }
-    public long addReponse(Reponse reponse) {
+    public long addReponse(ReponseOption reponseOption) {
         KeyHolder holder = new GeneratedKeyHolder();
-        SqlParameterSource sqlParameterSource = this.initParams(reponse);
-        int insert = namedParameterJdbcTemplate.update(sqlProperties.getProperty("reponse.create"), sqlParameterSource, holder);
+        SqlParameterSource sqlParameterSource = this.initParams(reponseOption);
+        int insert = namedParameterJdbcTemplate.update(sqlProperties.getProperty("reponseOption.create"), sqlParameterSource, holder);
         if (insert == 1) {
-            log.info("New reponse added :) " + reponse.getOption_id());
+            log.info("New reponse added :) " + reponseOption.getOption_id());
             return Objects.requireNonNull(holder.getKey()).longValue();
         } else {
             log.error("Reponse not added :/ ");
@@ -46,7 +46,7 @@ public class ReponseDao {
         SqlParameterSource namedParameters = new MapSqlParameterSource("option_id", option_id);
         int optionCount = 0;
         try {
-            optionCount = namedParameterJdbcTemplate.queryForObject(sqlProperties.getProperty("reponse.count"),namedParameters, Integer.class);
+            optionCount = namedParameterJdbcTemplate.queryForObject(sqlProperties.getProperty("reponseOption.count"),namedParameters, Integer.class);
         } catch (DataAccessException dataAccessException) {
             log.info("Reponse does not exist " + option_id);
         }
@@ -55,7 +55,7 @@ public class ReponseDao {
 
     public long deleteReponse(Long option_id) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource().addValue("option_id", option_id);
-        long delete = jdbcTemplate.update(sqlProperties.getProperty("reponse.delete"), sqlParameterSource);
+        long delete = jdbcTemplate.update(sqlProperties.getProperty("reponseOption.delete"), sqlParameterSource);
         if (delete == 1) {
             log.info("Reponse deleted:) ");
         } else {

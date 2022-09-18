@@ -1,6 +1,7 @@
 package com.norsys.activity.controller;
 
 import com.norsys.activity.dto.ReponseDto;
+import com.norsys.activity.dto.ReponseOptionDto;
 import com.norsys.activity.serviceImp.ReponseService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -30,5 +32,15 @@ public class ReponseController {
         Optional<Integer> count = this.reponseService.countOption(option_id);
         System.out.println(count);
         return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+    @GetMapping("/text/{question_id}")
+    public ResponseEntity<List<ReponseDto>> getAllResponsesOfQuestionText(@PathVariable  Long question_id) {
+        List<ReponseDto> reponseDtoList = this.reponseService.getAllResponsesOfQuestionText(question_id);
+        if(reponseDtoList != null){
+            return ResponseEntity.ok().body(reponseDtoList);
+        }else{
+            return new ResponseEntity<>(reponseDtoList, HttpStatus.CONFLICT);
+        }
     }
 }

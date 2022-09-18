@@ -27,7 +27,8 @@ public class SurveyService {
 
     private OptionDao optionDao;
     private FileDao fileDao;
-    private ReponseDao reponseDao;
+    private ReponseOptionDao reponseOptionDao;
+    private ReponseTextDao reponseTextDao;
     private EventCloudDao eventCloudDao;
     private final ModelMapper modelMapper = new ModelMapper();
     public Optional<SurveyDto> createNewSurvey(SurveyDto surveyDto) {
@@ -121,8 +122,9 @@ public class SurveyService {
         this.fileDao.deleteFiles(id);
         for (QuestionDto questionDto: surveyDto.get().getQuestion()) {
             System.out.println(questionDto.toString());
+            this.reponseTextDao.deleteReponse(questionDto.getId());
             for (OptionDto optionDto:questionDto.getOptions()) {
-                this.reponseDao.deleteReponse(optionDto.getId());
+                this.reponseOptionDao.deleteReponse(optionDto.getId());
             }
             this.optionDao.deleteOption(questionDto.getId());
             this.questionDao.deleteQuestion(QuestionService.getQuestion(questionDto));

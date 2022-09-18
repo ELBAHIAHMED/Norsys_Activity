@@ -1,6 +1,6 @@
 package com.norsys.activity.dto;
 
-import com.norsys.activity.model.Reponse;
+import com.norsys.activity.model.ReponseText;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,10 +13,13 @@ import org.modelmapper.ModelMapper;
 @NoArgsConstructor
 public class ReponseDto {
     private Long id;
+    private Long question_id;
     private Long option_id;
-    private static final ModelMapper modelMapper = new ModelMapper();
+    private String type;
+    private String value_text;
 
-    public static ReponseDto getReponseDto(Reponse reponse) {
-        return modelMapper.map(reponse, ReponseDto.class);
+    private static final ModelMapper modelMapper = new ModelMapper();
+    public static ReponseDto getReponseDto(ReponseText reponseText) {
+        return modelMapper.map(reponseText, ReponseDto.class);
     }
 }
