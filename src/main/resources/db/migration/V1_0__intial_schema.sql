@@ -31,9 +31,19 @@ CREATE TABLE option_q
 CREATE TABLE fileS
 (
     file_id bigint NOT NULL AUTO_INCREMENT,
-    file_path varchar(255) NOT NULL,
+    file_path varchar(255) NOT NULL UNIQUE,
     file_shared_path varchar(255) NOT NULL,
     survey_id bigint NOT NULL,
     PRIMARY KEY (file_id),
     FOREIGN KEY (survey_id) REFERENCES survey(survey_id)
+);
+
+CREATE TABLE user
+(
+    user_id varchar(300) NOT NULL,
+    user_username varchar(100) NOT NULL UNIQUE,
+    user_nom varchar(100) NOT NULL,
+    user_prenom varchar(100) NOT NULL,
+    user_email varchar(100) NOT NULL,
+    PRIMARY KEY (user_id)
 );
