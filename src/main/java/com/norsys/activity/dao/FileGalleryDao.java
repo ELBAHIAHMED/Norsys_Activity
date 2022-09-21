@@ -47,10 +47,10 @@ public class FileGalleryDao {
         }
     }
 
-    public List<FileS> getAllFilesOfEvent(String event_id) {
+    public List<FileGallery> getAllFilesOfEvent(String event_id) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("event_id", event_id);
-        return namedParameterJdbcTemplate.query(sqlProperties.getProperty("fileGallery.get.by.event_id"), sqlParameterSource, com.norsys.activity.model.FileS::baseMapper);
+        return namedParameterJdbcTemplate.query(sqlProperties.getProperty("fileGallery.get.by.event_id"), sqlParameterSource, com.norsys.activity.model.FileGallery::baseMapper);
     }
 
     public long deleteFilesGallery(String event_id) {

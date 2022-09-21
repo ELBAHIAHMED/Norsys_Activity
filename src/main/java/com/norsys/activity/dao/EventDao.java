@@ -2,8 +2,10 @@ package com.norsys.activity.dao;
 
 import com.norsys.activity.model.Evenement;
 import com.norsys.activity.model.Survey;
+import com.norsys.activity.util.SharedTools;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -25,8 +27,10 @@ public class EventDao {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     JdbcTemplate jdbcTemplate;
     Properties sqlProperties;
+
     private SqlParameterSource initParams(Evenement evenement) {
         return new MapSqlParameterSource()
+
                 .addValue("event_id", evenement.getEventId())
                 .addValue("event_name", evenement.getName())
                 .addValue("event_description", evenement.getDescription())

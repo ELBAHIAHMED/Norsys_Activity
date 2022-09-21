@@ -1,6 +1,8 @@
 package com.norsys.activity.cloudservice;
 
 import com.norsys.activity.dao.FileDao;
+import com.norsys.activity.dao.FileGalleryDao;
+import com.norsys.activity.model.FileGallery;
 import com.norsys.activity.model.FileS;
 import com.norsys.activity.util.CloudFileHelper;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,7 @@ public class EventCloudService {
 	EventCloudDao eventCloudDao;
 
 	FileDao fileDao;
+	FileGalleryDao fileGalleryDao;
 	
 	public List<String> getFolders() {
 		return eventCloudDao.getEventFolders();
@@ -49,6 +52,25 @@ public class EventCloudService {
 				.sharedPath(this.doShared(fullFilePath))
 				.build();
 		this.fileDao.createNewFile(fileS);
+		return fullFilePath;
+	}
+
+	public String uploadGallery(MultipartFile multipartFile, String path, String generatedKey,String event_Id) {
+
+		String[] name = multipartFile.getOriginalFilename().split("\\.");
+		String fullFilePath = path.concat(name[0] + "_" + generatedKey + "." + name[1]);
+		Optional<File> fileOptional = Optional.ofNullable(CloudFileHelper.getTempFileFromMultiPartFile(multipartFile));
+		fileOptional.ifPresent(file -> {
+			eventCloudDao.upLoadFile(file, fullFilePath);
+			file.delete();
+		});
+
+		FileGallery fileS = FileGallery.builder()
+				.event_id(event_Id)
+				.path(fullFilePath)
+				.sharedPath(this.doShared(fullFilePath))
+				.build();
+		this.fileGalleryDao.createNewFile(fileS);
 		return fullFilePath;
 	}
 

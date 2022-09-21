@@ -16,12 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 public class EventDto {
 
-    private String eventId;
+    private Long eventId;
     private String name;
     private String description;
-    private String Date;
-    private String Responsable;
-    private List<FileGallery> file;
+    private String date;
+    private String responsable;
+
 //    private String path;
 
 

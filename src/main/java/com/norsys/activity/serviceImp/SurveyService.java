@@ -15,6 +15,7 @@ import com.norsys.activity.model.Question;
 import com.norsys.activity.model.Survey;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -19,7 +19,7 @@ public class Evenement {
     private String description;
     private String date;
     private String responsable;
-    private String path;
+
 
     public static Evenement baseMapper(ResultSet resultSet, int rowNumber) throws SQLException {
         Evenement events = Evenement.builder().id(resultSet.getLong("id"))
@@ -28,7 +28,6 @@ public class Evenement {
                 .description(resultSet.getString("event_description"))
                 .date(resultSet.getString("event_date"))
                 .responsable(resultSet.getString("event_responsable"))
-                .path(resultSet.getString("event_path"))
                 .build();
         return events;
     }
