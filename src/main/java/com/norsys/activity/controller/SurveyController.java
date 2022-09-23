@@ -1,6 +1,7 @@
 package com.norsys.activity.controller;
 
 import com.norsys.activity.cloudservice.EventCloudService;
+import com.norsys.activity.dto.FileDto;
 import com.norsys.activity.dto.SurveyDto;
 import com.norsys.activity.serviceImp.SurveyService;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class SurveyController {
     private EventCloudService fileCloudService;
 
     @PostMapping
-    public long createNewSurvey(@RequestBody SurveyDto surveyDto) {
+    public Optional<SurveyDto> createNewSurvey(@RequestBody SurveyDto surveyDto) {
         return this.surveyService.createNewSurvey(surveyDto);
     }
 
@@ -37,6 +38,19 @@ public class SurveyController {
             return ResponseEntity.badRequest().body("There is no survey with that specific id");
         }
     }
+
+
+    @GetMapping("/available")
+    public ResponseEntity<?> getAvailableSurvey(){
+        Optional<SurveyDto> surveyDto= this.surveyService.getAvailableSurvey();
+        if(surveyDto != null){
+            return ResponseEntity.status(HttpStatus.OK).body(surveyDto.get());
+        }else{
+            return ResponseEntity.badRequest().body("There is no survey available");
+        }
+    }
+
+
     @GetMapping ResponseEntity<?> getAllSurveys() {
         Optional<List<SurveyDto>> surveyDtos = this.surveyService.getAllSurveys();
         return ResponseEntity.status(HttpStatus.OK).body(surveyDtos.get());
@@ -56,9 +70,9 @@ public class SurveyController {
     }
 
     @PostMapping(value = "/{survey_id}/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String uploadCourseSupport(@RequestParam MultipartFile file, @PathVariable Long survey_id) {
+    public FileDto uploadCourseSupport(@RequestParam MultipartFile file, @PathVariable Long survey_id) {
         log.info("Starting .....");
-        return this.fileCloudService.uploadFile(file,"/norsys_activity/file", String.valueOf(survey_id));
+        return this.fileCloudService.uploadFile(file,"/norsys_activity/", String.valueOf(survey_id));
     }
 
 

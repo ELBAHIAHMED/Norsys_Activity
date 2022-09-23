@@ -57,3 +57,4 @@ realm-admin:
   username: norsys-admin
   password: mysecretpassword
   group-admins: activity-admins
+  group-collabs: activity-collabs

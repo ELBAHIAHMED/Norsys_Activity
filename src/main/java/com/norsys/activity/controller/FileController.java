@@ -18,6 +18,7 @@ public class FileController {
     private EventCloudService eventCloudService;
     @DeleteMapping("/{file_id}")
     public long deleteFileById(@PathVariable Long file_id) {
+        System.out.println(this.fileService.getFileByID(file_id).get().getPath());
         this.eventCloudService.deleteFile(this.fileService.getFileByID(file_id).get().getPath());
         return this.fileService.deleteFile(file_id);
     }

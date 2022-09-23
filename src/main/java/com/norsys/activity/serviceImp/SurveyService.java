@@ -1,10 +1,7 @@
 package com.norsys.activity.serviceImp;
 
 import com.norsys.activity.clouddao.EventCloudDao;
-import com.norsys.activity.dao.FileDao;
-import com.norsys.activity.dao.OptionDao;
-import com.norsys.activity.dao.QuestionDao;
-import com.norsys.activity.dao.SurveyDao;
+import com.norsys.activity.dao.*;
 import com.norsys.activity.dto.FileDto;
 import com.norsys.activity.dto.OptionDto;
 import com.norsys.activity.dto.QuestionDto;
@@ -31,9 +28,11 @@ public class SurveyService {
 
     private OptionDao optionDao;
     private FileDao fileDao;
+    private ReponseOptionDao reponseOptionDao;
+    private ReponseTextDao reponseTextDao;
     private EventCloudDao eventCloudDao;
     private final ModelMapper modelMapper = new ModelMapper();
-    public long createNewSurvey(SurveyDto surveyDto) {
+    public Optional<SurveyDto> createNewSurvey(SurveyDto surveyDto) {
         long survey_id = this.surveyDao.createNewSurvey(this.getSurvey(surveyDto));
         for (QuestionDto questionDto: surveyDto.getQuestion()) {
             questionDto.setSurvey_id(survey_id);
@@ -41,11 +40,10 @@ public class SurveyService {
 
             for (OptionDto optionDto: questionDto.getOptions()) {
                 optionDto.setQuestion_id(question_id);
-                System.out.println("heeeeeeeeeere"+optionDto);
                 this.optionDao.createNewOption(OptionService.getOption(optionDto));
             }
         }
-        return survey_id;
+        return this.getSurveyByID(survey_id);
     }
 
     private Survey getSurvey(SurveyDto surveyDto) {
@@ -55,10 +53,11 @@ public class SurveyService {
 
     public Optional<SurveyDto> getSurveyByID(long surveyID) {
         Optional<Survey> surveyOptional = this.surveyDao.getSurveyByID(surveyID);
-        List<Question> questionList = this.questionDao.getAllQuestionsOfSurvey(surveyID);
-        List<QuestionDto> questionDtoList = new ArrayList<>();
-        List<FileDto> fileDtoList = new ArrayList<>();
+
         if (surveyOptional.isPresent()) {
+            List<Question> questionList = this.questionDao.getAllQuestionsOfSurvey(surveyID);
+            List<QuestionDto> questionDtoList = new ArrayList<>();
+            List<FileDto> fileDtoList = new ArrayList<>();
             for (Question question:questionList) {
                 questionDtoList.add(QuestionDto.getQuestionDto(question));
 
@@ -117,11 +116,17 @@ public class SurveyService {
         Optional<SurveyDto> surveyDto = this.getSurveyByID(id);
         System.out.println(surveyDto.get().getQuestion());
         for (FileS fileDto: this.fileDao.getAllFilesOfSurvey(id)) {
-            this.eventCloudDao.deleteFile(fileDto.getPath());
+            if(this.eventCloudDao.isFolderExist(fileDto.getPath())) {
+                this.eventCloudDao.deleteFile(fileDto.getPath());
+            }
         }
         this.fileDao.deleteFiles(id);
         for (QuestionDto questionDto: surveyDto.get().getQuestion()) {
             System.out.println(questionDto.toString());
+            this.reponseTextDao.deleteReponse(questionDto.getId());
+            for (OptionDto optionDto:questionDto.getOptions()) {
+                this.reponseOptionDao.deleteReponse(optionDto.getId());
+            }
             this.optionDao.deleteOption(questionDto.getId());
             this.questionDao.deleteQuestion(QuestionService.getQuestion(questionDto));
         }
@@ -171,5 +176,44 @@ public class SurveyService {
             surveyDtoList.add(SurveyDto.getSurveyDto(survey));
         }
         return Optional.of(surveyDtoList);
+    }
+
+    public Optional<SurveyDto> getAvailableSurvey() {
+        Optional<Survey> surveyOptional = this.surveyDao.getAvailableSurvey();
+
+        if (surveyOptional.isPresent()) {
+            List<Question> questionList = this.questionDao.getAllQuestionsOfSurvey(surveyOptional.get().getId());
+            List<QuestionDto> questionDtoList = new ArrayList<>();
+            List<FileDto> fileDtoList = new ArrayList<>();
+            for (Question question:questionList) {
+                questionDtoList.add(QuestionDto.getQuestionDto(question));
+
+            }
+            for (FileS fileS:this.fileDao.getAllFilesOfSurvey(surveyOptional.get().getId())) {
+                fileDtoList.add(FileDto.getFileDto(fileS));
+            }
+            for (QuestionDto questionDto: questionDtoList) {
+                List<Option> optionList = this.optionDao.getAllOptionsOfQuestion(questionDto.getId());
+                List<OptionDto> optionDtoList = new ArrayList<>();
+                for (Option option:optionList) {
+                    optionDtoList.add(OptionDto.getOptionDto(option));
+                }
+                questionDto.setOptions(optionDtoList);
+                System.out.println(questionDto);
+            }
+            SurveyDto surveyDto = SurveyDto.builder()
+                    .id(surveyOptional.get().getId())
+                    .title(surveyOptional.get().getTitle())
+                    .description(surveyOptional.get().getDescription())
+                    .url(surveyOptional.get().getUrl())
+                    .available(surveyOptional.get().isAvailable())
+                    .date(surveyOptional.get().getDate())
+                    .files(fileDtoList)
+                    .question(questionDtoList).build();
+            return Optional.ofNullable(surveyDto);
+        }
+        else {
+            return null;
+        }
     }
 }

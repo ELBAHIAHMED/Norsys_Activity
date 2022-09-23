@@ -57,6 +57,18 @@ public class SurveyDao {
         return Optional.ofNullable(survey);
     }
 
+    public Optional<Survey> getAvailableSurvey() {
+        Survey survey = null;
+        try {
+            survey = jdbcTemplate.queryForObject(sqlProperties.getProperty("survey.available.get"), Survey::baseMapper);
+            survey.getTitle();
+        } catch (DataAccessException dataAccessException) {
+            log.info("Path does not exist");
+        }
+        return Optional.ofNullable(survey);
+    }
+
+
     public long updateSurvey(Survey survey, long survey_id) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
                 .addValue("survey_id", survey_id)
