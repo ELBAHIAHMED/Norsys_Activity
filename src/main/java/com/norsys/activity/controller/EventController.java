@@ -34,7 +34,6 @@ public class EventController {
     }
     @PostMapping
     public long createNewEvent(@RequestBody EventDto eventDto){
-
         return this.evenementService.createNewEvent(eventDto);
     }
 
